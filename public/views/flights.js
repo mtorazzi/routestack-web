@@ -240,6 +240,7 @@ export function render(ctx) {
       try {
         const { data } = await apiV.checkout({
           fareSourceCode: offer.fareSourceCode,
+          flight: offer.raw,
           origin: state.lastArgs?.origin,
           destination: state.lastArgs?.destination,
           departureDate: state.lastArgs?.departureDate,

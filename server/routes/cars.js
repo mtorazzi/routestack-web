@@ -1,9 +1,14 @@
 import { Router } from 'express';
 
-import { cars, checkoutModeOf, findUrl, getCarSession, rememberCarSession } from '../routestack/verticals.js';
+import { cars, checkoutModeOf, findCarOffer, findUrl, getCarSearch, getCarSession, rememberCarSearch, rememberCarSession } from '../routestack/verticals.js';
 import { asyncHandler, clean, requireBody, requireString, sendOk } from './_helpers.js';
 
 const router = Router();
+
+/** First non-empty value; an explicit request body wins over the cached context. */
+function pick(...values) {
+  return values.find((v) => v !== undefined && v !== null && v !== '');
+}
 
 function buildPlace(place, fallbackDate, fallbackTime) {
   if (!place) return undefined;
@@ -39,6 +44,14 @@ router.post(
     });
     const r = await cars.search({ filter: args });
     rememberCarSession(r.data.correlationId);
+    rememberCarSearch(
+      {
+        correlationId: r.data?.correlationId,
+        pickup: args.pickup,
+        dropoff: args.dropoff,
+      },
+      r.data?.offers,
+    );
     sendOk(res, r.data, { source: r.source, tool: r.tool });
   }),
 );
@@ -65,17 +78,20 @@ router.post(
   '/checkout',
   asyncHandler(async (req, res) => {
     const body = requireBody(req);
+    const cached = getCarSearch() ?? {};
+    const fareCode = pick(body.fareCode, cached.fareCode);
+    const offerId = pick(body.offerId, cached.offerId);
     const args = clean({
-      correlationId: body.correlationId ?? getCarSession(),
-      offerId: body.offerId,
-      fareCode: body.fareCode,
-      pickup: body.pickup,
-      dropoff: body.dropoff,
-      pickupDate: body.pickupDate,
-      dropoffDate: body.dropoffDate,
-      pickupTime: body.pickupTime,
-      dropoffTime: body.dropoffTime,
-      car: requireBody(req).car,
+      correlationId: pick(body.correlationId, getCarSession(), cached.correlationId),
+      offerId,
+      fareCode,
+      pickup: pick(body.pickup, cached.pickup),
+      dropoff: pick(body.dropoff, cached.dropoff),
+      pickupDate: pick(body.pickupDate, cached.pickup?.date),
+      dropoffDate: pick(body.dropoffDate, cached.dropoff?.date),
+      pickupTime: pick(body.pickupTime, cached.pickup?.time),
+      dropoffTime: pick(body.dropoffTime, cached.dropoff?.time),
+      car: pick(body.car, findCarOffer(fareCode, offerId)),
       routestack_external_userid: body.routestack_external_userid || 'routestack-web',
       routestack_metadata: body.routestack_metadata,
     });

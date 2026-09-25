@@ -6,7 +6,7 @@ variables. No secret value, API key, API secret or full JWT is reproduced here:
 credentials are read from `ROUTESTACK_API_KEY` / `ROUTESTACK_API_SECRET` (and,
 for the `header` auth mode, `ROUTESTACK_ACCOUNT_ID`).
 
-Test suite: `npm test` → **46/46 pass**.
+Test suite: `npm test` → **51/51 pass**.
 
 ## Summary
 
@@ -394,3 +394,83 @@ curl -s localhost:8802/views/settings.js | grep -c saveBtn   # -> 4
 not touch, so the live check used `8802` and the instance was stopped afterwards.
 Only synthetic dummy values (`dummy-key-1234` / `dummy-secret-1234`) were used; no
 real credential appears in this document.
+
+## Check 17 — flight checkout requires the itinerary context
+
+**Symptom (from the UI):**
+
+```text
+Si è verificato un errore: flight_get_checkout_url: flight, origin, destination,
+departureDate, and adults are required
+```
+
+**Diagnosis.** `public/views/flights.js` built the checkout body with
+`fareSourceCode`, `origin`, `destination`, `departureDate`, `returnDate`,
+`adults`, `children`, `infants`, `searchFilterObj`, `correlationId` and
+`sessionId` — but never the selected offer's `flight` itinerary object. The
+upstream `flight_get_checkout_url` tool requires `flight` + `origin` +
+`destination` + `departureDate` + `adults`; without `flight` it cannot resolve
+the fare and reports all five as missing.
+
+**Fix.**
+
+- **Client** (`public/views/flights.js`): the checkout body now includes the
+  selected offer's raw itinerary, which `normalizeFlightOffer` already kept as
+  `offer.raw`:
+
+  ```js
+  const { data } = await apiV.checkout({
+    fareSourceCode: offer.fareSourceCode,
+    flight: offer.raw,
+    …
+  });
+  ```
+
+- **Server** (`server/routes/flights.js` + `server/routestack/verticals.js`):
+  `/api/flights/search` now caches the search context (`origin`, `destination`,
+  `departureDate`, `returnDate`, `adults`, `children`, `infants`, `cabinClass`,
+  `tripType`, `searchFilterObj`, `correlationId`, flight `sessionId`) **and** the
+  returned offers keyed by `fareSourceCode`, next to `rememberFlightSession`
+  (`rememberFlightSearch` / `getFlightSearch` / `findFlightOffer`). On checkout
+  the explicit request body wins and the cache fills the gaps, including
+  `flight` looked up by `fareSourceCode`. The existing `clean()` still drops
+  every empty value before forwarding.
+
+- **Cars audit** (`server/routes/cars.js` + `server/routestack/verticals.js`):
+  `car_get_checkout_url` requires the raw `car` row. The client already forwarded
+  `offer.raw`, but the server was not self-sufficient, so `/api/cars/search` now
+  caches the pickup/dropoff context and the raw offers keyed by `fareCode` /
+  `offerId` (`rememberCarSearch` / `getCarSearch` / `findCarOffer`) and checkout
+  merges them the same way. **Hotels** already pass
+  `token` + `recommendationId` + `roomId` and were proven live (Check 8); left
+  unchanged.
+
+**Offline proof (mandatory, no billable call).** `test/checkout-payload.test.js`
+boots the real Express app with the MCP client replaced by a stub through the
+`__setClientFactory` seam. The stub records every `tools/call`, so no network —
+and therefore no billable `/search` — is ever contacted. The tests assert the
+exact payload forwarded upstream:
+
+- flight checkout with **only** `fareSourceCode` + cached search context →
+  forwarded args contain non-empty `fareSourceCode`, `flight` (the raw itinerary),
+  `origin`, `destination`, `departureDate`, `adults`, plus the cached
+  `searchFilterObj` / `correlationId` / `sessionId`;
+- flight checkout with an explicit body → the body wins over the cache
+  (`origin`/`destination`/`departureDate`/`adults`/`flight`);
+- car checkout with only `offerId` + `fareCode` → forwards the cached raw `car`
+  row and the cached `correlationId`;
+- hotel checkout → keeps `token` + `recommendationId` + `correlationId`.
+
+Results:
+
+```text
+node --test test/checkout-payload.test.js  -> tests 4, pass 4, fail 0
+npm test                                   -> tests 51, pass 51, fail 0
+for f in $(find public -name '*.js'); do node --check "$f"; done  -> no output
+```
+
+**Live end-to-end checkout was NOT re-run.** It requires a billable
+`flight_search` (and, to reach `flight_get_checkout_url`, the selected fare),
+which this round is explicitly forbidden; the payload shape is instead proven
+offline against the stubbed `tools/call` arguments.
+

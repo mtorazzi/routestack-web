@@ -2,14 +2,22 @@ import { Router } from 'express';
 
 import {
   checkoutModeOf,
+  findFlightOffer,
   findUrl,
   flights,
+  getFlightSearch,
   getFlightSession,
+  rememberFlightSearch,
   rememberFlightSession,
 } from '../routestack/verticals.js';
 import { asyncHandler, clean, requireBody, requireString, sendOk } from './_helpers.js';
 
 const router = Router();
+
+/** First non-empty value; an explicit request body wins over the cached context. */
+function pick(...values) {
+  return values.find((v) => v !== undefined && v !== null && v !== '');
+}
 
 function buildStops(maxStops) {
   if (maxStops === undefined || maxStops === null || maxStops === '') return undefined;
@@ -84,6 +92,23 @@ router.post(
     requireString(filter.destination, 'destination');
     requireString(filter.departureDate, 'departureDate');
     const r = await flights.search({ filter });
+    rememberFlightSearch(
+      {
+        origin: filter.origin,
+        destination: filter.destination,
+        departureDate: filter.departureDate,
+        returnDate: filter.returnDate,
+        adults: filter.adults,
+        children: filter.children,
+        infants: filter.infants,
+        cabinClass: filter.cabinClass,
+        tripType: filter.tripType,
+        searchFilterObj: r.data?.searchFilterObj,
+        correlationId: r.data?.correlationId,
+        sessionId: getFlightSession(),
+      },
+      r.data?.offers,
+    );
     sendOk(res, r.data, { source: r.source, tool: r.tool });
   }),
 );
@@ -109,21 +134,25 @@ router.post(
   '/checkout',
   asyncHandler(async (req, res) => {
     const body = requireBody(req);
+    const cached = getFlightSearch() ?? {};
+    const fareSourceCode = pick(body.fareSourceCode, cached.fareSourceCode);
     const args = clean({
-      fareSourceCode: body.fareSourceCode,
+      fareSourceCode,
       offerId: body.offerId,
-      flight: body.flight,
-      origin: body.origin,
-      destination: body.destination,
-      departureDate: body.departureDate,
-      returnDate: body.returnDate,
-      adults: body.adults,
-      children: body.children,
-      infants: body.infants,
+      flight: pick(body.flight, findFlightOffer(fareSourceCode)),
+      origin: pick(body.origin, cached.origin),
+      destination: pick(body.destination, cached.destination),
+      departureDate: pick(body.departureDate, cached.departureDate),
+      returnDate: pick(body.returnDate, cached.returnDate),
+      adults: pick(body.adults, cached.adults),
+      children: pick(body.children, cached.children),
+      infants: pick(body.infants, cached.infants),
+      cabinClass: pick(body.cabinClass, cached.cabinClass),
+      tripType: pick(body.tripType, cached.tripType),
       exchangeRate: body.exchangeRate,
-      correlationId: body.correlationId,
-      searchFilterObj: body.searchFilterObj,
-      sessionId: body.sessionId ?? getFlightSession(),
+      correlationId: pick(body.correlationId, cached.correlationId),
+      searchFilterObj: pick(body.searchFilterObj, cached.searchFilterObj),
+      sessionId: pick(body.sessionId, cached.sessionId, getFlightSession()),
       routestack_external_userid: body.routestack_external_userid || 'routestack-web',
       routestack_metadata: body.routestack_metadata,
     });

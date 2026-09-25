@@ -34,7 +34,19 @@ export function runtimeConfig() {
   return { ...cfg, baseUrl: effectiveBaseUrl(cfg), source: sourceLabel(cfg) };
 }
 
+let clientFactory = null;
+
+/**
+ * Test-only seam: replace the MCP client factory so offline tests can capture
+ * `tools/call` arguments without ever contacting RouteStack. Pass `null` to
+ * restore the real client.
+ */
+export function __setClientFactory(factory = null) {
+  clientFactory = factory;
+}
+
 export function makeClient(cfg = runtimeConfig()) {
+  if (clientFactory) return { client: clientFactory(cfg), auth: null, cfg };
   const auth = new AuthProvider(cfg);
   const client = new McpClient(cfg, { auth });
   return { client, auth, cfg };
@@ -484,12 +496,70 @@ export function getFlightSession() {
   return flightSessionId;
 }
 
+let flightSearch = null;
+
+/**
+ * Cache the search context and the returned offers (keyed by `fareSourceCode`)
+ * so `/checkout` can rebuild the itinerary the tool requires even when the
+ * client only sends the selected `fareSourceCode`.
+ */
+export function rememberFlightSearch(context = {}, offers = []) {
+  const byFare = new Map();
+  for (const offer of arr(offers)) {
+    const row = offer?.raw ?? offer;
+    const code = firstStr(offer?.fareSourceCode, row?.fareSourceCode, row?.fare_source_code, row?.fareCode);
+    if (code) byFare.set(code, row);
+  }
+  flightSearch = { ...context, offersByFare: byFare, updatedAt: Date.now() };
+}
+
+export function getFlightSearch() {
+  return flightSearch;
+}
+
+/** Raw itinerary row cached at search time for a `fareSourceCode`. */
+export function findFlightOffer(fareSourceCode) {
+  const code = firstStr(fareSourceCode);
+  return code && flightSearch ? flightSearch.offersByFare.get(code) ?? null : null;
+}
+
 let lastCarSession = null;
 export function rememberCarSession(correlationId) {
   if (correlationId) lastCarSession = correlationId;
 }
 export function getCarSession() {
   return lastCarSession;
+}
+
+let carSearch = null;
+
+/**
+ * Cache the car search context and the returned raw offers (keyed by
+ * `fareCode` and `offerId`) so `/checkout` can forward the `car` row the tool
+ * requires even when the client does not resend it.
+ */
+export function rememberCarSearch(context = {}, offers = []) {
+  const byKey = new Map();
+  for (const offer of arr(offers)) {
+    const row = offer?.raw ?? offer;
+    const keys = [firstStr(offer?.fareCode, row?.fareCode, row?.fare_code), firstStr(offer?.offerId, row?.offerId, row?.offer_id)];
+    for (const key of keys) if (key) byKey.set(key, row);
+  }
+  carSearch = { ...context, offersByKey: byKey, updatedAt: Date.now() };
+}
+
+export function getCarSearch() {
+  return carSearch;
+}
+
+/** Raw car row cached at search time for a `fareCode`/`offerId`. */
+export function findCarOffer(...keys) {
+  if (!carSearch) return null;
+  for (const k of keys) {
+    const key = firstStr(k);
+    if (key && carSearch.offersByKey.has(key)) return carSearch.offersByKey.get(key);
+  }
+  return null;
 }
 
 /** Hotel checkout requires a token + recommendationId + correlationId. */
