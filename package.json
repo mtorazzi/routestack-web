@@ -1,0 +1,19 @@
+{
+  "name": "routestack-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web UI locale per esplorare l'inventario di viaggio RouteStack.ai (voli, hotel, auto).",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

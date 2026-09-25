@@ -1,0 +1,14 @@
+{
+  "code": "6032",
+  "success": true,
+  "message": "data retrieved",
+  "result": [
+    {
+      "name": "Malpensa",
+      "code": "MXP",
+      "city": "Milan",
+      "country": "Italy",
+      "fullname": "[MXP] Malpensa, Milan, Italy"
+    }
+  ]
+}

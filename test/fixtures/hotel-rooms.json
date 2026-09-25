@@ -1,0 +1,3420 @@
+{
+  "success": true,
+  "message": "data retrieved",
+  "code": 5128,
+  "result": {
+    "id": "39757732",
+    "token": "38fac1d1-564b-408a-89a5-7a34e4cce91a",
+    "correlationId": "621b0b85-4723-4e9f-9182-e464261c8533",
+    "currencyrate": 1,
+    "member_currencyrate": 0.8770898859256895,
+    "showCurrencyRate": 1,
+    "filters": {
+      "price": {
+        "min": 316.96,
+        "max": 1368.8
+      },
+      "freeCancellation": true,
+      "payAtHotel": true,
+      "paynow": true,
+      "freeBreakfast": true,
+      "roomOnly": true,
+      "fullBoard": false,
+      "halfBoard": false
+    },
+    "groups": [
+      {
+        "id": 4,
+        "name": "Double",
+        "facilities": [],
+        "maxGuestAllowed": "0",
+        "maxAdultAllowed": "0",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Double Room",
+        "area": null,
+        "beds": [
+          {
+            "type": "DOUBLE",
+            "count": "1"
+          }
+        ],
+        "rooms": [
+          {
+            "id": "6daaac7a-4a54-43ee-afc0-27d01cdb7988",
+            "name": "Double Room",
+            "description": null,
+            "recommendationId": "d50ce2d7-c57b-45ed-bf16-30bab8cf0f81",
+            "rateid": "a260cb5a-d456-4a85-9724-cbaa0296676c",
+            "availability": "1",
+            "ourprice": 316.96,
+            "publishedRate": 336.76,
+            "baseRate": 290.19,
+            "totalRate": 290.19,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "6daaac7a-4a54-43ee-afc0-27d01cdb7988",
+                "stdRoomId": 4,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "2dc69442-df90-48bd-b7d7-f9d46713e8e8",
+            "name": "Double Room",
+            "description": null,
+            "recommendationId": "f3abf335-eb65-4871-8973-5b5ff58e644d",
+            "rateid": "b30ee6d3-065b-45ef-ac22-431e3ec8b477",
+            "availability": "1",
+            "ourprice": 360.45,
+            "publishedRate": 382.98,
+            "baseRate": 330.01,
+            "totalRate": 330.01,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "2dc69442-df90-48bd-b7d7-f9d46713e8e8",
+                "stdRoomId": 4,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "260d6635-4bc4-45bc-bd06-129ae28d63ea",
+            "name": "Double Room",
+            "description": null,
+            "recommendationId": "af28476d-f9fc-40a0-8385-6f070135713f",
+            "rateid": "149a4af7-65dc-4399-88b0-2bce6e9b5ff4",
+            "availability": "1",
+            "ourprice": 393.93,
+            "publishedRate": 418.55,
+            "baseRate": 360.66,
+            "totalRate": 360.66,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Bed and Breakfast",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "260d6635-4bc4-45bc-bd06-129ae28d63ea",
+                "stdRoomId": 4,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "e052efce-2759-4eae-b9c7-5059695f4b99",
+            "name": "Double Room",
+            "description": null,
+            "recommendationId": "340ec58c-e702-444b-a8c7-662e21ae011c",
+            "rateid": "f8b5f0ad-e4f3-4fc7-802b-70d9a4be119f",
+            "availability": "1",
+            "ourprice": 465.59,
+            "publishedRate": 494.68,
+            "baseRate": 426.27,
+            "totalRate": 426.27,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Bed and Breakfast",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "1 Double",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "e052efce-2759-4eae-b9c7-5059695f4b99",
+                "stdRoomId": 4,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Comfort Double",
+        "facilities": [
+          {
+            "name": "Room service (limited hours)"
+          },
+          {
+            "name": "Television"
+          },
+          {
+            "name": "Wheelchair accessible"
+          },
+          {
+            "name": "Daily housekeeping"
+          },
+          {
+            "name": "Hypo-allergenic bedding available"
+          },
+          {
+            "name": "Phone"
+          },
+          {
+            "name": "Private bathroom"
+          },
+          {
+            "name": "Free toiletries"
+          },
+          {
+            "name": "Hair dryer"
+          },
+          {
+            "name": "Desk"
+          },
+          {
+            "name": "In-room climate control (air conditioning)"
+          },
+          {
+            "name": "Premium bedding"
+          },
+          {
+            "name": "Soundproofed rooms"
+          },
+          {
+            "name": "Access via exterior corridors"
+          },
+          {
+            "name": "Bidet"
+          },
+          {
+            "name": "Blackout drapes/curtains"
+          },
+          {
+            "name": "Shower only"
+          },
+          {
+            "name": "Digital TV service"
+          },
+          {
+            "name": "Flat-panel TV"
+          },
+          {
+            "name": "Free WiFi"
+          },
+          {
+            "name": "TV size: 32"
+          },
+          {
+            "name": "TV size measurement: inch"
+          },
+          {
+            "name": "No cribs (infant beds)"
+          },
+          {
+            "name": "Non-Smoking"
+          },
+          {
+            "name": "In-room climate control (heating)"
+          },
+          {
+            "name": "Towels provided"
+          },
+          {
+            "name": "Bedsheets provided"
+          },
+          {
+            "name": "Highchair"
+          },
+          {
+            "name": "Raised toilet seat"
+          },
+          {
+            "name": "Low-height counters/sink"
+          },
+          {
+            "name": "Grab bar - near toilet"
+          },
+          {
+            "name": "Bathroom emergency pull cord"
+          },
+          {
+            "name": "Wardrobe or closet"
+          }
+        ],
+        "maxGuestAllowed": "0",
+        "maxAdultAllowed": "0",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Comfort Double Room",
+        "area": "15",
+        "beds": [
+          {
+            "type": "FullBed",
+            "count": "1"
+          }
+        ],
+        "rooms": [
+          {
+            "id": "f174c6e6-51b3-44f0-8efe-64eda3b72565",
+            "name": "Comfort Double Room",
+            "description": null,
+            "recommendationId": "62a573f7-0f63-4ddf-ac2c-1daf4c96ad7e",
+            "rateid": "59d6a947-1294-47c6-8ef6-a31cf4ee7e01",
+            "availability": "1",
+            "ourprice": 321.12,
+            "publishedRate": 341.19,
+            "baseRate": 262.14,
+            "totalRate": 294,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "f174c6e6-51b3-44f0-8efe-64eda3b72565",
+                "stdRoomId": 2,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "3300e76f-9120-4e69-8596-6f662021d0cd",
+            "name": "Comfort Double Room",
+            "description": "<p><strong>1 Double Bed</strong></p><p>161 sq feet </p><br/><p><b>Internet</b> - Free WiFi </p><p><b>Entertainment</b> - 32-inch flat-screen TV with digital channels</p><p><b>Food & Drink</b> - Room service (limited)</p><p><b>Sleep</b> - Premium bedding, blackout drapes/curtains, and bed sheets </p><p><b>Bathroom</b> - Private bathroom, shower, free toiletries, and a hair dryer</p><p><b>Practical</b> - Desk, phone, and highchair</p><p><b>Comfort</b> - Daily housekeeping and climate-controlled heating and air conditioning</p><p><b>Accessibility</b> - Wheelchair accessible</p><p><b>Need to Know</b> - No cribs (infant beds) available</p><p>Non-Smoking</p><p>Room is accessed via exterior corridors </p>",
+            "recommendationId": "894a0a98-409c-4d6f-aa3f-fc5a177eb3c4",
+            "rateid": "74965525-e62a-4cf4-8150-f0872a12daf6",
+            "availability": "2",
+            "ourprice": 329.65,
+            "publishedRate": 407,
+            "baseRate": 299.7,
+            "totalRate": 329.65,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "FullBed",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [
+              {
+                "groupName": null,
+                "name": "Room service (limited hours)"
+              },
+              {
+                "groupName": null,
+                "name": "Television"
+              },
+              {
+                "groupName": null,
+                "name": "Wheelchair accessible"
+              },
+              {
+                "groupName": null,
+                "name": "Daily housekeeping"
+              },
+              {
+                "groupName": null,
+                "name": "Hypo-allergenic bedding available"
+              },
+              {
+                "groupName": null,
+                "name": "Phone"
+              },
+              {
+                "groupName": null,
+                "name": "Private bathroom"
+              },
+              {
+                "groupName": null,
+                "name": "Free toiletries"
+              },
+              {
+                "groupName": null,
+                "name": "Hair dryer"
+              },
+              {
+                "groupName": null,
+                "name": "Desk"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (air conditioning)"
+              },
+              {
+                "groupName": null,
+                "name": "Premium bedding"
+              },
+              {
+                "groupName": null,
+                "name": "Soundproofed rooms"
+              },
+              {
+                "groupName": null,
+                "name": "Access via exterior corridors"
+              },
+              {
+                "groupName": null,
+                "name": "Bidet"
+              },
+              {
+                "groupName": null,
+                "name": "Blackout drapes/curtains"
+              },
+              {
+                "groupName": null,
+                "name": "Shower only"
+              },
+              {
+                "groupName": null,
+                "name": "Digital TV service"
+              },
+              {
+                "groupName": null,
+                "name": "Flat-panel TV"
+              },
+              {
+                "groupName": null,
+                "name": "Free WiFi"
+              },
+              {
+                "groupName": null,
+                "name": "TV size: 32"
+              },
+              {
+                "groupName": null,
+                "name": "TV size measurement: inch"
+              },
+              {
+                "groupName": null,
+                "name": "No cribs (infant beds)"
+              },
+              {
+                "groupName": null,
+                "name": "Non-Smoking"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (heating)"
+              },
+              {
+                "groupName": null,
+                "name": "Towels provided"
+              },
+              {
+                "groupName": null,
+                "name": "Bedsheets provided"
+              },
+              {
+                "groupName": null,
+                "name": "Highchair"
+              },
+              {
+                "groupName": null,
+                "name": "Raised toilet seat"
+              },
+              {
+                "groupName": null,
+                "name": "Low-height counters/sink"
+              },
+              {
+                "groupName": null,
+                "name": "Grab bar - near toilet"
+              },
+              {
+                "groupName": null,
+                "name": "Bathroom emergency pull cord"
+              },
+              {
+                "groupName": null,
+                "name": "Wardrobe or closet"
+              }
+            ],
+            "occupancies": [
+              {
+                "roomId": "3300e76f-9120-4e69-8596-6f662021d0cd",
+                "stdRoomId": 2,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "bcf6bf49-713a-41e9-9497-2aa51563a9f8",
+            "name": "Comfort Double Room",
+            "description": null,
+            "recommendationId": "e48131c2-1704-4bbc-84c5-f4f53093fc85",
+            "rateid": "3fb17a06-6ab7-4776-b822-a612abb35a53",
+            "availability": "1",
+            "ourprice": 364.76,
+            "publishedRate": 387.55,
+            "baseRate": 297.74,
+            "totalRate": 333.95,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "bcf6bf49-713a-41e9-9497-2aa51563a9f8",
+                "stdRoomId": 2,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "187aeca8-d0f5-4bc5-99b3-7902bab9ceae",
+            "name": "Comfort Double Room",
+            "description": "<p><strong>1 Double Bed</strong></p><p>161 sq feet </p><br/><p><b>Internet</b> - Free WiFi </p><p><b>Entertainment</b> - 32-inch flat-screen TV with digital channels</p><p><b>Food & Drink</b> - Room service (limited)</p><p><b>Sleep</b> - Premium bedding, blackout drapes/curtains, and bed sheets </p><p><b>Bathroom</b> - Private bathroom, shower, free toiletries, and a hair dryer</p><p><b>Practical</b> - Desk, phone, and highchair</p><p><b>Comfort</b> - Daily housekeeping and climate-controlled heating and air conditioning</p><p><b>Accessibility</b> - Wheelchair accessible</p><p><b>Need to Know</b> - No cribs (infant beds) available</p><p>Non-Smoking</p><p>Room is accessed via exterior corridors </p>",
+            "recommendationId": "6876116e-e49c-4953-8170-829e18f47efe",
+            "rateid": "149621e9-1741-4705-b02e-6dc30e7076e2",
+            "availability": "2",
+            "ourprice": 375.25,
+            "publishedRate": 455,
+            "baseRate": 341.15,
+            "totalRate": 375.25,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "FullBed",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [
+              {
+                "groupName": null,
+                "name": "Room service (limited hours)"
+              },
+              {
+                "groupName": null,
+                "name": "Television"
+              },
+              {
+                "groupName": null,
+                "name": "Wheelchair accessible"
+              },
+              {
+                "groupName": null,
+                "name": "Daily housekeeping"
+              },
+              {
+                "groupName": null,
+                "name": "Hypo-allergenic bedding available"
+              },
+              {
+                "groupName": null,
+                "name": "Phone"
+              },
+              {
+                "groupName": null,
+                "name": "Private bathroom"
+              },
+              {
+                "groupName": null,
+                "name": "Free toiletries"
+              },
+              {
+                "groupName": null,
+                "name": "Hair dryer"
+              },
+              {
+                "groupName": null,
+                "name": "Desk"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (air conditioning)"
+              },
+              {
+                "groupName": null,
+                "name": "Premium bedding"
+              },
+              {
+                "groupName": null,
+                "name": "Soundproofed rooms"
+              },
+              {
+                "groupName": null,
+                "name": "Access via exterior corridors"
+              },
+              {
+                "groupName": null,
+                "name": "Bidet"
+              },
+              {
+                "groupName": null,
+                "name": "Blackout drapes/curtains"
+              },
+              {
+                "groupName": null,
+                "name": "Shower only"
+              },
+              {
+                "groupName": null,
+                "name": "Digital TV service"
+              },
+              {
+                "groupName": null,
+                "name": "Flat-panel TV"
+              },
+              {
+                "groupName": null,
+                "name": "Free WiFi"
+              },
+              {
+                "groupName": null,
+                "name": "TV size: 32"
+              },
+              {
+                "groupName": null,
+                "name": "TV size measurement: inch"
+              },
+              {
+                "groupName": null,
+                "name": "No cribs (infant beds)"
+              },
+              {
+                "groupName": null,
+                "name": "Non-Smoking"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (heating)"
+              },
+              {
+                "groupName": null,
+                "name": "Towels provided"
+              },
+              {
+                "groupName": null,
+                "name": "Bedsheets provided"
+              },
+              {
+                "groupName": null,
+                "name": "Highchair"
+              },
+              {
+                "groupName": null,
+                "name": "Raised toilet seat"
+              },
+              {
+                "groupName": null,
+                "name": "Low-height counters/sink"
+              },
+              {
+                "groupName": null,
+                "name": "Grab bar - near toilet"
+              },
+              {
+                "groupName": null,
+                "name": "Bathroom emergency pull cord"
+              },
+              {
+                "groupName": null,
+                "name": "Wardrobe or closet"
+              }
+            ],
+            "occupancies": [
+              {
+                "roomId": "187aeca8-d0f5-4bc5-99b3-7902bab9ceae",
+                "stdRoomId": 2,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "187aeca8-d0f5-4bc5-99b3-7902bab9ceae",
+            "name": "Comfort Double Room",
+            "description": "<p><strong>1 Double Bed</strong></p><p>161 sq feet </p><br/><p><b>Internet</b> - Free WiFi </p><p><b>Entertainment</b> - 32-inch flat-screen TV with digital channels</p><p><b>Food & Drink</b> - Room service (limited)</p><p><b>Sleep</b> - Premium bedding, blackout drapes/curtains, and bed sheets </p><p><b>Bathroom</b> - Private bathroom, shower, free toiletries, and a hair dryer</p><p><b>Practical</b> - Desk, phone, and highchair</p><p><b>Comfort</b> - Daily housekeeping and climate-controlled heating and air conditioning</p><p><b>Accessibility</b> - Wheelchair accessible</p><p><b>Need to Know</b> - No cribs (infant beds) available</p><p>Non-Smoking</p><p>Room is accessed via exterior corridors </p>",
+            "recommendationId": "834326a6-5bd6-492a-aa26-fc8d6bc36baa",
+            "rateid": "7344b076-171e-45e2-a6ec-ad24124cce59",
+            "availability": "2",
+            "ourprice": 541,
+            "publishedRate": 625,
+            "baseRate": 414.55,
+            "totalRate": 541,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Breakfast buffet",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "FullBed",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [
+              {
+                "groupName": null,
+                "name": "Room service (limited hours)"
+              },
+              {
+                "groupName": null,
+                "name": "Television"
+              },
+              {
+                "groupName": null,
+                "name": "Wheelchair accessible"
+              },
+              {
+                "groupName": null,
+                "name": "Daily housekeeping"
+              },
+              {
+                "groupName": null,
+                "name": "Hypo-allergenic bedding available"
+              },
+              {
+                "groupName": null,
+                "name": "Phone"
+              },
+              {
+                "groupName": null,
+                "name": "Private bathroom"
+              },
+              {
+                "groupName": null,
+                "name": "Free toiletries"
+              },
+              {
+                "groupName": null,
+                "name": "Hair dryer"
+              },
+              {
+                "groupName": null,
+                "name": "Desk"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (air conditioning)"
+              },
+              {
+                "groupName": null,
+                "name": "Premium bedding"
+              },
+              {
+                "groupName": null,
+                "name": "Soundproofed rooms"
+              },
+              {
+                "groupName": null,
+                "name": "Access via exterior corridors"
+              },
+              {
+                "groupName": null,
+                "name": "Bidet"
+              },
+              {
+                "groupName": null,
+                "name": "Blackout drapes/curtains"
+              },
+              {
+                "groupName": null,
+                "name": "Shower only"
+              },
+              {
+                "groupName": null,
+                "name": "Digital TV service"
+              },
+              {
+                "groupName": null,
+                "name": "Flat-panel TV"
+              },
+              {
+                "groupName": null,
+                "name": "Free WiFi"
+              },
+              {
+                "groupName": null,
+                "name": "TV size: 32"
+              },
+              {
+                "groupName": null,
+                "name": "TV size measurement: inch"
+              },
+              {
+                "groupName": null,
+                "name": "No cribs (infant beds)"
+              },
+              {
+                "groupName": null,
+                "name": "Non-Smoking"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (heating)"
+              },
+              {
+                "groupName": null,
+                "name": "Towels provided"
+              },
+              {
+                "groupName": null,
+                "name": "Bedsheets provided"
+              },
+              {
+                "groupName": null,
+                "name": "Highchair"
+              },
+              {
+                "groupName": null,
+                "name": "Raised toilet seat"
+              },
+              {
+                "groupName": null,
+                "name": "Low-height counters/sink"
+              },
+              {
+                "groupName": null,
+                "name": "Grab bar - near toilet"
+              },
+              {
+                "groupName": null,
+                "name": "Bathroom emergency pull cord"
+              },
+              {
+                "groupName": null,
+                "name": "Wardrobe or closet"
+              }
+            ],
+            "occupancies": [
+              {
+                "roomId": "187aeca8-d0f5-4bc5-99b3-7902bab9ceae",
+                "stdRoomId": 2,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "71e1ea42-a95a-4e77-b7bd-5cb67d9aef60",
+            "name": "Comfort Double Room",
+            "description": null,
+            "recommendationId": "da35967e-72ef-4610-b8f2-e8965c791ef0",
+            "rateid": "6c3e76c2-63b6-4314-9912-db24f62a38ac",
+            "availability": "1",
+            "ourprice": 541.89,
+            "publishedRate": 575.75,
+            "baseRate": 362.73,
+            "totalRate": 496.12,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Bed and Breakfast",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "1 Double",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "71e1ea42-a95a-4e77-b7bd-5cb67d9aef60",
+                "stdRoomId": 2,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Deluxe Double",
+        "facilities": [
+          {
+            "name": "Room service (limited hours)"
+          },
+          {
+            "name": "Television"
+          },
+          {
+            "name": "Wheelchair accessible"
+          },
+          {
+            "name": "Daily housekeeping"
+          },
+          {
+            "name": "Hypo-allergenic bedding available"
+          },
+          {
+            "name": "Phone"
+          },
+          {
+            "name": "Private bathroom"
+          },
+          {
+            "name": "Free toiletries"
+          },
+          {
+            "name": "Hair dryer"
+          },
+          {
+            "name": "Desk"
+          },
+          {
+            "name": "In-room climate control (air conditioning)"
+          },
+          {
+            "name": "Premium bedding"
+          },
+          {
+            "name": "Sofa bed"
+          },
+          {
+            "name": "Soundproofed rooms"
+          },
+          {
+            "name": "Access via exterior corridors"
+          },
+          {
+            "name": "Bidet"
+          },
+          {
+            "name": "Blackout drapes/curtains"
+          },
+          {
+            "name": "Shower only"
+          },
+          {
+            "name": "Digital TV service"
+          },
+          {
+            "name": "Flat-panel TV"
+          },
+          {
+            "name": "Free WiFi"
+          },
+          {
+            "name": "TV size: 32"
+          },
+          {
+            "name": "TV size measurement: inch"
+          },
+          {
+            "name": "Cribs/infant beds (surcharge)"
+          },
+          {
+            "name": "Non-Smoking"
+          },
+          {
+            "name": "Rollaway/extra beds (surcharge)"
+          },
+          {
+            "name": "In-room climate control (heating)"
+          },
+          {
+            "name": "Towels provided"
+          },
+          {
+            "name": "Bedsheets provided"
+          },
+          {
+            "name": "Highchair"
+          },
+          {
+            "name": "Raised toilet seat"
+          },
+          {
+            "name": "Low-height counters/sink"
+          },
+          {
+            "name": "Grab bar - near toilet"
+          },
+          {
+            "name": "Bathroom emergency pull cord"
+          },
+          {
+            "name": "Wardrobe or closet"
+          }
+        ],
+        "maxGuestAllowed": "0",
+        "maxAdultAllowed": "0",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Deluxe Double Room",
+        "area": "17",
+        "beds": [
+          {
+            "type": "KingBed",
+            "count": "1"
+          },
+          {
+            "type": "SofaBed",
+            "count": "1"
+          }
+        ],
+        "rooms": [
+          {
+            "id": "18c55b59-f9db-431d-8ac5-1640238440b8",
+            "name": "Deluxe Double Room",
+            "description": null,
+            "recommendationId": "b217bb72-cf00-4c93-9b72-01a88ac935d7",
+            "rateid": "a3d53c83-baff-42c9-970f-e91e4c6c7fed",
+            "availability": "1",
+            "ourprice": 357.67,
+            "publishedRate": 380.02,
+            "baseRate": 327.46,
+            "totalRate": 327.46,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "18c55b59-f9db-431d-8ac5-1640238440b8",
+                "stdRoomId": 3,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "ca1d3265-e957-45e5-a634-98da8748c53b",
+            "name": "Deluxe Double Room",
+            "description": "<p><strong>1 King Bed and 1 Twin Sofa Bed</strong></p><p>182 sq feet </p><br/><p><b>Internet</b> - Free WiFi </p><p><b>Entertainment</b> - 32-inch flat-screen TV with digital channels</p><p><b>Food & Drink</b> - Room service (limited)</p><p><b>Sleep</b> - Premium bedding, blackout drapes/curtains, and bed sheets </p><p><b>Bathroom</b> - Private bathroom, shower, free toiletries, and a hair dryer</p><p><b>Practical</b> - Desk, single sofa bed, and phone; rollaway beds (surcharge) and cribs (surcharge) available on request</p><p><b>Comfort</b> - Daily housekeeping and climate-controlled heating and air conditioning</p><p><b>Accessibility</b> - Bathroom emergency pull cord</p><p>Non-Smoking</p><p>Room is accessed via exterior corridors </p>",
+            "recommendationId": "f606f79a-cf24-4ad2-8d68-059127c83e40",
+            "rateid": "d4019938-0947-44d2-9b7c-6879702a5021",
+            "availability": "2",
+            "ourprice": 372.4,
+            "publishedRate": 452,
+            "baseRate": 338.55,
+            "totalRate": 372.4,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "KingBed",
+                "count": 1
+              },
+              {
+                "type": "SofaBed",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [
+              {
+                "groupName": null,
+                "name": "Room service (limited hours)"
+              },
+              {
+                "groupName": null,
+                "name": "Television"
+              },
+              {
+                "groupName": null,
+                "name": "Wheelchair accessible"
+              },
+              {
+                "groupName": null,
+                "name": "Daily housekeeping"
+              },
+              {
+                "groupName": null,
+                "name": "Hypo-allergenic bedding available"
+              },
+              {
+                "groupName": null,
+                "name": "Phone"
+              },
+              {
+                "groupName": null,
+                "name": "Private bathroom"
+              },
+              {
+                "groupName": null,
+                "name": "Free toiletries"
+              },
+              {
+                "groupName": null,
+                "name": "Hair dryer"
+              },
+              {
+                "groupName": null,
+                "name": "Desk"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (air conditioning)"
+              },
+              {
+                "groupName": null,
+                "name": "Premium bedding"
+              },
+              {
+                "groupName": null,
+                "name": "Sofa bed"
+              },
+              {
+                "groupName": null,
+                "name": "Soundproofed rooms"
+              },
+              {
+                "groupName": null,
+                "name": "Access via exterior corridors"
+              },
+              {
+                "groupName": null,
+                "name": "Bidet"
+              },
+              {
+                "groupName": null,
+                "name": "Blackout drapes/curtains"
+              },
+              {
+                "groupName": null,
+                "name": "Shower only"
+              },
+              {
+                "groupName": null,
+                "name": "Digital TV service"
+              },
+              {
+                "groupName": null,
+                "name": "Flat-panel TV"
+              },
+              {
+                "groupName": null,
+                "name": "Free WiFi"
+              },
+              {
+                "groupName": null,
+                "name": "TV size: 32"
+              },
+              {
+                "groupName": null,
+                "name": "TV size measurement: inch"
+              },
+              {
+                "groupName": null,
+                "name": "Cribs/infant beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "Non-Smoking"
+              },
+              {
+                "groupName": null,
+                "name": "Rollaway/extra beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (heating)"
+              },
+              {
+                "groupName": null,
+                "name": "Towels provided"
+              },
+              {
+                "groupName": null,
+                "name": "Bedsheets provided"
+              },
+              {
+                "groupName": null,
+                "name": "Highchair"
+              },
+              {
+                "groupName": null,
+                "name": "Raised toilet seat"
+              },
+              {
+                "groupName": null,
+                "name": "Low-height counters/sink"
+              },
+              {
+                "groupName": null,
+                "name": "Grab bar - near toilet"
+              },
+              {
+                "groupName": null,
+                "name": "Bathroom emergency pull cord"
+              },
+              {
+                "groupName": null,
+                "name": "Wardrobe or closet"
+              }
+            ],
+            "occupancies": [
+              {
+                "roomId": "ca1d3265-e957-45e5-a634-98da8748c53b",
+                "stdRoomId": 3,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "902d2b05-6adb-44e5-9d8a-f09e83f35e47",
+            "name": "Deluxe Double Room",
+            "description": null,
+            "recommendationId": "0251a705-bff8-4a1f-bd7f-16aff16913fd",
+            "rateid": "fa310a0b-b1ec-4584-9096-4593a182656b",
+            "availability": "1",
+            "ourprice": 393.93,
+            "publishedRate": 418.55,
+            "baseRate": 360.66,
+            "totalRate": 360.66,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Bed and Breakfast",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "902d2b05-6adb-44e5-9d8a-f09e83f35e47",
+                "stdRoomId": 3,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "9fa01838-6655-4dbd-ac7d-0cb654996840",
+            "name": "Deluxe Double Room",
+            "description": null,
+            "recommendationId": "662dce35-bf7f-4b6a-8f11-16632683baab",
+            "rateid": "890b55ec-b92c-4cfc-9ec9-de7aa924cceb",
+            "availability": "1",
+            "ourprice": 405.72,
+            "publishedRate": 431.07,
+            "baseRate": 371.45,
+            "totalRate": 371.45,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "9fa01838-6655-4dbd-ac7d-0cb654996840",
+                "stdRoomId": 3,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "010b420b-3033-479c-9dcc-1d65b98551bb",
+            "name": "Deluxe Double Room",
+            "description": "<p><strong>1 King Bed and 1 Twin Sofa Bed</strong></p><p>182 sq feet </p><br/><p><b>Internet</b> - Free WiFi </p><p><b>Entertainment</b> - 32-inch flat-screen TV with digital channels</p><p><b>Food & Drink</b> - Room service (limited)</p><p><b>Sleep</b> - Premium bedding, blackout drapes/curtains, and bed sheets </p><p><b>Bathroom</b> - Private bathroom, shower, free toiletries, and a hair dryer</p><p><b>Practical</b> - Desk, single sofa bed, and phone; rollaway beds (surcharge) and cribs (surcharge) available on request</p><p><b>Comfort</b> - Daily housekeeping and climate-controlled heating and air conditioning</p><p><b>Accessibility</b> - Bathroom emergency pull cord</p><p>Non-Smoking</p><p>Room is accessed via exterior corridors </p>",
+            "recommendationId": "135a3b45-6677-4ff4-826b-dee9d5fdc638",
+            "rateid": "5847d93e-d9fa-405e-91fc-1d623beba3dc",
+            "availability": "2",
+            "ourprice": 422.75,
+            "publishedRate": 505,
+            "baseRate": 384.3,
+            "totalRate": 422.75,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "KingBed",
+                "count": 1
+              },
+              {
+                "type": "SofaBed",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [
+              {
+                "groupName": null,
+                "name": "Room service (limited hours)"
+              },
+              {
+                "groupName": null,
+                "name": "Television"
+              },
+              {
+                "groupName": null,
+                "name": "Wheelchair accessible"
+              },
+              {
+                "groupName": null,
+                "name": "Daily housekeeping"
+              },
+              {
+                "groupName": null,
+                "name": "Hypo-allergenic bedding available"
+              },
+              {
+                "groupName": null,
+                "name": "Phone"
+              },
+              {
+                "groupName": null,
+                "name": "Private bathroom"
+              },
+              {
+                "groupName": null,
+                "name": "Free toiletries"
+              },
+              {
+                "groupName": null,
+                "name": "Hair dryer"
+              },
+              {
+                "groupName": null,
+                "name": "Desk"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (air conditioning)"
+              },
+              {
+                "groupName": null,
+                "name": "Premium bedding"
+              },
+              {
+                "groupName": null,
+                "name": "Sofa bed"
+              },
+              {
+                "groupName": null,
+                "name": "Soundproofed rooms"
+              },
+              {
+                "groupName": null,
+                "name": "Access via exterior corridors"
+              },
+              {
+                "groupName": null,
+                "name": "Bidet"
+              },
+              {
+                "groupName": null,
+                "name": "Blackout drapes/curtains"
+              },
+              {
+                "groupName": null,
+                "name": "Shower only"
+              },
+              {
+                "groupName": null,
+                "name": "Digital TV service"
+              },
+              {
+                "groupName": null,
+                "name": "Flat-panel TV"
+              },
+              {
+                "groupName": null,
+                "name": "Free WiFi"
+              },
+              {
+                "groupName": null,
+                "name": "TV size: 32"
+              },
+              {
+                "groupName": null,
+                "name": "TV size measurement: inch"
+              },
+              {
+                "groupName": null,
+                "name": "Cribs/infant beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "Non-Smoking"
+              },
+              {
+                "groupName": null,
+                "name": "Rollaway/extra beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (heating)"
+              },
+              {
+                "groupName": null,
+                "name": "Towels provided"
+              },
+              {
+                "groupName": null,
+                "name": "Bedsheets provided"
+              },
+              {
+                "groupName": null,
+                "name": "Highchair"
+              },
+              {
+                "groupName": null,
+                "name": "Raised toilet seat"
+              },
+              {
+                "groupName": null,
+                "name": "Low-height counters/sink"
+              },
+              {
+                "groupName": null,
+                "name": "Grab bar - near toilet"
+              },
+              {
+                "groupName": null,
+                "name": "Bathroom emergency pull cord"
+              },
+              {
+                "groupName": null,
+                "name": "Wardrobe or closet"
+              }
+            ],
+            "occupancies": [
+              {
+                "roomId": "010b420b-3033-479c-9dcc-1d65b98551bb",
+                "stdRoomId": 3,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "957c4e47-df3b-445c-b1c9-741574c4daa2",
+            "name": "Deluxe Double Room",
+            "description": null,
+            "recommendationId": "db7b7cb9-a5d2-42c3-995c-c683dfb19eb5",
+            "rateid": "1c3c0b35-a6cd-4079-8f3f-1f8b09c2b3d6",
+            "availability": "1",
+            "ourprice": 507.64,
+            "publishedRate": 539.36,
+            "baseRate": 464.77,
+            "totalRate": 464.77,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Bed and Breakfast",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "957c4e47-df3b-445c-b1c9-741574c4daa2",
+                "stdRoomId": 3,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "010b420b-3033-479c-9dcc-1d65b98551bb",
+            "name": "Deluxe Double Room",
+            "description": "<p><strong>1 King Bed and 1 Twin Sofa Bed</strong></p><p>182 sq feet </p><br/><p><b>Internet</b> - Free WiFi </p><p><b>Entertainment</b> - 32-inch flat-screen TV with digital channels</p><p><b>Food & Drink</b> - Room service (limited)</p><p><b>Sleep</b> - Premium bedding, blackout drapes/curtains, and bed sheets </p><p><b>Bathroom</b> - Private bathroom, shower, free toiletries, and a hair dryer</p><p><b>Practical</b> - Desk, single sofa bed, and phone; rollaway beds (surcharge) and cribs (surcharge) available on request</p><p><b>Comfort</b> - Daily housekeeping and climate-controlled heating and air conditioning</p><p><b>Accessibility</b> - Bathroom emergency pull cord</p><p>Non-Smoking</p><p>Room is accessed via exterior corridors </p>",
+            "recommendationId": "fdaad13a-cbb8-44cb-a386-31a870281cdd",
+            "rateid": "5ac641c0-adf5-46c8-84e2-0e36aed0ba65",
+            "availability": "2",
+            "ourprice": 564.75,
+            "publishedRate": 650,
+            "baseRate": 436.15,
+            "totalRate": 564.75,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Breakfast buffet",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "KingBed",
+                "count": 1
+              },
+              {
+                "type": "SofaBed",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [
+              {
+                "groupName": null,
+                "name": "Room service (limited hours)"
+              },
+              {
+                "groupName": null,
+                "name": "Television"
+              },
+              {
+                "groupName": null,
+                "name": "Wheelchair accessible"
+              },
+              {
+                "groupName": null,
+                "name": "Daily housekeeping"
+              },
+              {
+                "groupName": null,
+                "name": "Hypo-allergenic bedding available"
+              },
+              {
+                "groupName": null,
+                "name": "Phone"
+              },
+              {
+                "groupName": null,
+                "name": "Private bathroom"
+              },
+              {
+                "groupName": null,
+                "name": "Free toiletries"
+              },
+              {
+                "groupName": null,
+                "name": "Hair dryer"
+              },
+              {
+                "groupName": null,
+                "name": "Desk"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (air conditioning)"
+              },
+              {
+                "groupName": null,
+                "name": "Premium bedding"
+              },
+              {
+                "groupName": null,
+                "name": "Sofa bed"
+              },
+              {
+                "groupName": null,
+                "name": "Soundproofed rooms"
+              },
+              {
+                "groupName": null,
+                "name": "Access via exterior corridors"
+              },
+              {
+                "groupName": null,
+                "name": "Bidet"
+              },
+              {
+                "groupName": null,
+                "name": "Blackout drapes/curtains"
+              },
+              {
+                "groupName": null,
+                "name": "Shower only"
+              },
+              {
+                "groupName": null,
+                "name": "Digital TV service"
+              },
+              {
+                "groupName": null,
+                "name": "Flat-panel TV"
+              },
+              {
+                "groupName": null,
+                "name": "Free WiFi"
+              },
+              {
+                "groupName": null,
+                "name": "TV size: 32"
+              },
+              {
+                "groupName": null,
+                "name": "TV size measurement: inch"
+              },
+              {
+                "groupName": null,
+                "name": "Cribs/infant beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "Non-Smoking"
+              },
+              {
+                "groupName": null,
+                "name": "Rollaway/extra beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (heating)"
+              },
+              {
+                "groupName": null,
+                "name": "Towels provided"
+              },
+              {
+                "groupName": null,
+                "name": "Bedsheets provided"
+              },
+              {
+                "groupName": null,
+                "name": "Highchair"
+              },
+              {
+                "groupName": null,
+                "name": "Raised toilet seat"
+              },
+              {
+                "groupName": null,
+                "name": "Low-height counters/sink"
+              },
+              {
+                "groupName": null,
+                "name": "Grab bar - near toilet"
+              },
+              {
+                "groupName": null,
+                "name": "Bathroom emergency pull cord"
+              },
+              {
+                "groupName": null,
+                "name": "Wardrobe or closet"
+              }
+            ],
+            "occupancies": [
+              {
+                "roomId": "010b420b-3033-479c-9dcc-1d65b98551bb",
+                "stdRoomId": 3,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name": "Assigned On Arrival",
+        "facilities": [],
+        "maxGuestAllowed": "2",
+        "maxAdultAllowed": "2",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Room Assigned on Arrival",
+        "area": null,
+        "beds": [],
+        "rooms": [
+          {
+            "id": "28baab14-d117-4f2c-a8f9-1d6a9ffe2aaa",
+            "name": "Room Assigned On Arrival",
+            "description": null,
+            "recommendationId": "1a4697ce-aac6-4305-a5dc-dba44adb4fef",
+            "rateid": "0b577e5f-0627-40b3-a002-2fcefbd9bab3",
+            "availability": "1",
+            "ourprice": 363.71,
+            "publishedRate": 386.43,
+            "baseRate": 332.99,
+            "totalRate": 332.99,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "28baab14-d117-4f2c-a8f9-1d6a9ffe2aaa",
+                "stdRoomId": 10,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "1acce331-fd6d-4c45-a865-3efd53cecb9b",
+            "name": "Room Assigned On Arrival",
+            "description": null,
+            "recommendationId": "c367229f-85b7-40a2-b8aa-728b3e66ad7e",
+            "rateid": "25b1ac73-9ea0-40bb-bf90-8528b0182b89",
+            "availability": "1",
+            "ourprice": 432.16,
+            "publishedRate": 459.16,
+            "baseRate": 395.66,
+            "totalRate": 395.66,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "1acce331-fd6d-4c45-a865-3efd53cecb9b",
+                "stdRoomId": 10,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "e2bec81d-896f-4a4b-8d91-ca5a328b3f6c",
+            "name": "Room Assigned On Arrival",
+            "description": null,
+            "recommendationId": "5e5a67ba-1309-4226-9511-67f8876d4e6b",
+            "rateid": "9c1b050e-cf49-4fb3-99a9-01663d4b85c4",
+            "availability": "1",
+            "ourprice": 593.11,
+            "publishedRate": 630.17,
+            "baseRate": 543.01,
+            "totalRate": 543.01,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Bed and Breakfast",
+              "displayText": "Breakfast"
+            },
+            "beds": [],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "e2bec81d-896f-4a4b-8d91-ca5a328b3f6c",
+                "stdRoomId": 10,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Deluxe",
+        "facilities": [],
+        "maxGuestAllowed": "0",
+        "maxAdultAllowed": "0",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Room DELUXE",
+        "area": null,
+        "beds": [],
+        "rooms": [
+          {
+            "id": "4e3b6aa8-04ed-4003-bf25-a81d0ca8a3dd",
+            "name": "Deluxe Room",
+            "description": null,
+            "recommendationId": "a67e2056-1579-4284-a889-5ae15a709933",
+            "rateid": "f7d119df-4426-4516-a99b-78253d3fce2a",
+            "availability": "1",
+            "ourprice": 367.06,
+            "publishedRate": 389.99,
+            "baseRate": 336.06,
+            "totalRate": 336.06,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "4e3b6aa8-04ed-4003-bf25-a81d0ca8a3dd",
+                "stdRoomId": 8,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "6bfd0015-34ea-4889-a809-3745d3b7ab30",
+            "name": "Deluxe Room",
+            "description": null,
+            "recommendationId": "0c3cd8dc-eaee-4ae2-ae4d-d44673e6737d",
+            "rateid": "b653ace5-7377-4003-8fec-63f09bbea4b4",
+            "availability": "1",
+            "ourprice": 451.26,
+            "publishedRate": 479.46,
+            "baseRate": 413.15,
+            "totalRate": 413.15,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "6bfd0015-34ea-4889-a809-3745d3b7ab30",
+                "stdRoomId": 8,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "1435bd31-0674-4323-a6a5-686d43bb8b97",
+            "name": "Deluxe Room",
+            "description": null,
+            "recommendationId": "f39f96a2-64af-4c1a-b4d3-c1feba2f233a",
+            "rateid": "05c08a3d-1434-4017-bbcf-0a524f62e306",
+            "availability": "1",
+            "ourprice": 466.16,
+            "publishedRate": 495.29,
+            "baseRate": 426.79,
+            "totalRate": 426.79,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Bed and Breakfast",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "1435bd31-0674-4323-a6a5-686d43bb8b97",
+                "stdRoomId": 8,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "86620b1c-63dd-47e2-854c-3be485bded20",
+            "name": "Deluxe Room",
+            "description": null,
+            "recommendationId": "b0110d56-0ba6-494c-8181-00535d5f2c86",
+            "rateid": "2b5460e2-39b3-484c-9867-985bfba85bb4",
+            "availability": "1",
+            "ourprice": 520.1,
+            "publishedRate": 552.6,
+            "baseRate": 432.89,
+            "totalRate": 476.17,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Bed and Breakfast",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "86620b1c-63dd-47e2-854c-3be485bded20",
+                "stdRoomId": 8,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Double Standard",
+        "facilities": [],
+        "maxGuestAllowed": "0",
+        "maxAdultAllowed": "0",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Double Standard",
+        "area": null,
+        "beds": [
+          {
+            "type": "DOUBLE",
+            "count": "1"
+          }
+        ],
+        "rooms": [
+          {
+            "id": "c00df855-eebd-457c-a3d8-2ae9af87a599",
+            "name": "Double Standard",
+            "description": "Double Bed.",
+            "recommendationId": "a2ea27a2-440a-4c41-9f06-8e91f088760d",
+            "rateid": "cbe97184-50b6-4190-9f79-2de541ac11bb",
+            "availability": "2",
+            "ourprice": 375.63,
+            "publishedRate": 389.46,
+            "baseRate": 312.9,
+            "totalRate": 351.85,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": null,
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "DOUBLE",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "c00df855-eebd-457c-a3d8-2ae9af87a599",
+                "stdRoomId": 5,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "a8c6c2fc-7c36-4893-983f-49f92d4daa35",
+            "name": "Double Standard",
+            "description": "Double Bed.",
+            "recommendationId": "413f55d0-538e-414c-858f-6e8f16236de6",
+            "rateid": "3d070662-fc8d-40e3-a3c8-c6e66fb4b6df",
+            "availability": "2",
+            "ourprice": 413.9,
+            "publishedRate": 429.17,
+            "baseRate": 344.8,
+            "totalRate": 387.7,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": null,
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "DOUBLE",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "a8c6c2fc-7c36-4893-983f-49f92d4daa35",
+                "stdRoomId": 5,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "51ddd800-d46c-48ad-9bff-adcbf0a2aa07",
+            "name": "Double Standard",
+            "description": "Double Bed.",
+            "recommendationId": "9a3b02bc-22f9-4300-803c-50b2c776b119",
+            "rateid": "236f1598-2f5d-4852-97f7-6d5b1d81ff45",
+            "availability": "2",
+            "ourprice": 473.2,
+            "publishedRate": 490.62,
+            "baseRate": 394.2,
+            "totalRate": 443.25,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": null,
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "DOUBLE",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "51ddd800-d46c-48ad-9bff-adcbf0a2aa07",
+                "stdRoomId": 5,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "9018634f-cb75-4d4e-9be1-751eb34c2eb9",
+            "name": "Double Standard",
+            "description": "Double Bed.",
+            "recommendationId": "eaa0ad5c-5611-4521-84fc-27d2644fccbe",
+            "rateid": "96832ab4-cbf4-4062-9807-c9b383caa7e1",
+            "availability": "2",
+            "ourprice": 504.09,
+            "publishedRate": 522.61,
+            "baseRate": 420,
+            "totalRate": 472.2,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": null,
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "DOUBLE",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "9018634f-cb75-4d4e-9be1-751eb34c2eb9",
+                "stdRoomId": 5,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Double Deluxe",
+        "facilities": [],
+        "maxGuestAllowed": "0",
+        "maxAdultAllowed": "0",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Double Deluxe",
+        "area": null,
+        "beds": [
+          {
+            "type": "DOUBLE",
+            "count": "1"
+          }
+        ],
+        "rooms": [
+          {
+            "id": "fd1555d2-4ee7-401f-80cf-e3dc2a867a64",
+            "name": "Double Deluxe",
+            "description": "Double Bed.",
+            "recommendationId": "06fdc673-bb43-4187-b2e4-186f58669923",
+            "rateid": "68c0ad2f-69ba-4575-8224-191d268a81a2",
+            "availability": "2",
+            "ourprice": 377.33,
+            "publishedRate": 391.2,
+            "baseRate": 314.3,
+            "totalRate": 353.45,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": null,
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "DOUBLE",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "fd1555d2-4ee7-401f-80cf-e3dc2a867a64",
+                "stdRoomId": 6,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "1f011cb4-11a6-4211-83e9-ce38cf91e23b",
+            "name": "Double Deluxe",
+            "description": "Double Bed.",
+            "recommendationId": "b0beb613-8bb5-431b-966b-c65f4c95af90",
+            "rateid": "ecea08d4-6329-43e2-92ae-f3bfe4c4da17",
+            "availability": "2",
+            "ourprice": 415.71,
+            "publishedRate": 431,
+            "baseRate": 346.35,
+            "totalRate": 389.4,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": null,
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "DOUBLE",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "1f011cb4-11a6-4211-83e9-ce38cf91e23b",
+                "stdRoomId": 6,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "cf777b93-fd63-49a2-a5dd-c49e64dcf616",
+            "name": "Double Deluxe",
+            "description": "Double Bed.",
+            "recommendationId": "14704aee-4bcb-40e5-ba73-f9cbba8681a1",
+            "rateid": "2c43e4d2-6a67-4238-bc31-a4b3ba1b5863",
+            "availability": "2",
+            "ourprice": 428.25,
+            "publishedRate": 443.99,
+            "baseRate": 356.75,
+            "totalRate": 401.15,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": null,
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "DOUBLE",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "cf777b93-fd63-49a2-a5dd-c49e64dcf616",
+                "stdRoomId": 6,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "b8ffded7-77a2-4748-b97d-e0ea08e602f2",
+            "name": "Double Deluxe",
+            "description": "Double Bed.",
+            "recommendationId": "9d0ef703-83be-4caf-8b38-2e57ff9edb8f",
+            "rateid": "19655d95-4065-4bdd-9c5a-9a0ac4db1204",
+            "availability": "2",
+            "ourprice": 536.61,
+            "publishedRate": 556.35,
+            "baseRate": 447.1,
+            "totalRate": 502.65,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": null,
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "DOUBLE",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "b8ffded7-77a2-4748-b97d-e0ea08e602f2",
+                "stdRoomId": 6,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "name": "Deluxe Double King Bed And Twin Sofa Bed",
+        "facilities": [],
+        "maxGuestAllowed": "2",
+        "maxAdultAllowed": "2",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Deluxe Double Room,1 King Bed and 1 Twin Sofa Bed",
+        "area": null,
+        "beds": [],
+        "rooms": [
+          {
+            "id": "68d54792-8ccb-4621-879a-e030f49751e5",
+            "name": "Deluxe Double Room,1 King Bed And 1 Twin Sofa Bed",
+            "description": null,
+            "recommendationId": "699a92e7-c878-4693-8d27-36fb532f8e01",
+            "rateid": "3ef91f34-276c-4121-b5e9-7b1bb3333927",
+            "availability": "1",
+            "ourprice": 384.4,
+            "publishedRate": 408.42,
+            "baseRate": 351.93,
+            "totalRate": 351.93,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "68d54792-8ccb-4621-879a-e030f49751e5",
+                "stdRoomId": 11,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "e39205ee-e2d7-44b9-a6fa-94a47e4f3c79",
+            "name": "Deluxe Double Room 1 King Bed And 1 Twin Sofa Bed",
+            "description": null,
+            "recommendationId": "a7e62707-d43d-419f-a421-55f884814cc7",
+            "rateid": "ff0d1f72-15c8-4074-b16c-9deedb9ebad3",
+            "availability": "1",
+            "ourprice": 412.9,
+            "publishedRate": 438.7,
+            "baseRate": 378.03,
+            "totalRate": 378.03,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "e39205ee-e2d7-44b9-a6fa-94a47e4f3c79",
+                "stdRoomId": 11,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "68dab8ab-94db-4ae4-aa7f-f1790ab7ff26",
+            "name": "Deluxe Double Room 1 King Bed And 1 Twin Sofa Bed",
+            "description": null,
+            "recommendationId": "2f7a929e-f6d1-4923-a500-f9fc3b6934cc",
+            "rateid": "68801d0b-16d3-404c-b08a-361f35108716",
+            "availability": "1",
+            "ourprice": 567.09,
+            "publishedRate": 602.53,
+            "baseRate": 519.19,
+            "totalRate": 519.19,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Bed and Breakfast",
+              "displayText": "Breakfast"
+            },
+            "beds": [],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "68dab8ab-94db-4ae4-aa7f-f1790ab7ff26",
+                "stdRoomId": 11,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Double Or Twin Deluxe Two Beds",
+        "facilities": [],
+        "maxGuestAllowed": "0",
+        "maxAdultAllowed": "0",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Double or Twin DELUXE TWO BEDS",
+        "area": null,
+        "beds": [
+          {
+            "type": "DOUBLE",
+            "count": "1"
+          }
+        ],
+        "rooms": [
+          {
+            "id": "70203cd4-c892-40e4-a4b7-59e038f724eb",
+            "name": "Double Or Twin Deluxe Two Beds",
+            "description": "Double Or Twin Bed.",
+            "recommendationId": "d445dd0a-77db-4f61-852a-e8dab994fc27",
+            "rateid": "d1baa779-56a0-4c76-bee4-f7ced3ca0a13",
+            "availability": "2",
+            "ourprice": 422.54,
+            "publishedRate": 438.08,
+            "baseRate": 352.05,
+            "totalRate": 395.8,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": null,
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "DOUBLE",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "70203cd4-c892-40e4-a4b7-59e038f724eb",
+                "stdRoomId": 7,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "9f417d85-cdc4-4dc1-9b70-3aff4640ad09",
+            "name": "Double Or Twin Deluxe Two Beds",
+            "description": "Double Or Twin Bed.",
+            "recommendationId": "4de98b2a-f24c-4936-8c40-b120f19d69fe",
+            "rateid": "9352633b-0065-4e2b-bff3-18ff0d8a7dd9",
+            "availability": "2",
+            "ourprice": 544.84,
+            "publishedRate": 564.91,
+            "baseRate": 453.95,
+            "totalRate": 510.35,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": null,
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "DOUBLE",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "9f417d85-cdc4-4dc1-9b70-3aff4640ad09",
+                "stdRoomId": 7,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Triple",
+        "facilities": [
+          {
+            "name": "Room service (limited hours)"
+          },
+          {
+            "name": "Television"
+          },
+          {
+            "name": "Wheelchair accessible"
+          },
+          {
+            "name": "Daily housekeeping"
+          },
+          {
+            "name": "Hypo-allergenic bedding available"
+          },
+          {
+            "name": "Phone"
+          },
+          {
+            "name": "Private bathroom"
+          },
+          {
+            "name": "Free toiletries"
+          },
+          {
+            "name": "Hair dryer"
+          },
+          {
+            "name": "Desk"
+          },
+          {
+            "name": "In-room climate control (air conditioning)"
+          },
+          {
+            "name": "Premium bedding"
+          },
+          {
+            "name": "Soundproofed rooms"
+          },
+          {
+            "name": "Access via exterior corridors"
+          },
+          {
+            "name": "Bidet"
+          },
+          {
+            "name": "Blackout drapes/curtains"
+          },
+          {
+            "name": "Shower only"
+          },
+          {
+            "name": "Digital TV service"
+          },
+          {
+            "name": "Flat-panel TV"
+          },
+          {
+            "name": "Free WiFi"
+          },
+          {
+            "name": "TV size: 32"
+          },
+          {
+            "name": "TV size measurement: inch"
+          },
+          {
+            "name": "Cribs/infant beds (surcharge)"
+          },
+          {
+            "name": "Non-Smoking"
+          },
+          {
+            "name": "Rollaway/extra beds (surcharge)"
+          },
+          {
+            "name": "In-room climate control (heating)"
+          },
+          {
+            "name": "Towels provided"
+          },
+          {
+            "name": "Bedsheets provided"
+          },
+          {
+            "name": "Highchair"
+          },
+          {
+            "name": "Raised toilet seat"
+          },
+          {
+            "name": "Low-height counters/sink"
+          },
+          {
+            "name": "Grab bar - near toilet"
+          },
+          {
+            "name": "Bathroom emergency pull cord"
+          },
+          {
+            "name": "Wardrobe or closet"
+          }
+        ],
+        "maxGuestAllowed": "0",
+        "maxAdultAllowed": "0",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Triple Room",
+        "area": null,
+        "beds": [
+          {
+            "type": "FullBed",
+            "count": "1"
+          },
+          {
+            "type": "TwinBed",
+            "count": "1"
+          }
+        ],
+        "rooms": [
+          {
+            "id": "39476af7-bc17-4573-8291-fc834894305d",
+            "name": "Triple Room",
+            "description": null,
+            "recommendationId": "e30264ec-df3f-4a54-a08a-ae7a35d59d52",
+            "rateid": "f9f2fecc-a7b1-4a6d-b463-34be89e534ba",
+            "availability": "1",
+            "ourprice": 435.36,
+            "publishedRate": 462.56,
+            "baseRate": 398.59,
+            "totalRate": 398.59,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "39476af7-bc17-4573-8291-fc834894305d",
+                "stdRoomId": 1,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "6f0dc3fa-c19d-4799-94f7-875063dcc1b2",
+            "name": "Triple Room",
+            "description": "<p><strong>1 Double Bed and 1 Twin Bed</strong></p><p>Soundproofed room</p><br/><p><b>Internet</b> - Free WiFi </p><p><b>Entertainment</b> - 32-inch flat-screen TV with digital channels</p><p><b>Food & Drink</b> - Room service (limited)</p><p><b>Sleep</b> - Premium bedding, blackout drapes/curtains, and bed sheets </p><p><b>Bathroom</b> - Private bathroom, shower, free toiletries, and a hair dryer</p><p><b>Practical</b> - Desk, phone, and highchair; rollaway beds (surcharge) and cribs (surcharge) available on request</p><p><b>Comfort</b> - Daily housekeeping and climate-controlled heating and air conditioning</p><p><b>Accessibility</b> - Bathroom emergency pull cord</p><p>Non-Smoking</p><p>Room is accessed via exterior corridors </p>",
+            "recommendationId": "799e5aec-43e4-4380-bd7a-fd1087fe667e",
+            "rateid": "2bd24e40-deed-4a15-86cf-9e55c45fd8df",
+            "availability": "2",
+            "ourprice": 453.85,
+            "publishedRate": 537.75,
+            "baseRate": 412.6,
+            "totalRate": 453.85,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "FullBed",
+                "count": 1
+              },
+              {
+                "type": "TwinBed",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [
+              {
+                "groupName": null,
+                "name": "Room service (limited hours)"
+              },
+              {
+                "groupName": null,
+                "name": "Television"
+              },
+              {
+                "groupName": null,
+                "name": "Wheelchair accessible"
+              },
+              {
+                "groupName": null,
+                "name": "Daily housekeeping"
+              },
+              {
+                "groupName": null,
+                "name": "Hypo-allergenic bedding available"
+              },
+              {
+                "groupName": null,
+                "name": "Phone"
+              },
+              {
+                "groupName": null,
+                "name": "Private bathroom"
+              },
+              {
+                "groupName": null,
+                "name": "Free toiletries"
+              },
+              {
+                "groupName": null,
+                "name": "Hair dryer"
+              },
+              {
+                "groupName": null,
+                "name": "Desk"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (air conditioning)"
+              },
+              {
+                "groupName": null,
+                "name": "Premium bedding"
+              },
+              {
+                "groupName": null,
+                "name": "Soundproofed rooms"
+              },
+              {
+                "groupName": null,
+                "name": "Access via exterior corridors"
+              },
+              {
+                "groupName": null,
+                "name": "Bidet"
+              },
+              {
+                "groupName": null,
+                "name": "Blackout drapes/curtains"
+              },
+              {
+                "groupName": null,
+                "name": "Shower only"
+              },
+              {
+                "groupName": null,
+                "name": "Digital TV service"
+              },
+              {
+                "groupName": null,
+                "name": "Flat-panel TV"
+              },
+              {
+                "groupName": null,
+                "name": "Free WiFi"
+              },
+              {
+                "groupName": null,
+                "name": "TV size: 32"
+              },
+              {
+                "groupName": null,
+                "name": "TV size measurement: inch"
+              },
+              {
+                "groupName": null,
+                "name": "Cribs/infant beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "Non-Smoking"
+              },
+              {
+                "groupName": null,
+                "name": "Rollaway/extra beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (heating)"
+              },
+              {
+                "groupName": null,
+                "name": "Towels provided"
+              },
+              {
+                "groupName": null,
+                "name": "Bedsheets provided"
+              },
+              {
+                "groupName": null,
+                "name": "Highchair"
+              },
+              {
+                "groupName": null,
+                "name": "Raised toilet seat"
+              },
+              {
+                "groupName": null,
+                "name": "Low-height counters/sink"
+              },
+              {
+                "groupName": null,
+                "name": "Grab bar - near toilet"
+              },
+              {
+                "groupName": null,
+                "name": "Bathroom emergency pull cord"
+              },
+              {
+                "groupName": null,
+                "name": "Wardrobe or closet"
+              }
+            ],
+            "occupancies": [
+              {
+                "roomId": "6f0dc3fa-c19d-4799-94f7-875063dcc1b2",
+                "stdRoomId": 1,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "9d405718-054b-4a11-8ccc-10d899693298",
+            "name": "Triple Room",
+            "description": null,
+            "recommendationId": "0187df98-559f-4f0c-868c-55b7a5615ae3",
+            "rateid": "556e4976-36b9-4414-8cc1-f1e0ebf0fbfa",
+            "availability": "1",
+            "ourprice": 496.14,
+            "publishedRate": 527.14,
+            "baseRate": 454.24,
+            "totalRate": 454.24,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "9d405718-054b-4a11-8ccc-10d899693298",
+                "stdRoomId": 1,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "fc895e17-44dc-4abc-8ccb-66c67174446f",
+            "name": "Triple Room",
+            "description": "<p><strong>1 Double Bed and 1 Twin Bed</strong></p><p>Soundproofed room</p><br/><p><b>Internet</b> - Free WiFi </p><p><b>Entertainment</b> - 32-inch flat-screen TV with digital channels</p><p><b>Food & Drink</b> - Room service (limited)</p><p><b>Sleep</b> - Premium bedding, blackout drapes/curtains, and bed sheets </p><p><b>Bathroom</b> - Private bathroom, shower, free toiletries, and a hair dryer</p><p><b>Practical</b> - Desk, phone, and highchair; rollaway beds (surcharge) and cribs (surcharge) available on request</p><p><b>Comfort</b> - Daily housekeeping and climate-controlled heating and air conditioning</p><p><b>Accessibility</b> - Bathroom emergency pull cord</p><p>Non-Smoking</p><p>Room is accessed via exterior corridors </p>",
+            "recommendationId": "eb894072-6558-48f0-9768-047e856200fc",
+            "rateid": "6168568a-6a32-4a50-9f66-a60129ad9cb2",
+            "availability": "2",
+            "ourprice": 517.75,
+            "publishedRate": 605,
+            "baseRate": 470.7,
+            "totalRate": 517.75,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "FullBed",
+                "count": 1
+              },
+              {
+                "type": "TwinBed",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [
+              {
+                "groupName": null,
+                "name": "Room service (limited hours)"
+              },
+              {
+                "groupName": null,
+                "name": "Television"
+              },
+              {
+                "groupName": null,
+                "name": "Wheelchair accessible"
+              },
+              {
+                "groupName": null,
+                "name": "Daily housekeeping"
+              },
+              {
+                "groupName": null,
+                "name": "Hypo-allergenic bedding available"
+              },
+              {
+                "groupName": null,
+                "name": "Phone"
+              },
+              {
+                "groupName": null,
+                "name": "Private bathroom"
+              },
+              {
+                "groupName": null,
+                "name": "Free toiletries"
+              },
+              {
+                "groupName": null,
+                "name": "Hair dryer"
+              },
+              {
+                "groupName": null,
+                "name": "Desk"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (air conditioning)"
+              },
+              {
+                "groupName": null,
+                "name": "Premium bedding"
+              },
+              {
+                "groupName": null,
+                "name": "Soundproofed rooms"
+              },
+              {
+                "groupName": null,
+                "name": "Access via exterior corridors"
+              },
+              {
+                "groupName": null,
+                "name": "Bidet"
+              },
+              {
+                "groupName": null,
+                "name": "Blackout drapes/curtains"
+              },
+              {
+                "groupName": null,
+                "name": "Shower only"
+              },
+              {
+                "groupName": null,
+                "name": "Digital TV service"
+              },
+              {
+                "groupName": null,
+                "name": "Flat-panel TV"
+              },
+              {
+                "groupName": null,
+                "name": "Free WiFi"
+              },
+              {
+                "groupName": null,
+                "name": "TV size: 32"
+              },
+              {
+                "groupName": null,
+                "name": "TV size measurement: inch"
+              },
+              {
+                "groupName": null,
+                "name": "Cribs/infant beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "Non-Smoking"
+              },
+              {
+                "groupName": null,
+                "name": "Rollaway/extra beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (heating)"
+              },
+              {
+                "groupName": null,
+                "name": "Towels provided"
+              },
+              {
+                "groupName": null,
+                "name": "Bedsheets provided"
+              },
+              {
+                "groupName": null,
+                "name": "Highchair"
+              },
+              {
+                "groupName": null,
+                "name": "Raised toilet seat"
+              },
+              {
+                "groupName": null,
+                "name": "Low-height counters/sink"
+              },
+              {
+                "groupName": null,
+                "name": "Grab bar - near toilet"
+              },
+              {
+                "groupName": null,
+                "name": "Bathroom emergency pull cord"
+              },
+              {
+                "groupName": null,
+                "name": "Wardrobe or closet"
+              }
+            ],
+            "occupancies": [
+              {
+                "roomId": "fc895e17-44dc-4abc-8ccb-66c67174446f",
+                "stdRoomId": 1,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "7c89b3e0-9bf6-4d87-8779-ba1c949888e3",
+            "name": "Triple Room",
+            "description": null,
+            "recommendationId": "1c222d83-df62-411f-a8f3-3197fcbe3b74",
+            "rateid": "c342fa8b-ab4c-4c22-a827-acff50f1a6d9",
+            "availability": "1",
+            "ourprice": 550.71,
+            "publishedRate": 585.12,
+            "baseRate": 504.2,
+            "totalRate": 504.2,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Bed and Breakfast",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "7c89b3e0-9bf6-4d87-8779-ba1c949888e3",
+                "stdRoomId": 1,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "9a844658-d858-463a-a439-6e82bebcd740",
+            "name": "Triple Room",
+            "description": null,
+            "recommendationId": "c3e8bc68-d2c4-49f5-a987-199d930abe69",
+            "rateid": "88633c61-ff08-445f-81e7-e39c0cdd6cb1",
+            "availability": "1",
+            "ourprice": 598.13,
+            "publishedRate": 635.5,
+            "baseRate": 547.61,
+            "totalRate": 547.61,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Bed and Breakfast",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "1 Double or 1 Twin",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "9a844658-d858-463a-a439-6e82bebcd740",
+                "stdRoomId": 1,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "fc895e17-44dc-4abc-8ccb-66c67174446f",
+            "name": "Triple Room",
+            "description": "<p><strong>1 Double Bed and 1 Twin Bed</strong></p><p>Soundproofed room</p><br/><p><b>Internet</b> - Free WiFi </p><p><b>Entertainment</b> - 32-inch flat-screen TV with digital channels</p><p><b>Food & Drink</b> - Room service (limited)</p><p><b>Sleep</b> - Premium bedding, blackout drapes/curtains, and bed sheets </p><p><b>Bathroom</b> - Private bathroom, shower, free toiletries, and a hair dryer</p><p><b>Practical</b> - Desk, phone, and highchair; rollaway beds (surcharge) and cribs (surcharge) available on request</p><p><b>Comfort</b> - Daily housekeeping and climate-controlled heating and air conditioning</p><p><b>Accessibility</b> - Bathroom emergency pull cord</p><p>Non-Smoking</p><p>Room is accessed via exterior corridors </p>",
+            "recommendationId": "d0930bbb-9122-4a20-8cd4-e3263be92a2c",
+            "rateid": "4bc2656d-894e-4702-b6f8-67fea93da485",
+            "availability": "2",
+            "ourprice": 688.25,
+            "publishedRate": 780,
+            "baseRate": 548.4,
+            "totalRate": 688.25,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "BedAndBreakfast",
+              "description": "Breakfast buffet",
+              "displayText": "Breakfast"
+            },
+            "beds": [
+              {
+                "type": "FullBed",
+                "count": 1
+              },
+              {
+                "type": "TwinBed",
+                "count": 1
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [
+              {
+                "groupName": null,
+                "name": "Room service (limited hours)"
+              },
+              {
+                "groupName": null,
+                "name": "Television"
+              },
+              {
+                "groupName": null,
+                "name": "Wheelchair accessible"
+              },
+              {
+                "groupName": null,
+                "name": "Daily housekeeping"
+              },
+              {
+                "groupName": null,
+                "name": "Hypo-allergenic bedding available"
+              },
+              {
+                "groupName": null,
+                "name": "Phone"
+              },
+              {
+                "groupName": null,
+                "name": "Private bathroom"
+              },
+              {
+                "groupName": null,
+                "name": "Free toiletries"
+              },
+              {
+                "groupName": null,
+                "name": "Hair dryer"
+              },
+              {
+                "groupName": null,
+                "name": "Desk"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (air conditioning)"
+              },
+              {
+                "groupName": null,
+                "name": "Premium bedding"
+              },
+              {
+                "groupName": null,
+                "name": "Soundproofed rooms"
+              },
+              {
+                "groupName": null,
+                "name": "Access via exterior corridors"
+              },
+              {
+                "groupName": null,
+                "name": "Bidet"
+              },
+              {
+                "groupName": null,
+                "name": "Blackout drapes/curtains"
+              },
+              {
+                "groupName": null,
+                "name": "Shower only"
+              },
+              {
+                "groupName": null,
+                "name": "Digital TV service"
+              },
+              {
+                "groupName": null,
+                "name": "Flat-panel TV"
+              },
+              {
+                "groupName": null,
+                "name": "Free WiFi"
+              },
+              {
+                "groupName": null,
+                "name": "TV size: 32"
+              },
+              {
+                "groupName": null,
+                "name": "TV size measurement: inch"
+              },
+              {
+                "groupName": null,
+                "name": "Cribs/infant beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "Non-Smoking"
+              },
+              {
+                "groupName": null,
+                "name": "Rollaway/extra beds (surcharge)"
+              },
+              {
+                "groupName": null,
+                "name": "In-room climate control (heating)"
+              },
+              {
+                "groupName": null,
+                "name": "Towels provided"
+              },
+              {
+                "groupName": null,
+                "name": "Bedsheets provided"
+              },
+              {
+                "groupName": null,
+                "name": "Highchair"
+              },
+              {
+                "groupName": null,
+                "name": "Raised toilet seat"
+              },
+              {
+                "groupName": null,
+                "name": "Low-height counters/sink"
+              },
+              {
+                "groupName": null,
+                "name": "Grab bar - near toilet"
+              },
+              {
+                "groupName": null,
+                "name": "Bathroom emergency pull cord"
+              },
+              {
+                "groupName": null,
+                "name": "Wardrobe or closet"
+              }
+            ],
+            "occupancies": [
+              {
+                "roomId": "fc895e17-44dc-4abc-8ccb-66c67174446f",
+                "stdRoomId": 1,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Triple Standard",
+        "facilities": [],
+        "maxGuestAllowed": "0",
+        "maxAdultAllowed": "0",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Triple Standard",
+        "area": null,
+        "beds": [],
+        "rooms": [
+          {
+            "id": "37786565-a4a8-46b4-9027-aa5f7b10b729",
+            "name": "Triple Standard",
+            "description": "Standard Room.",
+            "recommendationId": "c4225906-8712-4f1c-ada1-6b6d3cb4c726",
+            "rateid": "d5740437-4120-4060-8bbd-2aa6f4c32829",
+            "availability": "2",
+            "ourprice": 522.58,
+            "publishedRate": 541.83,
+            "baseRate": 435.4,
+            "totalRate": 489.5,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": null,
+              "displayText": "Room Only"
+            },
+            "beds": [],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "37786565-a4a8-46b4-9027-aa5f7b10b729",
+                "stdRoomId": 9,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "name": "Double Classic",
+        "facilities": [],
+        "maxGuestAllowed": "2",
+        "maxAdultAllowed": "2",
+        "maxChildrenAllowed": "0",
+        "views": [],
+        "type": "Double Classic",
+        "area": null,
+        "beds": [
+          {
+            "type": "1 Double",
+            "count": "0"
+          }
+        ],
+        "rooms": [
+          {
+            "id": "6e0b4bad-aa1b-4959-b482-2e4f454f33bd",
+            "name": "Double Classic",
+            "description": null,
+            "recommendationId": "b9a753b9-4535-4f5b-a04a-db8ed624f5d2",
+            "rateid": "e5dbf9ac-72ab-45ac-9beb-d3b130b7be1a",
+            "availability": "1",
+            "ourprice": 1202.4,
+            "publishedRate": 1277.53,
+            "baseRate": 1100.84,
+            "totalRate": 1100.84,
+            "refundable": false,
+            "refundability": "NonRefundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "6e0b4bad-aa1b-4959-b482-2e4f454f33bd",
+                "stdRoomId": 12,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          },
+          {
+            "id": "485954bd-30cc-4be8-9389-70aa750ade81",
+            "name": "Double Classic",
+            "description": null,
+            "recommendationId": "7d4d83be-e26f-413e-aa45-6e7f5584ed92",
+            "rateid": "0c282e62-c4d9-4d48-a642-4f7b3c40564f",
+            "availability": "1",
+            "ourprice": 1368.8,
+            "publishedRate": 1454.33,
+            "baseRate": 1253.19,
+            "totalRate": 1253.19,
+            "refundable": true,
+            "refundability": "Refundable",
+            "boardBasis": {
+              "type": "RoomOnly",
+              "description": "Room Only",
+              "displayText": "Room Only"
+            },
+            "beds": [
+              {
+                "type": "1 Double",
+                "count": 0
+              }
+            ],
+            "smokingAllowed": false,
+            "facilities": [],
+            "occupancies": [
+              {
+                "roomId": "485954bd-30cc-4be8-9389-70aa750ade81",
+                "stdRoomId": 12,
+                "numOfAdults": 2,
+                "numOfChildren": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

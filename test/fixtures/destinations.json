@@ -1,0 +1,52 @@
+{
+  "success": true,
+  "message": "data retrieved",
+  "code": 5128,
+  "result": [
+    {
+      "city": null,
+      "type": "City",
+      "referenceId": null,
+      "fullName": "Rome, Metropolitan City of Rome Capital, Italy",
+      "country": null,
+      "id": "ChIJu46S-ZZhLxMROG5lkwZ3D7k",
+      "coordinates": null
+    },
+    {
+      "city": null,
+      "type": "City",
+      "referenceId": null,
+      "fullName": "Rome, GA, USA",
+      "country": null,
+      "id": "ChIJ-0CeYsCkiogRKx3zvPnFUCg",
+      "coordinates": null
+    },
+    {
+      "city": null,
+      "type": "City",
+      "referenceId": null,
+      "fullName": "Romeoville, IL, USA",
+      "country": null,
+      "id": "ChIJn4Q6Qh9cDogR0a4P7KCLA7A",
+      "coordinates": null
+    },
+    {
+      "city": null,
+      "type": "City",
+      "referenceId": null,
+      "fullName": "Rome, NY, USA",
+      "country": null,
+      "id": "ChIJDYryPb4O2YkR97P8bHEaoEo",
+      "coordinates": null
+    },
+    {
+      "city": null,
+      "type": "City",
+      "referenceId": null,
+      "fullName": "Rome, Italy",
+      "country": null,
+      "id": "ChIJw0rXGxGKJRMRAIE4sppPCQM",
+      "coordinates": null
+    }
+  ]
+}

@@ -1,0 +1,1272 @@
+{
+  "success": true,
+  "message": "data retrieved",
+  "code": 5128,
+  "result": [
+    {
+      "status": "InProgress",
+      "nextResultsKey": "MF8xNDA=",
+      "count": 141,
+      "token": "38fac1d1-564b-408a-89a5-7a34e4cce91a",
+      "correlationId": "621b0b85-4723-4e9f-9182-e464261c8533",
+      "currency": "EUR",
+      "result": [
+        {
+          "id": "41393487",
+          "name": "ibis Styles Roma Aurelia",
+          "providerName": "Priceline_CUG",
+          "starRating": 4,
+          "ourprice": 634.11,
+          "baseprice": 0,
+          "publishedRate": 631.1,
+          "saving": 0,
+          "savingratio": 0,
+          "facilities": [
+            {
+              "name": "Dry cleaning/laundry service",
+              "id": 2070,
+              "groupId": "12"
+            },
+            {
+              "name": "Bulk dispenser for toiletries",
+              "id": 1073745301,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Vegetarian breakfast available",
+              "id": 1073745265,
+              "groupId": "5"
+            },
+            {
+              "name": "RV, bus, truck parking (surcharge)",
+              "id": 4453,
+              "groupId": "1"
+            },
+            {
+              "name": "Biodegradable/compostable stirrers",
+              "id": 1073745304,
+              "groupId": "undefined"
+            },
+            {
+              "name": "No single-use plastic straws",
+              "id": 1073745305,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Free reception",
+              "id": 2594,
+              "groupId": "undefined"
+            },
+            {
+              "name": "No single-use plastic stirrers",
+              "id": 1073745303,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Reusable cups only",
+              "id": 1073745308,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Biodegradable/compostable straws",
+              "id": 1073745306,
+              "groupId": "undefined"
+            },
+            {
+              "name": "No single-use plastic water bottles",
+              "id": 1073745307,
+              "groupId": "76"
+            },
+            {
+              "name": "Free WiFi",
+              "id": 2390,
+              "groupId": "16"
+            },
+            {
+              "name": "Number of bars/lounges - 1",
+              "id": 3913,
+              "groupId": "2"
+            },
+            {
+              "name": "Wheelchair accessible parking",
+              "id": 2422,
+              "groupId": "1"
+            },
+            {
+              "name": "Tours/ticket assistance",
+              "id": 2387,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Comprehensive food waste policy",
+              "id": 1073745297,
+              "groupId": "14"
+            },
+            {
+              "name": "Vegetable garden",
+              "id": 1073744087,
+              "groupId": "67"
+            },
+            {
+              "name": "At least 80% of all lighting comes from LEDs",
+              "id": 1073745295,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Recycling",
+              "id": 1073744243,
+              "groupId": "undefined"
+            },
+            {
+              "name": "LED light bulbs",
+              "id": 1073744242,
+              "groupId": "11"
+            },
+            {
+              "name": "Vegan menu options available",
+              "id": 1073745298,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Living plant wall",
+              "id": 1073744245,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Vegetarian menu options available",
+              "id": 1073745299,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Wheelchair-accessible on-site restaurant",
+              "id": 1073744640,
+              "groupId": "14"
+            },
+            {
+              "name": "Multilingual staff",
+              "id": 2043,
+              "groupId": "35"
+            },
+            {
+              "name": "Water dispenser",
+              "id": 1073743877,
+              "groupId": "76"
+            },
+            {
+              "name": "Breakfast available (surcharge)",
+              "id": 361,
+              "groupId": "5"
+            },
+            {
+              "name": "Number of coffee shops/cafes - 1",
+              "id": 3929,
+              "groupId": "78"
+            },
+            {
+              "name": "Coffee/tea in common areas",
+              "id": 324,
+              "groupId": "78"
+            },
+            {
+              "name": "Laundry facilities",
+              "id": 369,
+              "groupId": "12"
+            },
+            {
+              "name": "Elevator",
+              "id": 8,
+              "groupId": "62"
+            },
+            {
+              "name": "Double-glazing on all windows",
+              "id": 1073745292,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Locally-sourced food on site (80% or more)",
+              "id": 1073745293,
+              "groupId": "14"
+            },
+            {
+              "name": "Uncovered parking",
+              "id": 1073744273,
+              "groupId": "1"
+            },
+            {
+              "name": "Books",
+              "id": 1073743382,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Wheelchair accessible (may have limitations)",
+              "id": 1073744430,
+              "groupId": "34"
+            },
+            {
+              "name": "Wheelchair accessible",
+              "id": 27,
+              "groupId": "34"
+            },
+            {
+              "name": "Wheelchair-accessible concierge desk",
+              "id": 1073744630,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Table tennis",
+              "id": 1073743386,
+              "groupId": "51"
+            },
+            {
+              "name": "Foosball",
+              "id": 1073743388,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Wheelchair-accessible registration desk",
+              "id": 1073744635,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Garden",
+              "id": 378,
+              "groupId": "67"
+            },
+            {
+              "name": "Stair-free path to entrance",
+              "id": 1073744907,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Area shuttle (surcharge)",
+              "id": 2529,
+              "groupId": "74"
+            },
+            {
+              "name": "Children's toys",
+              "id": 1073744388,
+              "groupId": "79"
+            },
+            {
+              "name": "Children's games",
+              "id": 1073744387,
+              "groupId": "79"
+            },
+            {
+              "name": "Luggage storage",
+              "id": 4003,
+              "groupId": "80"
+            },
+            {
+              "name": "Coin laundry on site",
+              "id": 1073744422,
+              "groupId": "12"
+            },
+            {
+              "name": "Porter/bellhop",
+              "id": 2066,
+              "groupId": "77"
+            },
+            {
+              "name": "24-hour front desk",
+              "id": 2063,
+              "groupId": "80"
+            },
+            {
+              "name": "Playground on site",
+              "id": 3825,
+              "groupId": "76"
+            },
+            {
+              "name": "Number of restaurants - 1",
+              "id": 2537,
+              "groupId": "14"
+            },
+            {
+              "name": "Outdoor seasonal pool",
+              "id": 2138,
+              "groupId": "13"
+            },
+            {
+              "name": "Smoke-free property",
+              "id": 2137,
+              "groupId": "10"
+            },
+            {
+              "name": "Safe-deposit box at front desk",
+              "id": 2016,
+              "groupId": "32"
+            },
+            {
+              "name": "Snack bar/deli",
+              "id": 3500,
+              "groupId": "8"
+            },
+            {
+              "name": "Free self parking",
+              "id": 3861,
+              "groupId": "1"
+            },
+            {
+              "name": "Concierge services",
+              "id": 43,
+              "groupId": "49"
+            }
+          ],
+          "distance": 2.78,
+          "distancekm": 4.48,
+          "heroImage": "https://i.travelapi.com/lodging/1000000/30000/24500/24438/a70fd19a_b.jpg",
+          "chain": "Accor",
+          "payAtHotel": false,
+          "ratetype": "PREPAID",
+          "options": {
+            "freeBreakfast": false,
+            "halfBoard": false,
+            "fullBoard": false,
+            "refundable": false,
+            "freeCancellation": false
+          },
+          "contact": {
+            "address": {
+              "line1": "Via Andrea Ferrara 33",
+              "city": {
+                "name": "Rome"
+              },
+              "country": {
+                "code": "IT",
+                "name": "Italy"
+              }
+            }
+          },
+          "reviews": null,
+          "mainamenity": [
+            "restaurant",
+            "accessible rooms"
+          ]
+        },
+        {
+          "id": "41416363",
+          "name": "H10 Palazzo Galla",
+          "providerName": "Priceline_CUG",
+          "starRating": 4,
+          "ourprice": 1610.01,
+          "baseprice": 0,
+          "publishedRate": 1816.54,
+          "saving": 206.53,
+          "savingratio": 11.37,
+          "facilities": [
+            {
+              "name": "Dry cleaning/laundry service",
+              "id": 2070,
+              "groupId": "12"
+            },
+            {
+              "name": "Comprehensive recycling policy",
+              "id": 1073745300,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Bulk dispenser for toiletries",
+              "id": 1073745301,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Parking (limited spaces)",
+              "id": 3761,
+              "groupId": "1"
+            },
+            {
+              "name": "Area rugs in public areas",
+              "id": 1073745348,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Number of meeting rooms - 2",
+              "id": 2593,
+              "groupId": "6"
+            },
+            {
+              "name": "Conference space size (meters) - 43",
+              "id": 2592,
+              "groupId": "6"
+            },
+            {
+              "name": "Free WiFi",
+              "id": 2390,
+              "groupId": "16"
+            },
+            {
+              "name": "Number of bars/lounges - 1",
+              "id": 3913,
+              "groupId": "2"
+            },
+            {
+              "name": "Wheelchair accessible parking",
+              "id": 2422,
+              "groupId": "1"
+            },
+            {
+              "name": "Tours/ticket assistance",
+              "id": 2387,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Rooftop terrace",
+              "id": 3912,
+              "groupId": "42"
+            },
+            {
+              "name": "All property's electricity comes from renewable sources",
+              "id": 1073745296,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Comprehensive food waste policy",
+              "id": 1073745297,
+              "groupId": "14"
+            },
+            {
+              "name": "Airport transportation (surcharge)",
+              "id": 56,
+              "groupId": "18"
+            },
+            {
+              "name": "Energy-saving switches",
+              "id": 1073745294,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Eco-friendly toiletries",
+              "id": 1073744241,
+              "groupId": "undefined"
+            },
+            {
+              "name": "At least 80% of all lighting comes from LEDs",
+              "id": 1073745295,
+              "groupId": "undefined"
+            },
+            {
+              "name": "LED light bulbs",
+              "id": 1073744242,
+              "groupId": "11"
+            },
+            {
+              "name": "Vegan menu options available",
+              "id": 1073745298,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Wheelchair-accessible lounge",
+              "id": 1073744641,
+              "groupId": "2"
+            },
+            {
+              "name": "No accessible shuttle",
+              "id": 1073745332,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Vegetarian menu options available",
+              "id": 1073745299,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Wheelchair-accessible on-site restaurant",
+              "id": 1073744640,
+              "groupId": "14"
+            },
+            {
+              "name": "Multilingual staff",
+              "id": 2043,
+              "groupId": "35"
+            },
+            {
+              "name": "Water dispenser",
+              "id": 1073743877,
+              "groupId": "76"
+            },
+            {
+              "name": "Electric car charging station",
+              "id": 1073743315,
+              "groupId": "68"
+            },
+            {
+              "name": "Number of accessible parking spaces - 1",
+              "id": 1073745339,
+              "groupId": "1"
+            },
+            {
+              "name": "Breakfast available (surcharge)",
+              "id": 361,
+              "groupId": "5"
+            },
+            {
+              "name": "Elevator",
+              "id": 8,
+              "groupId": "62"
+            },
+            {
+              "name": "Fitness facilities",
+              "id": 9,
+              "groupId": "17"
+            },
+            {
+              "name": "Double-glazing on all windows",
+              "id": 1073745292,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Guest education on local ecosystems and culture",
+              "id": 1073745291,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Covered parking",
+              "id": 1073744272,
+              "groupId": "1"
+            },
+            {
+              "name": "Wheelchair accessible (may have limitations)",
+              "id": 1073744430,
+              "groupId": "34"
+            },
+            {
+              "name": "Banquet hall",
+              "id": 1073744111,
+              "groupId": "29"
+            },
+            {
+              "name": "Locally-owned & organized tours & activities",
+              "id": 1073745288,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Meeting rooms",
+              "id": 2131,
+              "groupId": "6"
+            },
+            {
+              "name": "Wheelchair-accessible registration desk",
+              "id": 1073744635,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Wheelchair-accessible fitness center",
+              "id": 1073744638,
+              "groupId": "17"
+            },
+            {
+              "name": "Television in common areas",
+              "id": 372,
+              "groupId": "11"
+            },
+            {
+              "name": "Well-lit path to entrance",
+              "id": 1073744906,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Stair-free path to entrance",
+              "id": 1073744907,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Registration desk height (centimeters) - 60",
+              "id": 1073745351,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Elevator door width (inches) - 39",
+              "id": 1073745352,
+              "groupId": "62"
+            },
+            {
+              "name": "Registration desk height (inches) - 24",
+              "id": 1073745350,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Elevator door width (centimeters) - 100",
+              "id": 1073745353,
+              "groupId": "62"
+            },
+            {
+              "name": "Luggage storage",
+              "id": 4003,
+              "groupId": "80"
+            },
+            {
+              "name": "Porter/bellhop",
+              "id": 2066,
+              "groupId": "77"
+            },
+            {
+              "name": "24-hour front desk",
+              "id": 2063,
+              "groupId": "80"
+            },
+            {
+              "name": "Smoke-free property",
+              "id": 2137,
+              "groupId": "10"
+            },
+            {
+              "name": "Snack bar/deli",
+              "id": 3500,
+              "groupId": "8"
+            },
+            {
+              "name": "Self parking (surcharge)",
+              "id": 3862,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Conference space",
+              "id": 81,
+              "groupId": "6"
+            },
+            {
+              "name": "Computer station",
+              "id": 3865,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Conference space size (feet) - 463",
+              "id": 2539,
+              "groupId": "6"
+            },
+            {
+              "name": "Concierge services",
+              "id": 43,
+              "groupId": "49"
+            }
+          ],
+          "distance": 2.46,
+          "distancekm": 3.96,
+          "heroImage": "https://i.travelapi.com/lodging/75000000/74980000/74973000/74972957/abd6dc67_b.jpg",
+          "chain": "H10 Hoteles",
+          "payAtHotel": false,
+          "ratetype": "PREPAID",
+          "options": {
+            "freeBreakfast": false,
+            "halfBoard": false,
+            "fullBoard": false,
+            "refundable": true,
+            "freeCancellation": true
+          },
+          "contact": {
+            "address": {
+              "line1": "Via IV Novembre",
+              "city": {
+                "name": "Rome"
+              },
+              "country": {
+                "code": "IT",
+                "name": "Italy"
+              }
+            }
+          },
+          "reviews": null,
+          "mainamenity": [
+            "restaurant",
+            "accessible rooms"
+          ]
+        },
+        {
+          "id": "41542357",
+          "name": "Six Senses Rome",
+          "providerName": "Priceline_CUG",
+          "starRating": 5,
+          "ourprice": 9523.49,
+          "baseprice": 0,
+          "publishedRate": 10745.15,
+          "saving": 1221.66,
+          "savingratio": 11.37,
+          "facilities": [
+            {
+              "name": "Dry cleaning/laundry service",
+              "id": 2070,
+              "groupId": "12"
+            },
+            {
+              "name": "Wheelchair accessible (may have limitations)",
+              "id": 1073744430,
+              "groupId": "34"
+            },
+            {
+              "name": "Banquet hall",
+              "id": 1073744111,
+              "groupId": "29"
+            },
+            {
+              "name": "Covered parking",
+              "id": 1073744275,
+              "groupId": "1"
+            },
+            {
+              "name": "Food and water bowls",
+              "id": 1073744795,
+              "groupId": "14"
+            },
+            {
+              "name": "Wheelchair-accessible concierge desk",
+              "id": 1073744630,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Secured parking",
+              "id": 1073744277,
+              "groupId": "1"
+            },
+            {
+              "name": "Wheelchair-accessible path to elevator",
+              "id": 1073744634,
+              "groupId": "62"
+            },
+            {
+              "name": "Valet for wheelchair-equipped vehicle",
+              "id": 1073744633,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Wheelchair-accessible spa",
+              "id": 1073744636,
+              "groupId": "9"
+            },
+            {
+              "name": "Wheelchair-accessible registration desk",
+              "id": 1073744635,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Free WiFi",
+              "id": 2390,
+              "groupId": "16"
+            },
+            {
+              "name": "Wheelchair-accessible public washroom",
+              "id": 1073744629,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Number of bars/lounges - 1",
+              "id": 3913,
+              "groupId": "2"
+            },
+            {
+              "name": "Well-lit path to entrance",
+              "id": 1073744906,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Garden",
+              "id": 378,
+              "groupId": "67"
+            },
+            {
+              "name": "Stair-free path to entrance",
+              "id": 1073744907,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Tours/ticket assistance",
+              "id": 2387,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Full-service spa",
+              "id": 2123,
+              "groupId": "9"
+            },
+            {
+              "name": "24-hour fitness facilities",
+              "id": 4468,
+              "groupId": "17"
+            },
+            {
+              "name": "Rooftop terrace",
+              "id": 3912,
+              "groupId": "42"
+            },
+            {
+              "name": "Wheelchair-accessible lounge",
+              "id": 1073744641,
+              "groupId": "2"
+            },
+            {
+              "name": "Wheelchair-accessible on-site restaurant",
+              "id": 1073744640,
+              "groupId": "14"
+            },
+            {
+              "name": "Luggage storage",
+              "id": 4003,
+              "groupId": "80"
+            },
+            {
+              "name": "Porter/bellhop",
+              "id": 2066,
+              "groupId": "77"
+            },
+            {
+              "name": "Handrails in stairways",
+              "id": 1073744645,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Multilingual staff",
+              "id": 2043,
+              "groupId": "35"
+            },
+            {
+              "name": "24-hour front desk",
+              "id": 2063,
+              "groupId": "80"
+            },
+            {
+              "name": "Breakfast available (surcharge)",
+              "id": 361,
+              "groupId": "5"
+            },
+            {
+              "name": "Number of restaurants - 1",
+              "id": 2537,
+              "groupId": "14"
+            },
+            {
+              "name": "Smoke-free property",
+              "id": 2137,
+              "groupId": "10"
+            },
+            {
+              "name": "Safe-deposit box at front desk",
+              "id": 2016,
+              "groupId": "32"
+            },
+            {
+              "name": "Steam room",
+              "id": 2134,
+              "groupId": "31"
+            },
+            {
+              "name": "Elevator",
+              "id": 8,
+              "groupId": "62"
+            },
+            {
+              "name": "Valet parking (surcharge)",
+              "id": 3864,
+              "groupId": "1"
+            },
+            {
+              "name": "Hair salon",
+              "id": 40,
+              "groupId": "37"
+            },
+            {
+              "name": "Wheelchair accessible path of travel",
+              "id": 2419,
+              "groupId": "34"
+            },
+            {
+              "name": "Concierge services",
+              "id": 43,
+              "groupId": "49"
+            }
+          ],
+          "distance": 2.22,
+          "distancekm": 3.58,
+          "heroImage": "https://i.travelapi.com/lodging/84000000/83220000/83216200/83216106/w3496h2333x4y0-8c6b8837_b.jpg",
+          "chain": "IHG",
+          "payAtHotel": false,
+          "ratetype": "PREPAID",
+          "options": {
+            "freeBreakfast": true,
+            "halfBoard": false,
+            "fullBoard": false,
+            "refundable": false,
+            "freeCancellation": false
+          },
+          "contact": {
+            "address": {
+              "line1": "Piazza di San Marcello",
+              "city": {
+                "name": "Rome"
+              },
+              "country": {
+                "code": "IT",
+                "name": "Italy"
+              }
+            }
+          },
+          "reviews": null,
+          "mainamenity": [
+            "restaurant",
+            "accessible rooms"
+          ]
+        },
+        {
+          "id": "39532068",
+          "name": "Hotel Ponte Sisto",
+          "providerName": "EAN",
+          "starRating": 4,
+          "ourprice": 1214.95,
+          "baseprice": 0,
+          "publishedRate": 1425,
+          "saving": 210.05,
+          "savingratio": 14.74,
+          "facilities": [
+            {
+              "name": "Dry cleaning/laundry service",
+              "id": 2070,
+              "groupId": "12"
+            },
+            {
+              "name": "Uncovered parking",
+              "id": 1073744273,
+              "groupId": "1"
+            },
+            {
+              "name": "Wheelchair accessible (may have limitations)",
+              "id": 1073744430,
+              "groupId": "34"
+            },
+            {
+              "name": "Banquet hall",
+              "id": 1073744111,
+              "groupId": "29"
+            },
+            {
+              "name": "Proposal/romance packages available",
+              "id": 1073744099,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Wheelchair accessible",
+              "id": 27,
+              "groupId": "34"
+            },
+            {
+              "name": "Parking (limited spaces)",
+              "id": 3761,
+              "groupId": "1"
+            },
+            {
+              "name": "Number of meeting rooms - 1",
+              "id": 2593,
+              "groupId": "6"
+            },
+            {
+              "name": "Conference space size (meters) - 200",
+              "id": 2592,
+              "groupId": "6"
+            },
+            {
+              "name": "Free WiFi",
+              "id": 2390,
+              "groupId": "16"
+            },
+            {
+              "name": "Number of bars/lounges - 1",
+              "id": 3913,
+              "groupId": "2"
+            },
+            {
+              "name": "Garden",
+              "id": 378,
+              "groupId": "67"
+            },
+            {
+              "name": "Tours/ticket assistance",
+              "id": 2387,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Wedding services",
+              "id": 2167,
+              "groupId": "77"
+            },
+            {
+              "name": "Rooftop terrace",
+              "id": 3912,
+              "groupId": "42"
+            },
+            {
+              "name": "Off-street parking",
+              "id": 1073744381,
+              "groupId": "1"
+            },
+            {
+              "name": "Luggage storage",
+              "id": 4003,
+              "groupId": "80"
+            },
+            {
+              "name": "Porter/bellhop",
+              "id": 2066,
+              "groupId": "77"
+            },
+            {
+              "name": "Multilingual staff",
+              "id": 2043,
+              "groupId": "35"
+            },
+            {
+              "name": "24-hour front desk",
+              "id": 2063,
+              "groupId": "80"
+            },
+            {
+              "name": "Breakfast available (surcharge)",
+              "id": 361,
+              "groupId": "5"
+            },
+            {
+              "name": "Smoke-free property",
+              "id": 2137,
+              "groupId": "10"
+            },
+            {
+              "name": "Safe-deposit box at front desk",
+              "id": 2016,
+              "groupId": "32"
+            },
+            {
+              "name": "Number of coffee shops/cafes - 1",
+              "id": 3929,
+              "groupId": "78"
+            },
+            {
+              "name": "Snack bar/deli",
+              "id": 3500,
+              "groupId": "8"
+            },
+            {
+              "name": "Laundry facilities",
+              "id": 369,
+              "groupId": "12"
+            },
+            {
+              "name": "Elevator",
+              "id": 8,
+              "groupId": "62"
+            },
+            {
+              "name": "Self parking (surcharge)",
+              "id": 3862,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Conference space",
+              "id": 81,
+              "groupId": "6"
+            },
+            {
+              "name": "Terrace",
+              "id": 4514,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Conference space size (feet) - 2153",
+              "id": 2539,
+              "groupId": "6"
+            },
+            {
+              "name": "24-hour business center",
+              "id": 2538,
+              "groupId": "6"
+            },
+            {
+              "name": "Concierge services",
+              "id": 43,
+              "groupId": "49"
+            }
+          ],
+          "distance": 2.26,
+          "distancekm": 3.63,
+          "heroImage": "https://i.travelapi.com/lodging/3000000/2590000/2589600/2589511/b9bfa652_b.jpg",
+          "chain": "Independent",
+          "payAtHotel": true,
+          "ratetype": "POSTPAID",
+          "options": {
+            "freeBreakfast": true,
+            "halfBoard": false,
+            "fullBoard": false,
+            "refundable": false,
+            "freeCancellation": false
+          },
+          "contact": {
+            "address": {
+              "line1": "Via Dei Pettinari, 64",
+              "city": {
+                "name": "Rome"
+              },
+              "country": {
+                "code": "IT",
+                "name": "Italy"
+              }
+            }
+          },
+          "reviews": null,
+          "mainamenity": [
+            "accessible rooms"
+          ]
+        },
+        {
+          "id": "39691028",
+          "name": "The Code Hotel",
+          "providerName": "EAN",
+          "starRating": 4,
+          "ourprice": 978.11,
+          "baseprice": 0,
+          "publishedRate": 1161.8,
+          "saving": 183.69,
+          "savingratio": 15.81,
+          "facilities": [
+            {
+              "name": "Dry cleaning/laundry service",
+              "id": 2070,
+              "groupId": "12"
+            },
+            {
+              "name": "Wheelchair accessible – no",
+              "id": 1073744740,
+              "groupId": "undefined"
+            },
+            {
+              "name": "No accessible shuttle",
+              "id": 1073745332,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Reception hall",
+              "id": 1073744112,
+              "groupId": "29"
+            },
+            {
+              "name": "Luggage storage",
+              "id": 4003,
+              "groupId": "80"
+            },
+            {
+              "name": "Multilingual staff",
+              "id": 2043,
+              "groupId": "35"
+            },
+            {
+              "name": "24-hour front desk",
+              "id": 2063,
+              "groupId": "80"
+            },
+            {
+              "name": "Breakfast available (surcharge)",
+              "id": 361,
+              "groupId": "5"
+            },
+            {
+              "name": "Free WiFi",
+              "id": 2390,
+              "groupId": "16"
+            },
+            {
+              "name": "Number of bars/lounges - 1",
+              "id": 3913,
+              "groupId": "2"
+            },
+            {
+              "name": "Number of restaurants - 1",
+              "id": 2537,
+              "groupId": "14"
+            },
+            {
+              "name": "Spa treatment room(s)",
+              "id": 2129,
+              "groupId": "9"
+            },
+            {
+              "name": "Spa services on site",
+              "id": 2017,
+              "groupId": "9"
+            },
+            {
+              "name": "Smoke-free property",
+              "id": 2137,
+              "groupId": "10"
+            },
+            {
+              "name": "Snack bar/deli",
+              "id": 3500,
+              "groupId": "8"
+            },
+            {
+              "name": "Laundry facilities",
+              "id": 369,
+              "groupId": "12"
+            },
+            {
+              "name": "Tours/ticket assistance",
+              "id": 2387,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Full-service spa",
+              "id": 2123,
+              "groupId": "9"
+            },
+            {
+              "name": "Airport transportation - pickup (surcharge)",
+              "id": 4006,
+              "groupId": "18"
+            },
+            {
+              "name": "Terrace",
+              "id": 4514,
+              "groupId": "undefined"
+            },
+            {
+              "name": "Rooftop terrace",
+              "id": 3912,
+              "groupId": "42"
+            },
+            {
+              "name": "Concierge services",
+              "id": 43,
+              "groupId": "49"
+            }
+          ],
+          "distance": 2.04,
+          "distancekm": 3.29,
+          "heroImage": "https://i.travelapi.com/lodging/28000000/27260000/27256700/27256645/f94669e6_b.jpg",
+          "chain": "Independent",
+          "payAtHotel": true,
+          "ratetype": "POSTPAID",
+          "options": {
+            "freeBreakfast": false,
+            "halfBoard": false,
+            "fullBoard": false,
+            "refundable": false,
+            "freeCancellation": false
+          },
+          "contact": {
+            "address": {
+              "line1": "79 Via Sistina",
+              "city": {
+                "name": "Rome"
+              },
+              "country": {
+                "code": "IT",
+                "name": "Italy"
+              }
+            }
+          },
+          "reviews": null,
+          "mainamenity": [
+            "restaurant",
+            "accessible rooms"
+          ]
+        }
+      ]
+    }
+  ],
+  "searchIncomplete": true
+}

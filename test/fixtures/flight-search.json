@@ -1,0 +1,545 @@
+{
+  "count": 420,
+  "code": "6026",
+  "message": "data retrieved",
+  "success": true,
+  "searchFilterObj": "{\"type\":\"OneWay\",\"destinations\":[{\"departureDate\":\"2027-08-20\",\"destination\":\"MXP\",\"arrival\":\"BKK\"}],\"preference\":\"Economy\",\"preferenceLevel\":\"Preferred\",\"adult\":1}",
+  "result": [
+    {
+      "stops": 2,
+      "flights": [
+        {
+          "triptime": 55,
+          "airline": "Oman Air",
+          "cabin": "Economy",
+          "departure": "MXP",
+          "departurelocation": "Milan",
+          "departairport": "Malpensa",
+          "arrival": "ZRH",
+          "arrivallocation": "Zurich",
+          "arrivalairport": "Zurich-Kloten",
+          "departureTime": "2027-08-20T14:55:00",
+          "arrivalTime": "2027-08-20T15:50:00",
+          "stops": 0,
+          "flightCode": "WY",
+          "flightNumber": "5844",
+          "fareFamily": "ECONOMY COMFORT",
+          "remainingSeats": 4,
+          "legindicator": 0,
+          "checkInBaggage": [
+            {
+              "type": "Adult",
+              "value": "30KG"
+            }
+          ],
+          "cabinBaggage": [
+            {
+              "type": "Adult",
+              "value": "Small Bag"
+            }
+          ]
+        },
+        {
+          "triptime": 380,
+          "airline": "Oman Air",
+          "cabin": "Economy",
+          "departure": "ZRH",
+          "departurelocation": "Zurich",
+          "departairport": "Zurich-Kloten",
+          "arrival": "MCT",
+          "arrivallocation": "Muscat",
+          "arrivalairport": "Seeb",
+          "departureTime": "2027-08-20T20:35:00",
+          "arrivalTime": "2027-08-21T04:55:00",
+          "stops": 0,
+          "flightCode": "WY",
+          "flightNumber": "154",
+          "fareFamily": "ECONOMY COMFORT",
+          "remainingSeats": 9,
+          "legindicator": 0,
+          "checkInBaggage": [
+            {
+              "type": "Adult",
+              "value": "30KG"
+            }
+          ],
+          "cabinBaggage": [
+            {
+              "type": "Adult",
+              "value": "Small Bag"
+            }
+          ]
+        },
+        {
+          "triptime": 365,
+          "airline": "Oman Air",
+          "cabin": "Economy",
+          "departure": "MCT",
+          "departurelocation": "Muscat",
+          "departairport": "Seeb",
+          "arrival": "BKK",
+          "arrivallocation": "Bangkok",
+          "arrivalairport": "All Airports",
+          "departureTime": "2027-08-21T08:40:00",
+          "arrivalTime": "2027-08-21T17:45:00",
+          "stops": 0,
+          "flightCode": "WY",
+          "flightNumber": "815",
+          "fareFamily": "ECONOMY COMFORT",
+          "remainingSeats": 9,
+          "legindicator": 0,
+          "checkInBaggage": [
+            {
+              "type": "Adult",
+              "value": "30KG"
+            }
+          ],
+          "cabinBaggage": [
+            {
+              "type": "Adult",
+              "value": "Small Bag"
+            }
+          ]
+        }
+      ],
+      "exchangeTime": "90",
+      "ticketingTime": "15",
+      "voidTime": "20",
+      "fareSourceCode": "QnJjcFVqNGtIMytJU3V5Z1oyRXlwa05PZDk0dng0SUkxTzdIS25nTHpSVEJQamZkQzhxOVFUeHl5UGFaZ1lPSVdiSlcxazZNT0pxRlhpWHV5RFhjaUJDZjRRRXFwVFFTYXRKTEpCek9ROXUvd1lmQ1NuckxYdVN3UHhoWnk1cTVBK3JSUDNPakJZTUF3Wm5CNi9SZnVBPT0=",
+      "sessionId": null,
+      "penaltiesInfoRef": 0,
+      "paxType": "ADT",
+      "quantity": 1,
+      "baseFare": 212.92,
+      "totalFare": 459.02,
+      "ourprice": 489.34,
+      "showOurprice": 489.34,
+      "convertedCoin": 489.34,
+      "marginPerc": 3,
+      "merchantFeesPerc": 3.5,
+      "taxes": 246.1,
+      "margin": 13.77,
+      "merchantfee": 16.55,
+      "taxBreakUp": [
+        {
+          "amount": "17.00",
+          "taxCode": "CH"
+        },
+        {
+          "amount": "8.00",
+          "taxCode": "HB"
+        },
+        {
+          "amount": "11.90",
+          "taxCode": "IT3"
+        },
+        {
+          "amount": "2.00",
+          "taxCode": "MJ"
+        },
+        {
+          "amount": "3.70",
+          "taxCode": "VT"
+        },
+        {
+          "amount": "2.60",
+          "taxCode": "I2"
+        },
+        {
+          "amount": "2.60",
+          "taxCode": "OM2"
+        },
+        {
+          "amount": "5.70",
+          "taxCode": "S6"
+        },
+        {
+          "amount": "1.10",
+          "taxCode": "E72"
+        },
+        {
+          "amount": "0.80",
+          "taxCode": "G82"
+        },
+        {
+          "amount": "145.00",
+          "taxCode": "YQF"
+        },
+        {
+          "amount": "5.20",
+          "taxCode": "YQI"
+        },
+        {
+          "amount": "13.50",
+          "taxCode": "YRF"
+        },
+        {
+          "amount": "13.50",
+          "taxCode": "YRF"
+        },
+        {
+          "amount": "13.50",
+          "taxCode": "YRF"
+        }
+      ],
+      "coin": 489.34,
+      "credit": null,
+      "penaltydetails": [
+        {
+          "paxType": "Adult",
+          "refundPenaltyAmount": "182.0",
+          "refundAllowed": true,
+          "currency": "USD",
+          "changePenaltyAmount": "52.0",
+          "changeAllowed": true
+        }
+      ]
+    },
+    {
+      "stops": 1,
+      "flights": [
+        {
+          "triptime": 380,
+          "airline": "Oman Air",
+          "cabin": "Economy",
+          "departure": "MXP",
+          "departurelocation": "Milan",
+          "departairport": "Malpensa",
+          "arrival": "MCT",
+          "arrivallocation": "Muscat",
+          "arrivalairport": "Seeb",
+          "departureTime": "2027-08-20T21:50:00",
+          "arrivalTime": "2027-08-21T06:10:00",
+          "stops": 0,
+          "flightCode": "WY",
+          "flightNumber": "144",
+          "fareFamily": "ECONOMY COMFORT",
+          "remainingSeats": 4,
+          "legindicator": 0,
+          "checkInBaggage": [
+            {
+              "type": "Adult",
+              "value": "0KG"
+            }
+          ],
+          "cabinBaggage": [
+            {
+              "type": "Adult",
+              "value": "0KG"
+            }
+          ]
+        },
+        {
+          "triptime": 340,
+          "airline": "Oman Air",
+          "cabin": "Economy",
+          "departure": "MCT",
+          "departurelocation": "Muscat",
+          "departairport": "Seeb",
+          "arrival": "BKK",
+          "arrivallocation": "Bangkok",
+          "arrivalairport": "All Airports",
+          "departureTime": "2027-08-21T22:05:00",
+          "arrivalTime": "2027-08-22T06:45:00",
+          "stops": 0,
+          "flightCode": "WY",
+          "flightNumber": "817",
+          "fareFamily": "ECONOMY COMFORT",
+          "remainingSeats": 4,
+          "legindicator": 0,
+          "checkInBaggage": [
+            {
+              "type": "Adult",
+              "value": "0KG"
+            }
+          ],
+          "cabinBaggage": [
+            {
+              "type": "Adult",
+              "value": "0KG"
+            }
+          ]
+        }
+      ],
+      "exchangeTime": "",
+      "ticketingTime": "30",
+      "voidTime": "",
+      "fareSourceCode": "RHdKVGNhdDJDOFpYZytTRXlUYmZXV3dkV2tFeTZTeFVYclVtamIzQmNTa2ptTytXZFR6TFB2b1JJcVVyZDQrRndzNy96TkZSMGtEUUJxT3ljRENJeklBd3JwZFIwTWRoV0EvUnd2OXNBcTgrbFNXQ0dEdDlTczBiR2QzRFRpY2NPR0c3emdzdFhJdUNvcjRyMTd5eGh3PT0=",
+      "sessionId": null,
+      "penaltiesInfoRef": 1,
+      "paxType": "ADT",
+      "quantity": 1,
+      "baseFare": 278.42,
+      "totalFare": 463.43,
+      "ourprice": 494.04,
+      "showOurprice": 494.04,
+      "convertedCoin": 494.04,
+      "marginPerc": 3,
+      "merchantFeesPerc": 3.5,
+      "taxes": 185.01,
+      "margin": 13.9,
+      "merchantfee": 16.71,
+      "taxBreakUp": [
+        {
+          "amount": "0.75",
+          "taxCode": "G8"
+        },
+        {
+          "amount": "1.06",
+          "taxCode": "E7"
+        },
+        {
+          "amount": "5.75",
+          "taxCode": "S6"
+        },
+        {
+          "amount": "142.15",
+          "taxCode": "YQ"
+        },
+        {
+          "amount": "2.61",
+          "taxCode": "I2"
+        },
+        {
+          "amount": "7.99",
+          "taxCode": "HB"
+        },
+        {
+          "amount": "16.45",
+          "taxCode": "IT"
+        },
+        {
+          "amount": "1.97",
+          "taxCode": "MJ"
+        },
+        {
+          "amount": "2.61",
+          "taxCode": "OM"
+        },
+        {
+          "amount": "3.67",
+          "taxCode": "VT"
+        }
+      ],
+      "coin": 494.04,
+      "credit": null,
+      "penaltydetails": [
+        {
+          "paxType": "Adult",
+          "refundPenaltyAmount": "",
+          "refundAllowed": false,
+          "currency": "",
+          "changePenaltyAmount": "",
+          "changeAllowed": false
+        }
+      ]
+    },
+    {
+      "stops": 1,
+      "flights": [
+        {
+          "triptime": 380,
+          "airline": "Oman Air",
+          "cabin": "Economy",
+          "departure": "MXP",
+          "departurelocation": "Milan",
+          "departairport": "Malpensa",
+          "arrival": "MCT",
+          "arrivallocation": "Muscat",
+          "arrivalairport": "Seeb",
+          "departureTime": "2027-08-20T21:50:00",
+          "arrivalTime": "2027-08-21T06:10:00",
+          "stops": 0,
+          "flightCode": "WY",
+          "flightNumber": "144",
+          "fareFamily": "ECONOMY COMFORT",
+          "remainingSeats": 4,
+          "legindicator": 0,
+          "checkInBaggage": [
+            {
+              "type": "Adult",
+              "value": "0KG"
+            }
+          ],
+          "cabinBaggage": [
+            {
+              "type": "Adult",
+              "value": "0KG"
+            }
+          ]
+        },
+        {
+          "triptime": 365,
+          "airline": "Oman Air",
+          "cabin": "Economy",
+          "departure": "MCT",
+          "departurelocation": "Muscat",
+          "departairport": "Seeb",
+          "arrival": "BKK",
+          "arrivallocation": "Bangkok",
+          "arrivalairport": "All Airports",
+          "departureTime": "2027-08-21T08:40:00",
+          "arrivalTime": "2027-08-21T17:45:00",
+          "stops": 0,
+          "flightCode": "WY",
+          "flightNumber": "815",
+          "fareFamily": "ECONOMY COMFORT",
+          "remainingSeats": 4,
+          "legindicator": 0,
+          "checkInBaggage": [
+            {
+              "type": "Adult",
+              "value": "0KG"
+            }
+          ],
+          "cabinBaggage": [
+            {
+              "type": "Adult",
+              "value": "0KG"
+            }
+          ]
+        }
+      ],
+      "exchangeTime": "",
+      "ticketingTime": "30",
+      "voidTime": "",
+      "fareSourceCode": "ajkzcVdRQkV1TUNpZ1YybG4xMFl3NUUzUS83aExybHRvYXdLOWxSdWlsZ1AvSUdPUmlSRFVucC9GSkZNSWI2UWRFbDFoUmdmczRVRE1pYUZHWGgzMGlqUUwzMGFSdWhmUVpFVDJJVFlSeEo0bFQ2Y0pwbjhyRThaNjJwWGdFQkQ0aC8zWG0wQ3kwVDJEZFFhbmNScUZRPT0=",
+      "sessionId": null,
+      "penaltiesInfoRef": 1,
+      "paxType": "ADT",
+      "quantity": 1,
+      "baseFare": 278.42,
+      "totalFare": 463.43,
+      "ourprice": 494.04,
+      "showOurprice": 494.04,
+      "convertedCoin": 494.04,
+      "marginPerc": 3,
+      "merchantFeesPerc": 3.5,
+      "taxes": 185.01,
+      "margin": 13.9,
+      "merchantfee": 16.71,
+      "taxBreakUp": [
+        {
+          "amount": "0.75",
+          "taxCode": "G8"
+        },
+        {
+          "amount": "1.06",
+          "taxCode": "E7"
+        },
+        {
+          "amount": "5.75",
+          "taxCode": "S6"
+        },
+        {
+          "amount": "142.15",
+          "taxCode": "YQ"
+        },
+        {
+          "amount": "2.61",
+          "taxCode": "I2"
+        },
+        {
+          "amount": "7.99",
+          "taxCode": "HB"
+        },
+        {
+          "amount": "16.45",
+          "taxCode": "IT"
+        },
+        {
+          "amount": "1.97",
+          "taxCode": "MJ"
+        },
+        {
+          "amount": "2.61",
+          "taxCode": "OM"
+        },
+        {
+          "amount": "3.67",
+          "taxCode": "VT"
+        }
+      ],
+      "coin": 494.04,
+      "credit": null,
+      "penaltydetails": [
+        {
+          "paxType": "Adult",
+          "refundPenaltyAmount": "",
+          "refundAllowed": false,
+          "currency": "",
+          "changePenaltyAmount": "",
+          "changeAllowed": false
+        }
+      ]
+    }
+  ],
+  "currency": "USD",
+  "currencyrate": 1,
+  "membercurrencyrate": 1,
+  "showcurrencyrate": 1,
+  "filters": {
+    "classes": [
+      "ECONOMY"
+    ],
+    "airline": [
+      "AIR DOLOMITI",
+      "AIR FRANCE",
+      "AIR INDIA",
+      "AIR SERBIA",
+      "ALITALIA",
+      "BRUSSELS AIRLINE",
+      "CATHAY PACIFIC",
+      "CHINA EASTERN",
+      "CONDOR",
+      "EMIRATES",
+      "ETIHAD AIRWAYS",
+      "EVA AIRWAYS",
+      "FINNAIR",
+      "GULF AIR",
+      "IBERIA",
+      "KLM",
+      "KUWAIT AIRWAYS",
+      "LUFTHANSA",
+      "OMAN AIR",
+      "QATAR AIRWAYS",
+      "ROYAL JORDANIAN",
+      "SAS",
+      "SHANGHAI",
+      "SWISS",
+      "THAI INTL",
+      "TURKISH AIRLINES",
+      "VIETNAM AIR"
+    ],
+    "stops": [
+      0,
+      1,
+      2
+    ],
+    "minprice": 489.34,
+    "maxprice": 873.71,
+    "refundability": [
+      "REFUNDABLE",
+      "NON-REFUNDABLE"
+    ],
+    "fromdepart": [
+      {
+        "MXP-BKK": {
+          "MXP": "departure",
+          "BKK": "arrival"
+        }
+      }
+    ],
+    "timeslots": {
+      "start": 0,
+      "end": 24
+    },
+    "maxTotalDuration": 2155,
+    "minTotalDuration": 0,
+    "minLayoverDuration": 0,
+    "maxLayoverDuration": 1355
+  },
+  "correlationId": "1790351064956-hmc5xztsp",
+  "alphaSessionId": "FA83C7FE-442A-40D7-AB28-6BE972BA896B-25117",
+  "adults": 1
+}
