@@ -11,7 +11,7 @@ Il progetto è composto da:
   risposte.
 - `public/` — UI statica (`index.html`, `app.js`, `router.js`, `components/*`,
   `views/*`, `styles/*`), senza dipendenze: il browser non vede mai i segreti.
-- `test/` — suite `node:test` (38 test).
+- `test/` — suite `node:test` (72 test).
 
 ## Avvio
 
@@ -63,9 +63,25 @@ File di configurazione locale, creato con permessi **0600** e **ignorato da Git*
   "baseUrl": "https://mcp.routestack.ai/mcp",
   "sandbox": false,
   "currency": "EUR",
-  "timeoutMs": 30000
+  "timeoutMs": 60000,
+  "searchTimeoutMs": 180000
 }
 ```
+
+I due timeout:
+
+- `timeoutMs` — timeout **generale** delle chiamate MCP (mint del token, autocomplete
+  e chiamate non billable), default **60000** ms.
+- `searchTimeoutMs` — timeout dedicato alle **tre ricerche billable**
+  (`/api/hotels/search`, `/api/flights/search`, `/api/cars/search`), default
+  **180000** ms, limitato dall'ambiente locale a **30000–600000** ms: le ricerche
+  long-haul / multi-tratta possono richiedere 30–120 s o più.
+
+> **Precedenza.** Un valore presente in `config/secrets.json` **vince** sempre sul
+> default del codice. Un file rimasto con `"timeoutMs": 30000` (o senza
+> `searchTimeoutMs`) mantiene quindi il vecchio comportamento finché l'operatore
+> non aggiorna il file sulla macchina di deploy. La pagina **Impostazioni**
+> espone entrambi i campi.
 
 I campi segreti si possono impostare anche dalla pagina **Impostazioni** dell'UI
 (`POST /api/config`); vengono sovrascritti solo se il nuovo valore è non vuoto.

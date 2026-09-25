@@ -8,7 +8,7 @@ import { clear, el, icon, render as renderNodes } from '../components/dom.js';
 import { advanced, clearErrors, dateField, fieldset, numberField, radioField, readValues, selectField, setError, textField } from '../components/fields.js';
 import { formatDate, formatDuration, formatPrice, formatTime, isoDateInDays } from '../components/format.js';
 import { buildFlightSearchArgs, missingRequired } from '../components/params.js';
-import { badge, errorState, emptyState, idleState, kv, skeletonGrid } from '../components/states.js';
+import { badge, errorState, emptyState, idleState, kv, LONG_SEARCH_HINT, skeletonGrid, startSearchClock } from '../components/states.js';
 import { flightCard, resultsHeader } from '../components/results.js';
 
 const CABIN_OPTIONS = [
@@ -85,6 +85,8 @@ export function render(ctx) {
   ]);
 
   const submitBtn = el('button', { class: 'btn btn--primary btn--block', type: 'submit' }, icon('M21 21l-4.35-4.35M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z', { size: 16 }), 'Cerca voli');
+  // Reserved-height line: setting/clearing the hint never shifts the layout.
+  const searchHint = el('p', { class: 'card__sub', attrs: { 'aria-live': 'polite', style: 'min-height: 1.2em; margin: 0' } });
 
   /* ---------------- MultiCity leg editor ---------------- */
   const MAX_LEGS = 5;
@@ -214,7 +216,7 @@ export function render(ctx) {
     syncLegsUi();
   }
 
-  const form = el('form', { class: 'form', attrs: { novalidate: '' } }, tripType.wrap, singleFields, legsEditor, pax, cabin.wrap, adv, submitBtn);
+  const form = el('form', { class: 'form', attrs: { novalidate: '' } }, tripType.wrap, singleFields, legsEditor, pax, cabin.wrap, adv, submitBtn, searchHint);
 
   attachLocation(originField.control, (it) => {
     sel.origin = it;
@@ -316,7 +318,10 @@ export function render(ctx) {
     state.lastArgs = args;
     submitBtn.disabled = true;
     clear(submitBtn);
-    submitBtn.append(el('span', { class: 'spinner' }), ' Ricerca in corso…');
+    const searchLabel = el('span', { text: 'Ricerca in corso…' });
+    submitBtn.append(el('span', { class: 'spinner' }), ' ', searchLabel);
+    searchHint.textContent = LONG_SEARCH_HINT;
+    const stopClock = startSearchClock({ onTick: (s) => { searchLabel.textContent = `Ricerca in corso… ${s}s`; } });
     announce('Ricerca voli in corso.');
     showSkeletons();
     try {
@@ -335,6 +340,8 @@ export function render(ctx) {
       renderNodes(resultsEl, errorState(err));
       announce(`Errore: ${humanError(err).title}.`);
     } finally {
+      stopClock();
+      searchHint.textContent = '';
       submitBtn.disabled = false;
       clear(submitBtn);
       submitBtn.append(icon('M21 21l-4.35-4.35M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z', { size: 16 }), 'Cerca voli');

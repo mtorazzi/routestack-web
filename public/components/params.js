@@ -215,6 +215,7 @@ export function buildConfigPatch(values = {}, editing = {}) {
     sandbox: values.sandbox === true,
     currency: values.currency,
     timeoutMs: Number(values.timeoutMs) || 30000,
+    searchTimeoutMs: Number(values.searchTimeoutMs) || 180000,
   };
 
   if (typeof values.apiKey === 'string' && values.apiKey !== '') patch.apiKey = values.apiKey;

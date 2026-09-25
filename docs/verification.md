@@ -561,4 +561,90 @@ The server was stopped afterwards; no credential value was printed (startup logs
 only the masked key). The live proof in Check 9 still covers the single
 itinerary search; the MultiCity live search remains deliberately unspent.
 
+## Check 19 — search timeouts and billed-call wording
+
+**Incident.** A **MultiCity** flight search launched from the UI failed after
+30 s with
+
+```text
+RouteStack: timeout dopo 30000 ms.        (code UPSTREAM_TIMEOUT)
+```
+
+while RouteStack **still counted the billable call**. Root cause: a single
+`config.timeoutMs` (default `30_000`) was used for every MCP call, but long-haul
+/ multi-leg searches legitimately need 30–120 s+ (a single-leg MXP→BKK search
+had already measured **29.3 s**). The error text also did not tell the user the
+call may have been billed and may still be running.
+
+**Values.**
+
+| Field | Default | Scope |
+|---|---|---|
+| `timeoutMs` | `60000` (was `30000`) | general MCP calls (mint, autocomplete, revalidate, checkout) |
+| `searchTimeoutMs` | `180000` | the three billable searches, clamped to **30000–600000** |
+
+`searchTimeoutMs` is threaded through `run(tool, args, normalize, { timeoutMs })`
+→ `McpClient.callTool(name, args, { timeoutMs, billable })` → `#post(...)`; the
+`search` methods of `hotels` / `flights` / `cars` pass it, everything else keeps
+the general timeout.
+
+**Never retry a timeout.** Only the 401 / session-expiry branches of
+`McpClient.callTool` re-issue the call. An abort throws `UPSTREAM_TIMEOUT`
+directly, so a retry can never fire a second billable search (explicit comment in
+`server/routestack/mcp.js`).
+
+**Honest wording.** For the three searches the timeout message is
+`RouteStack non ha risposto entro <N> s. La ricerca potrebbe essere ancora in
+corso e la chiamata è stata conteggiata: attendi prima di ripetere.` with
+`code: UPSTREAM_TIMEOUT`, `status: 504` and `meta.billable = true`
+(`errorEnvelope` now merges `ApiError.meta`). `public/components/api.js`
+propagates the envelope `meta` and `humanError()` maps it to
+**“Ricerca non conclusa in tempo”** + the advice to wait a few minutes.
+
+**UI.** `public/views/{flights,hotels,cars}.js` show the elapsed seconds next to
+the spinner (`Ricerca in corso… 24s`) and a reserved-height `aria-live="polite"`
+line *“Le ricerche lunghe possono richiedere 1–3 minuti: attendi senza
+ripetere.”* (`startSearchClock`/`LONG_SEARCH_HINT` in
+`public/components/states.js`); the clock is stopped in the `finally` branch, so
+there is no layout jump and no leak. `public/views/settings.js` exposes
+`searchTimeoutMs` (*Timeout ricerca (ms)*, min 30000, max 600000, step 30000)
+next to `timeoutMs`; `buildConfigPatch` forwards it.
+
+**Offline proofs (no billable call).** `test/search-timeout.test.js` (10 tests):
+
+- `loadConfig()` defaults → `timeoutMs 60000`, `searchTimeoutMs 180000`; an
+  injected temp `secrets.json` value (90 000) wins; 999 999 → 600 000; 1 000 →
+  30 000; `maskConfig()` includes it; `buildConfigPatch` forwards it.
+- with the `__setClientFactory` stubbed transport, `/api/hotels/search`,
+  `/api/flights/search` and `/api/cars/search` go out with `180000`, while
+  `/api/hotels/destinations` falls back to the general `60000`.
+- a `fetch` stub that hangs: `flight_search` with a 50 ms per-call timeout throws
+  `UPSTREAM_TIMEOUT` with `meta.billable === true`, and the transport is called
+  **exactly once** (no retry); a non-billable tool keeps the generic message and
+  no billable meta.
+- `errorEnvelope` surfaces `meta.billable` through the real Express error
+  middleware (HTTP 504).
+- `humanError()` on a billable timeout → title *“Ricerca non conclusa in tempo”*.
+
+```text
+node --test test/search-timeout.test.js -> tests 10, pass 10, fail 0
+npm test                                -> tests 72, pass 72, fail 0
+for f in $(find public -name '*.js'); do node --check "$f"; done -> no output
+```
+
+**Smoke (`PORT=8799 HOST=127.0.0.1`, no billable call).**
+
+```text
+/api/config -> timeoutMs= 60000 searchTimeoutMs= 180000 apiKey= rst_… (masked)
+```
+
+The server was stopped immediately afterwards; no credential value was printed
+(masked only).
+
+**No live search was re-run.** Every `/search` in this round is billable and is
+explicitly forbidden; the request shape and the timeout plumbing are proven
+against stubbed transports only. The precedence gotcha is documented in
+`README.md` / `docs/api.md`: a deployed `config/secrets.json` still carrying
+`"timeoutMs": 30000` keeps the old behaviour until the operator updates it.
+
 

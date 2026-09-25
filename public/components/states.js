@@ -4,6 +4,26 @@
 import { humanError } from './api.js';
 import { el, icon } from './dom.js';
 
+/**
+ * Hint shown while a billable search runs. Long-haul / multi-leg searches can
+ * take 1–3 minutes and repeating one consumes another billable call, so we tell
+ * the user to wait.
+ */
+export const LONG_SEARCH_HINT = 'Le ricerche lunghe possono richiedere 1–3 minuti: attendi senza ripetere.';
+
+/**
+ * Start a 1-second elapsed-seconds counter for a running search.
+ * @param {{onTick?: (seconds:number)=>void}} [handlers]
+ * @returns {() => void} stop function — always call it from the `finally` branch
+ */
+export function startSearchClock({ onTick } = {}) {
+  const started = Date.now();
+  const tick = () => onTick?.(Math.max(0, Math.floor((Date.now() - started) / 1000)));
+  tick();
+  const timer = setInterval(tick, 1000);
+  return () => clearInterval(timer);
+}
+
 /** Skeleton grid. */
 export function skeletonGrid(count = 6) {
   const grid = el('div', { class: 'card-grid', attrs: { 'aria-hidden': 'true' } });

@@ -52,11 +52,17 @@ export function makeClient(cfg = runtimeConfig()) {
   return { client, auth, cfg };
 }
 
-/** Run a tool and normalize its payload. */
-async function run(tool, args, normalize) {
+/**
+ * Run a tool and normalize its payload.
+ * @param {string} tool canonical tool name
+ * @param {object} args
+ * @param {Function|null} normalize
+ * @param {{timeoutMs?: number}} [opts] per-call timeout override (billable searches)
+ */
+async function run(tool, args, normalize, { timeoutMs } = {}) {
   const cfg = runtimeConfig();
   const { client } = makeClient(cfg);
-  const { payload } = await client.callTool(tool, args ?? {});
+  const { payload } = await client.callTool(tool, args ?? {}, { timeoutMs });
   assertUpstreamSuccess(payload, tool);
   return {
     raw: payload,
@@ -64,6 +70,11 @@ async function run(tool, args, normalize) {
     tool,
     source: cfg.source,
   };
+}
+
+/** Effective timeout for the billable search calls. */
+function searchTimeoutMs() {
+  return runtimeConfig().searchTimeoutMs;
 }
 
 export async function testConnection() {
@@ -453,7 +464,7 @@ export function normalizeCarSearch(payload) {
 
 export const hotels = {
   destinations: (args) => run(TOOLS.hotelDestinations, args, normalizeDestinations),
-  search: (args) => run(TOOLS.hotelSearch, args, normalizeHotelSearch),
+  search: (args) => run(TOOLS.hotelSearch, args, normalizeHotelSearch, { timeoutMs: searchTimeoutMs() }),
   rooms: (args) => run(TOOLS.hotelRooms, args, normalizeHotelRooms),
   revalidate: (args) => run(TOOLS.hotelRevalidate, args),
   details: (args) => run(TOOLS.hotelDetails, args),
@@ -463,14 +474,14 @@ export const hotels = {
 export const flights = {
   session: () => run(TOOLS.flightSession, {}, null),
   locations: (args) => run(TOOLS.flightLocations, args, normalizeLocations),
-  search: (args) => run(TOOLS.flightSearch, args, normalizeFlightSearch),
+  search: (args) => run(TOOLS.flightSearch, args, normalizeFlightSearch, { timeoutMs: searchTimeoutMs() }),
   revalidate: (args) => run(TOOLS.flightRevalidate, args),
   checkout: (args) => run(TOOLS.flightCheckout, args),
 };
 
 export const cars = {
   locations: (args) => run(TOOLS.carLocations, args, normalizeLocations),
-  search: (args) => run(TOOLS.carSearch, args, normalizeCarSearch),
+  search: (args) => run(TOOLS.carSearch, args, normalizeCarSearch, { timeoutMs: searchTimeoutMs() }),
   revalidate: (args) => run(TOOLS.carRevalidate, args),
   checkout: (args) => run(TOOLS.carCheckout, args),
 };

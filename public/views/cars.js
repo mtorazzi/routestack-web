@@ -9,7 +9,7 @@ import { clear, el, icon, render as renderNodes } from '../components/dom.js';
 import { advanced, checkField, clearErrors, dateField, field, fieldset, numberField, readValues, selectField, setError, textField } from '../components/fields.js';
 import { formatDate, formatPrice, formatTime, isoDateInDays } from '../components/format.js';
 import { buildCarSearchArgs, missingRequired } from '../components/params.js';
-import { badge, emptyState, errorState, idleState, kv, skeletonGrid } from '../components/states.js';
+import { badge, emptyState, errorState, idleState, kv, LONG_SEARCH_HINT, skeletonGrid, startSearchClock } from '../components/states.js';
 import { carCard, resultsHeader } from '../components/results.js';
 
 const SORT_OPTIONS = [
@@ -47,6 +47,8 @@ export function render(ctx) {
   ]);
 
   const submitBtn = el('button', { class: 'btn btn--primary btn--block', type: 'submit' }, icon('M21 21l-4.35-4.35M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z', { size: 16 }), 'Cerca auto');
+  // Reserved-height line: setting/clearing the hint never shifts the layout.
+  const searchHint = el('p', { class: 'card__sub', attrs: { 'aria-live': 'polite', style: 'min-height: 1.2em; margin: 0' } });
   const form = el(
     'form',
     { class: 'form', attrs: { novalidate: '' } },
@@ -54,6 +56,7 @@ export function render(ctx) {
     fieldset('Riconsegna', [dropoffField.wrap, el('div', { class: 'grid-2' }, dropoffDate.wrap, dropoffTime.wrap)]),
     adv,
     submitBtn,
+    searchHint,
   );
 
   const attachLocations = (input, onPick) =>
@@ -121,7 +124,10 @@ export function render(ctx) {
     state.lastArgs = args;
     submitBtn.disabled = true;
     clear(submitBtn);
-    submitBtn.append(el('span', { class: 'spinner' }), ' Ricerca in corso…');
+    const searchLabel = el('span', { text: 'Ricerca in corso…' });
+    submitBtn.append(el('span', { class: 'spinner' }), ' ', searchLabel);
+    searchHint.textContent = LONG_SEARCH_HINT;
+    const stopClock = startSearchClock({ onTick: (s) => { searchLabel.textContent = `Ricerca in corso… ${s}s`; } });
     announce('Ricerca auto in corso.');
     showSkeletons();
     try {
@@ -139,6 +145,8 @@ export function render(ctx) {
       renderNodes(resultsEl, errorState(err));
       announce(`Errore: ${humanError(err).title}.`);
     } finally {
+      stopClock();
+      searchHint.textContent = '';
       submitBtn.disabled = false;
       clear(submitBtn);
       submitBtn.append(icon('M21 21l-4.35-4.35M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z', { size: 16 }), 'Cerca auto');

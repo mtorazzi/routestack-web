@@ -17,7 +17,11 @@ const ENV_KEYS = {
   accountId: 'ROUTESTACK_ACCOUNT_ID',
 };
 
-const FILE_FIELDS = ['authMode', 'apiKey', 'apiSecret', 'accountId', 'baseUrl', 'sandbox', 'currency', 'timeoutMs'];
+const FILE_FIELDS = ['authMode', 'apiKey', 'apiSecret', 'accountId', 'baseUrl', 'sandbox', 'currency', 'timeoutMs', 'searchTimeoutMs'];
+
+/** Clamp bounds for the dedicated billable-search timeout. */
+export const SEARCH_TIMEOUT_MIN_MS = 30_000;
+export const SEARCH_TIMEOUT_MAX_MS = 600_000;
 
 const DEFAULTS = {
   authMode: 'partner-token', // 'partner-token' | 'header'
@@ -27,14 +31,24 @@ const DEFAULTS = {
   baseUrl: PROD_MCP_URL,
   sandbox: false,
   currency: 'EUR',
-  timeoutMs: 30_000,
+  // General MCP timeout (free calls + auth). Long-haul searches get their own.
+  timeoutMs: 60_000,
+  // Billable searches (hotel/flight/car) legitimately need 30–120 s+.
+  searchTimeoutMs: 180_000,
 };
 
 let cached = null;
 
-function readFile() {
+/** File values win over DEFAULTS; the search timeout is clamped to a safe band. */
+export function normalizeSearchTimeout(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n) || n <= 0) return DEFAULTS.searchTimeoutMs;
+  return Math.min(Math.max(Math.trunc(n), SEARCH_TIMEOUT_MIN_MS), SEARCH_TIMEOUT_MAX_MS);
+}
+
+function readFile(filePath = CONFIG_PATH) {
   try {
-    const txt = fs.readFileSync(CONFIG_PATH, 'utf8');
+    const txt = fs.readFileSync(filePath, 'utf8');
     const parsed = JSON.parse(txt);
     return parsed && typeof parsed === 'object' ? parsed : {};
   } catch (err) {
@@ -45,11 +59,12 @@ function readFile() {
 
 /**
  * Resolve effective config: file first, environment as fallback.
+ * @param {{force?: boolean, filePath?: string}} [opts] `filePath` is a test seam.
  * @returns {object} full config including per-field `sources`.
  */
-export function loadConfig({ force = false } = {}) {
-  if (cached && !force) return cached;
-  const file = readFile();
+export function loadConfig({ force = false, filePath = CONFIG_PATH } = {}) {
+  if (cached && !force && filePath === CONFIG_PATH) return cached;
+  const file = readFile(filePath);
   const out = { ...DEFAULTS };
   const sources = { apiKey: 'none', apiSecret: 'none', accountId: 'none' };
 
@@ -67,11 +82,12 @@ export function loadConfig({ force = false } = {}) {
   if (process.env.ROUTESTACK_BASE_URL && !file.baseUrl) out.baseUrl = process.env.ROUTESTACK_BASE_URL;
 
   out.timeoutMs = Number(out.timeoutMs) || DEFAULTS.timeoutMs;
+  out.searchTimeoutMs = normalizeSearchTimeout(out.searchTimeoutMs);
   out.currency = out.currency || DEFAULTS.currency;
   out.authMode = out.authMode === 'header' ? 'header' : 'partner-token';
   out.sandbox = Boolean(out.sandbox);
   out.sources = sources;
-  cached = out;
+  if (filePath === CONFIG_PATH) cached = out;
   return out;
 }
 
@@ -101,7 +117,9 @@ export function saveConfig(patch = {}) {
       else if (String(value).length > 0) next[field] = String(value);
       continue;
     }
-    next[field] = field === 'timeoutMs' ? Number(value) || DEFAULTS.timeoutMs : value;
+    if (field === 'timeoutMs') next[field] = Number(value) || DEFAULTS.timeoutMs;
+    else if (field === 'searchTimeoutMs') next[field] = normalizeSearchTimeout(value);
+    else next[field] = value;
   }
   if (typeof next.sandbox !== 'boolean') next.sandbox = Boolean(next.sandbox ?? current.sandbox);
 
@@ -146,6 +164,7 @@ export function maskConfig(cfg = loadConfig()) {
     source: sourceLabel(cfg),
     currency: cfg.currency,
     timeoutMs: cfg.timeoutMs,
+    searchTimeoutMs: cfg.searchTimeoutMs,
     apiKey: redact(cfg.apiKey),
     apiSecret: redact(cfg.apiSecret),
     accountId: redact(cfg.accountId),

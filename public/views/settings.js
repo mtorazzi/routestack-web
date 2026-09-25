@@ -54,6 +54,7 @@ export function render(ctx) {
     const sandbox = checkField({ name: 'sandbox', label: 'Usa ambiente sandbox', checked: Boolean(cfg.sandbox), hint: cfg.sandbox ? '(sandbox non disponibile con queste credenziali)' : '' });
     const currency = selectField({ name: 'currency', label: 'Valuta predefinita', options: ['EUR', 'USD', 'GBP'], value: cfg.currency });
     const timeout = numberField({ name: 'timeoutMs', label: 'Timeout (ms)', value: String(cfg.timeoutMs), min: 1000, max: 120000, step: 1000 });
+    const searchTimeout = numberField({ name: 'searchTimeoutMs', label: 'Timeout ricerca (ms)', value: String(cfg.searchTimeoutMs ?? 180000), min: 30000, max: 600000, step: 30000 });
 
     const testBtn = el('button', { class: 'btn btn--ghost', type: 'button' }, icon('M22 12h-4l-3 9L9 3l-3 9H2', { size: 16 }), 'Test connessione');
     const saveBtn = el('button', { class: 'btn btn--primary', type: 'submit', attrs: { form: FORM_ID } }, icon('M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2zM17 21v-8H7v8M7 3v5h8', { size: 16 }), 'Salva');
@@ -70,7 +71,7 @@ export function render(ctx) {
       { class: 'form', attrs: { novalidate: '', id: FORM_ID } },
       fieldset('Autenticazione', [authMode.wrap, apiKey.wrap, apiSecret.wrap, accountId.wrap]),
       fieldset('Connessione', [baseUrl.wrap, sandbox.wrap]),
-      fieldset('Preferenze', [el('div', { class: 'grid-2' }, currency.wrap, timeout.wrap)]),
+      fieldset('Preferenze', [el('div', { class: 'grid-3' }, currency.wrap, timeout.wrap, searchTimeout.wrap)]),
       el('hr', { class: 'divider' }),
       actions,
       testResult,

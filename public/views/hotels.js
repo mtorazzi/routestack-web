@@ -9,7 +9,7 @@ import { clear, el, icon, render as renderNodes } from '../components/dom.js';
 import { advanced, checkField, checkGroup, clearErrors, dateField, fieldset, numberField, readValues, selectField, setError, textField } from '../components/fields.js';
 import { formatPrice, isoDateInDays } from '../components/format.js';
 import { buildHotelSearchArgs, missingRequired } from '../components/params.js';
-import { badge, emptyState, errorState, idleState, kv, skeletonGrid } from '../components/states.js';
+import { badge, emptyState, errorState, idleState, kv, LONG_SEARCH_HINT, skeletonGrid, startSearchClock } from '../components/states.js';
 import { hotelCard, resultsHeader } from '../components/results.js';
 
 const CURRENCIES = ['EUR', 'USD', 'GBP'];
@@ -54,6 +54,8 @@ export function render(ctx) {
   ]);
 
   const submitBtn = el('button', { class: 'btn btn--primary btn--block', type: 'submit' }, icon('M21 21l-4.35-4.35M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z', { size: 16 }), 'Cerca hotel');
+  // Reserved-height line: setting/clearing the hint never shifts the layout.
+  const searchHint = el('p', { class: 'card__sub', attrs: { 'aria-live': 'polite', style: 'min-height: 1.2em; margin: 0' } });
   const form = el(
     'form',
     { class: 'form', attrs: { novalidate: '' } },
@@ -63,6 +65,7 @@ export function render(ctx) {
     stars.wrap,
     adv,
     submitBtn,
+    searchHint,
   );
 
   attachAutocomplete(destField.control, {
@@ -127,7 +130,10 @@ export function render(ctx) {
   async function runSearch(args, { append }) {
     submitBtn.disabled = true;
     clear(submitBtn);
-    submitBtn.append(el('span', { class: 'spinner' }), ' Ricerca in corso…');
+    const searchLabel = el('span', { text: 'Ricerca in corso…' });
+    submitBtn.append(el('span', { class: 'spinner' }), ' ', searchLabel);
+    searchHint.textContent = LONG_SEARCH_HINT;
+    const stopClock = startSearchClock({ onTick: (s) => { searchLabel.textContent = `Ricerca in corso… ${s}s`; } });
     announce('Ricerca hotel in corso.');
     if (!append) showSkeletons();
     try {
@@ -148,6 +154,8 @@ export function render(ctx) {
       renderNodes(resultsEl, errorState(err));
       announce(`Errore: ${humanError(err).title}.`);
     } finally {
+      stopClock();
+      searchHint.textContent = '';
       submitBtn.disabled = false;
       clear(submitBtn);
       submitBtn.append(icon('M21 21l-4.35-4.35M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z', { size: 16 }), 'Cerca hotel');

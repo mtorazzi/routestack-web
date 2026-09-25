@@ -4,13 +4,14 @@
  */
 
 export class ApiError extends Error {
-  constructor(code, message, { upstreamStatus = null, detail = null, status = null } = {}) {
+  constructor(code, message, { upstreamStatus = null, detail = null, status = null, meta = null } = {}) {
     super(message);
     this.name = 'ApiError';
     this.code = code;
     this.upstreamStatus = upstreamStatus;
     this.detail = detail;
     this.status = status;
+    this.meta = meta;
   }
 }
 
@@ -53,6 +54,7 @@ export async function api(path, body, opts = {}) {
       upstreamStatus: e.upstreamStatus ?? null,
       detail: e.detail ?? null,
       status: res.status,
+      meta: json.meta ?? null,
     });
   }
 
@@ -99,6 +101,14 @@ export function openCheckout(url) {
 export function humanError(err) {
   const code = err?.code || '';
   const upstream = err?.upstreamStatus;
+  // A timed-out billable search was very likely counted upstream, so it must
+  // not invite an immediate retry the way a generic timeout does.
+  if (code === 'UPSTREAM_TIMEOUT' && err?.meta?.billable === true) {
+    return {
+      title: 'Ricerca non conclusa in tempo',
+      hint: 'La ricerca potrebbe essere ancora in corso e la chiamata è stata conteggiata: attendi qualche minuto prima di ripetere.',
+    };
+  }
   const byCode = {
     CREDENTIALS_MISSING: { title: 'Credenziali mancanti', hint: 'Apri Impostazioni e inserisci API key e API secret.' },
     CREDENTIALS_INVALID: { title: 'Credenziali non valide', hint: 'Controlla API key/secret oppure rigenera il partner token nelle Impostazioni.' },

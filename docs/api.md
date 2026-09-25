@@ -40,6 +40,28 @@ Failure:
 - `error.upstreamStatus` — HTTP status observed from RouteStack, or `null`.
 - `error.detail` — optional, redacted technical detail.
 - `meta.source` — `production` or `sandbox`.
+- `meta.billable` — `true` **only** when one of the three billable searches
+  (`hotel_search` / `flight_search` / `car_search`) timed out. The UI uses it to
+  warn that the call was very likely counted and that the user should wait before
+  retrying, instead of offering an immediate retry.
+
+## Timeouts
+
+Two knobs, both read from `config/secrets.json` (file wins) or the defaults:
+
+| Field | Default | Applies to |
+|---|---|---|
+| `timeoutMs` | `60000` | general MCP calls: token mint, autocomplete, revalidate, checkout |
+| `searchTimeoutMs` | `180000` | the three **billable** searches (clamped to 30000–600000) |
+
+A timed-out call is **never retried** (a retry would bill a second search): the
+`UPSTREAM_TIMEOUT` error propagates straight to the client. For the three
+searches the message names the limit and `meta.billable` is `true`; the UI maps
+it to *"Ricerca non conclusa in tempo"* with the advice to wait a few minutes.
+
+> **Precedence.** A value stored in `config/secrets.json` overrides the default,
+> so a deployed file still holding `"timeoutMs": 30000` (or lacking
+> `searchTimeoutMs`) keeps the old behaviour until the operator updates it.
 
 ## Error mapping (upstream → local)
 
@@ -53,7 +75,7 @@ Failure:
 | 503 | `PARTNER_TOKEN_NOT_CONFIGURED` | 503 | service unavailable / partner token not configured |
 | other ≥500 | `UPSTREAM_ERROR` | 502 | generic upstream failure |
 | 400 | `UPSTREAM_BAD_REQUEST` | 400 | invalid request |
-| timeout | `UPSTREAM_TIMEOUT` | 504 | no answer within `timeoutMs` |
+| timeout | `UPSTREAM_TIMEOUT` | 504 | no answer within `timeoutMs` (general) / `searchTimeoutMs` (billable searches); searches also set `meta.billable` |
 | network | `UPSTREAM_UNREACHABLE` | 502 | host unreachable |
 
 Local validation errors are `ApiError` with code `BAD_REQUEST` (HTTP 400),

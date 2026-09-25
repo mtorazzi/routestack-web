@@ -5,6 +5,13 @@ const PROTOCOL_VERSION = '2025-06-18';
 export const CLIENT_INFO = { name: 'routestack-web', version: '1.0.0' };
 
 /**
+ * The only tools that consume the billable quota. A timeout on these has very
+ * likely been counted upstream even though no payload came back, so the UI must
+ * warn the user instead of inviting an immediate retry.
+ */
+export const BILLABLE_TOOLS = new Set(['hotel_search', 'flight_search', 'car_search']);
+
+/**
  * Parse a Streamable-HTTP MCP response body. Supports both plain JSON and SSE
  * (`text/event-stream`, `data: <json>` lines, possibly several events).
  *
@@ -116,7 +123,7 @@ export class McpClient {
     this.nextId = 1;
   }
 
-  async #post(body, { timeoutMs = this.timeoutMs } = {}) {
+  async #post(body, { timeoutMs = this.timeoutMs, billable = false } = {}) {
     const authHeaders = await this.auth.authHeaders();
     const headers = {
       'content-type': 'application/json',
@@ -132,7 +139,16 @@ export class McpClient {
       res = await this.fetchImpl(this.baseUrl, { method: 'POST', headers, body: JSON.stringify(body), signal: ac.signal });
     } catch (err) {
       if (err?.name === 'AbortError') {
-        throw new ApiError('UPSTREAM_TIMEOUT', `RouteStack: timeout dopo ${timeoutMs} ms.`, { status: 504 });
+        const seconds = Math.max(1, Math.round(timeoutMs / 1000));
+        // A timed-out billable search has very likely already been counted
+        // upstream; say so instead of a bare "timeout, riprova".
+        const message = billable
+          ? `RouteStack non ha risposto entro ${seconds} s. La ricerca potrebbe essere ancora in corso e la chiamata è stata conteggiata: attendi prima di ripetere.`
+          : `RouteStack: timeout dopo ${timeoutMs} ms.`;
+        throw new ApiError('UPSTREAM_TIMEOUT', message, {
+          status: 504,
+          ...(billable ? { meta: { billable: true } } : {}),
+        });
       }
       throw new ApiError('UPSTREAM_UNREACHABLE', `RouteStack: rete non raggiungibile (${err.message}).`, { status: 502 });
     } finally {
@@ -175,20 +191,26 @@ export class McpClient {
     this.sessionId = null;
   }
 
-  async #rpc(method, params) {
+  async #rpc(method, params, opts = {}) {
     await this.#ensureSession();
-    const res = await this.#post({ jsonrpc: '2.0', id: this.nextId++, method, params });
+    const res = await this.#post({ jsonrpc: '2.0', id: this.nextId++, method, params }, opts);
     return { res, envelope: parseMcpBody(res.text, res.contentType) };
   }
 
   /**
    * Call a tool, transparently handling 401 (re-mint token) and session expiry.
+   *
+   * A timeout is **never** retried: only the 401/session-expiry branches below
+   * re-issue the call. An aborted `tools/call` throws `UPSTREAM_TIMEOUT` and
+   * propagates straight out. Retrying here would fire a second billable search.
+   *
    * @param {string} name
    * @param {object} args
+   * @param {{timeoutMs?: number, billable?: boolean}} [opts]
    */
-  async callTool(name, args = {}) {
+  async callTool(name, args = {}, { timeoutMs, billable = BILLABLE_TOOLS.has(name) } = {}) {
     const attempt = async () => {
-      const { res, envelope } = await this.#rpc('tools/call', { name, arguments: args });
+      const { res, envelope } = await this.#rpc('tools/call', { name, arguments: args }, { timeoutMs, billable });
       return { res, envelope };
     };
 

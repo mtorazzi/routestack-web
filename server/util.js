@@ -13,6 +13,7 @@ export class ApiError extends Error {
    * @param {number} [opts.status]         HTTP status to send to the browser
    * @param {number|null} [opts.upstreamStatus] status observed from RouteStack
    * @param {unknown} [opts.detail]        technical detail (redacted by caller)
+   * @param {object|null} [opts.meta]      extra response-envelope meta (e.g. `{ billable: true }`)
    */
   constructor(code, message, opts = {}) {
     super(message);
@@ -21,6 +22,7 @@ export class ApiError extends Error {
     this.status = opts.status ?? 502;
     this.upstreamStatus = opts.upstreamStatus ?? null;
     this.detail = opts.detail ?? null;
+    this.meta = opts.meta ?? null;
   }
 }
 
@@ -39,7 +41,8 @@ export function errorEnvelope(err, meta = {}) {
       upstreamStatus: isApi ? err.upstreamStatus : null,
       ...(isApi && err.detail != null ? { detail: err.detail } : {}),
     },
-    meta,
+    // Error-level meta (e.g. `billable`) first, request meta (path/method) wins.
+    meta: { ...(isApi && err.meta ? err.meta : {}), ...meta },
   };
 }
 
