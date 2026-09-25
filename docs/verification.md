@@ -6,7 +6,7 @@ variables. No secret value, API key, API secret or full JWT is reproduced here:
 credentials are read from `ROUTESTACK_API_KEY` / `ROUTESTACK_API_SECRET` (and,
 for the `header` auth mode, `ROUTESTACK_ACCOUNT_ID`).
 
-Test suite: `npm test` → **51/51 pass**.
+Test suite: `npm test` → **62/62 pass**.
 
 ## Summary
 
@@ -473,4 +473,92 @@ for f in $(find public -name '*.js'); do node --check "$f"; done  -> no output
 `flight_search` (and, to reach `flight_get_checkout_url`, the selected fare),
 which this round is explicitly forbidden; the payload shape is instead proven
 offline against the stubbed `tools/call` arguments.
+
+## Check 18 — MultiCity support
+
+**Contract (confirmed, free — no billable call).** `flight_search` accepts
+`filter.type` / `filter.tripType` = `MultiCity` and then requires a
+`destinations` array with **at least two segments** (production `tools/list`
+dump kept at `/tmp/opencode/tools-prod.json`). Each segment carries the same
+origin/destination aliases as the top-level filter
+(`origin`/`from`/`departureCity`/`departureAirport`,
+`destination`/`to`/`arrivalCity`/`arrivalAirport`) plus the leg date key
+**`departureDate`** — a leg has **no** `returnDate`. The code uses exactly
+`origin`, `destination` and `departureDate`; the local server additionally
+accepts the UI alias `date` and normalises it to `departureDate`.
+
+**Shape.**
+
+- `public/components/params.js#buildFlightSearchArgs`: for `MultiCity` emits
+  `{ tripType: 'MultiCity', destinations: [{ origin, destination, departureDate }, …],
+  adults, children, infants, cabinClass, filters, sortBy, limit }` and omits the
+  top-level `origin`/`destination`/`departureDate`/`returnDate`. OneWay/RoundTrip
+  are unchanged (verified by test).
+- `missingRequired('flights', …)`: for MultiCity requires the cabin class and,
+  per leg, origin, destination and date, with per-leg Italian messages
+  (`tratta 2: destinazione`).
+- `public/views/flights.js`: the trip-type radio gained
+  **`Più tratte (MultiCity)`** and a leg editor of **2–5** legs. Each leg is a
+  labelled `<fieldset><legend>Tratta N</legend>` with origin/destination
+  autocomplete (`POST /api/flights/locations`) and a date; `Rimuovi` is hidden
+  on legs 1–2 and `Aggiungi tratta` disables at 5. Leg 1 seeds from the
+  single-itinerary fields; the single origin/destination/date/return-date fields
+  are hidden **and** disabled while MultiCity is active, then restored.
+- `server/routes/flights.js#buildFilter`: forwards sanitised `destinations`
+  (only legs with origin + destination + departureDate) and omits the top-level
+  itinerary; `< 2` valid legs → HTTP 400 `BAD_REQUEST` with the Italian message,
+  thrown **before** the free session bootstrap (so no upstream call at all).
+  OneWay/RoundTrip keep the existing origin/destination/departureDate
+  requirements.
+- Checkout: `rememberFlightSearch` now stores `destinations`;
+  `/api/flights/checkout` forwards them plus the raw `flight` itinerary looked
+  up by `fareSourceCode`, and derives the first/last leg
+  origin/destination/date so the itinerary stays complete.
+
+**Why the live search was not re-run.** A live MultiCity `flight_search` is
+**billable**, and this round forbids billable calls (not even one). The request
+shape, the local 400 guard and the checkout forwarding are proven offline
+against the `__setClientFactory` stub, which captures every `tools/call`
+without any network.
+
+**Offline proof.**
+
+```text
+for f in $(find public -name '*.js'); do node --check "$f"; done  -> no output
+node --test test/frontend-params.test.js   -> MultiCity build + validation green
+node --test test/flights-filter.test.js    -> MultiCity filter + 400 guard green
+node --test test/checkout-payload.test.js  -> MultiCity checkout context green
+npm test                                   -> tests 62, pass 62, fail 0
+```
+
+The new/updated tests assert: 3 legs → `destinations.length === 3` with no
+top-level origin/destination and `tripType:'MultiCity'`; OneWay/RoundTrip
+unchanged; `missingRequired` names the first incomplete leg and passes a complete
+itinerary; `buildFilter` rejects `< 2` valid legs with `BAD_REQUEST` while
+OneWay/RoundTrip still require origin/destination/departureDate; and a stubbed
+MultiCity search followed by `/checkout` forwards `destinations` + `flight`.
+
+**Smoke (`PORT=8799 HOST=127.0.0.1`, no billable call).** The local server was
+started and a 1-leg MultiCity body posted; validation runs before the session
+bootstrap, so nothing reaches RouteStack:
+
+```text
+fonte: production (https://mcp.routestack.ai/mcp)
+/api/health -> {"ok":true}
+
+POST /api/flights/search
+  {"tripType":"MultiCity",
+   "destinations":[{"origin":"MXP","destination":"BKK","departureDate":"2027-08-20"}],
+   "adults":1,"cabinClass":"Economy"}
+
+HTTP_STATUS:400
+{"ok":false,"error":{"code":"BAD_REQUEST",
+ "message":"MultiCity richiede almeno 2 tratte valide: origine, destinazione e data per ogni tratta.",
+ "upstreamStatus":null},"meta":{"path":"/api/flights/search","method":"POST"}}
+```
+
+The server was stopped afterwards; no credential value was printed (startup logs
+only the masked key). The live proof in Check 9 still covers the single
+itinerary search; the MultiCity live search remains deliberately unspent.
+
 

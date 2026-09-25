@@ -65,6 +65,13 @@ textarea {
   border-radius: var(--radius-sm);
 }
 
+/* The `hidden` attribute must win over component display rules (`.field`,
+   `.fieldset` set explicit `display`, which would otherwise override the UA
+   `[hidden] { display: none }` rule and leave the element visible). */
+[hidden] {
+  display: none !important;
+}
+
 /* Visually hidden but available to assistive tech */
 .sr-only {
   position: absolute !important;

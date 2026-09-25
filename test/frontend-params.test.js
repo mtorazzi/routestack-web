@@ -66,6 +66,82 @@ test('buildFlightSearchArgs drops the return date for OneWay', () => {
   assert.equal(args.returnDate, undefined);
 });
 
+test('buildFlightSearchArgs builds a MultiCity body with one entry per leg', () => {
+  const args = buildFlightSearchArgs({
+    tripType: 'MultiCity',
+    destinations: [
+      { origin: 'mxp', destination: 'bkk', departureDate: '2027-08-20' },
+      { origin: 'bkk', destination: 'syd', date: '2027-08-27' },
+      { origin: 'syd', destination: 'akl', departureDate: '2027-09-03' },
+    ],
+    adults: '2',
+    children: '0',
+    infants: '0',
+    cabinClass: 'Economy',
+    sortBy: 'price',
+    limit: '20',
+  });
+  assert.equal(args.tripType, 'MultiCity');
+  assert.equal(args.type, undefined);
+  assert.equal(args.destinations.length, 3);
+  assert.equal(args.origin, undefined);
+  assert.equal(args.destination, undefined);
+  assert.equal(args.departureDate, undefined);
+  assert.equal(args.returnDate, undefined);
+  assert.deepEqual(args.destinations[0], { origin: 'MXP', destination: 'BKK', departureDate: '2027-08-20' });
+  assert.equal(args.destinations[1].departureDate, '2027-08-27');
+  assert.equal(args.destinations[2].destination, 'AKL');
+  assert.equal(args.adults, 2);
+  assert.equal(args.cabinClass, 'Economy');
+  assert.equal(args.limit, 20);
+});
+
+test('buildFlightSearchArgs keeps OneWay and RoundTrip unchanged when destinations are present', () => {
+  const legs = [{ origin: 'X', destination: 'Y', departureDate: '2027-08-21' }];
+  const one = buildFlightSearchArgs({ tripType: 'OneWay', origin: 'mxp', destination: 'bkk', departureDate: '2027-08-20', destinations: legs });
+  assert.equal(one.origin, 'MXP');
+  assert.equal(one.destination, 'BKK');
+  assert.equal(one.returnDate, undefined);
+  assert.equal(one.destinations, undefined);
+
+  const rt = buildFlightSearchArgs({ tripType: 'RoundTrip', origin: 'MXP', destination: 'BKK', departureDate: '2027-08-20', returnDate: '2027-08-27', destinations: legs });
+  assert.equal(rt.returnDate, '2027-08-27');
+  assert.equal(rt.destinations, undefined);
+});
+
+test('missingRequired reports the first incomplete MultiCity leg by name', () => {
+  const base = { tripType: 'MultiCity', cabinClass: 'Economy' };
+  assert.deepEqual(
+    missingRequired('flights', {
+      ...base,
+      destinations: [
+        { origin: 'MXP', destination: 'BKK', departureDate: '2027-08-20' },
+        { origin: 'BKK' },
+      ],
+    }),
+    ['tratta 2: destinazione', 'tratta 2: data'],
+  );
+  assert.deepEqual(
+    missingRequired('flights', {
+      ...base,
+      destinations: [
+        { destination: 'BKK', departureDate: '2027-08-20' },
+        { origin: 'BKK', destination: 'SYD', departureDate: '2027-08-27' },
+      ],
+    }),
+    ['tratta 1: origine'],
+  );
+});
+
+test('missingRequired passes a complete MultiCity itinerary and still asks for the cabin', () => {
+  const destinations = [
+    { origin: 'MXP', destination: 'BKK', departureDate: '2027-08-20' },
+    { origin: 'BKK', destination: 'SYD', departureDate: '2027-08-27' },
+  ];
+  assert.deepEqual(missingRequired('flights', { tripType: 'MultiCity', cabinClass: 'Business', destinations }), []);
+  assert.deepEqual(missingRequired('flights', { tripType: 'MultiCity', destinations }), ['classe']);
+});
+
 test('buildHotelSearchArgs builds rooms and filters', () => {
   const args = buildHotelSearchArgs({
     destinationId: 'ChIJw0rXGxGKJRMRAIE4sppPCQM',

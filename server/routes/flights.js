@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import { ApiError } from '../util.js';
 import {
   checkoutModeOf,
   findFlightOffer,
@@ -26,7 +27,25 @@ function buildStops(maxStops) {
   return Array.from({ length: Math.min(Math.max(max, 0), 3) + 1 }, (_, i) => i);
 }
 
-function buildFilter(body = {}) {
+/**
+ * Keep only MultiCity legs that carry origin + destination + date, normalised to
+ * the `flight_search` leg shape (`{ origin, destination, departureDate }`).
+ */
+export function sanitizeDestinations(raw) {
+  const legs = [];
+  for (const leg of Array.isArray(raw) ? raw : []) {
+    if (!leg || typeof leg !== 'object') continue;
+    const origin = typeof leg.origin === 'string' ? leg.origin.trim() : '';
+    const destination = typeof leg.destination === 'string' ? leg.destination.trim() : '';
+    const dateValue = leg.departureDate ?? leg.date;
+    const departureDate = typeof dateValue === 'string' ? dateValue.trim() : '';
+    if (origin && destination && departureDate) legs.push({ origin, destination, departureDate });
+  }
+  return legs;
+}
+
+export function buildFilter(body = {}) {
+  const multiCity = body.tripType === 'MultiCity' || body.type === 'MultiCity';
   const price = body.filters?.price;
   const filters = clean({
     price: price && (price.min !== undefined || price.max !== undefined) ? { min: Number(price.min) || 0, max: Number(price.max) || undefined } : undefined,
@@ -34,13 +53,28 @@ function buildFilter(body = {}) {
     stops: body.filters?.stops ?? buildStops(body.maxStops),
     refundability: body.filters?.refundability,
   });
+  let destinations;
+  if (multiCity) {
+    destinations = sanitizeDestinations(body.destinations);
+    if (destinations.length < 2) {
+      throw new ApiError('BAD_REQUEST', 'MultiCity richiede almeno 2 tratte valide: origine, destinazione e data per ogni tratta.', { status: 400 });
+    }
+  } else {
+    for (const field of ['origin', 'destination', 'departureDate']) {
+      const value = body[field];
+      if (typeof value !== 'string' || !value.trim()) {
+        throw new ApiError('BAD_REQUEST', `Campo obbligatorio mancante: ${field}.`, { status: 400 });
+      }
+    }
+  }
   return clean({
-    origin: body.origin,
-    destination: body.destination,
-    departureDate: body.departureDate,
-    returnDate: body.returnDate,
-    tripType: body.tripType,
-    type: body.tripType,
+    origin: multiCity ? undefined : body.origin,
+    destination: multiCity ? undefined : body.destination,
+    departureDate: multiCity ? undefined : body.departureDate,
+    returnDate: multiCity ? undefined : body.returnDate,
+    tripType: multiCity ? 'MultiCity' : body.tripType,
+    type: multiCity ? 'MultiCity' : body.tripType,
+    destinations,
     adults: body.adults,
     children: body.children,
     infants: body.infants,
@@ -79,6 +113,7 @@ router.post(
   '/search',
   asyncHandler(async (req, res) => {
     const body = requireBody(req);
+    const filter = buildFilter(body);
     if (!getFlightSession()) {
       try {
         const s = await flights.session();
@@ -87,10 +122,6 @@ router.post(
         /* flight_session is optional; continue without it */
       }
     }
-    const filter = buildFilter(requireBody(req));
-    requireString(filter.origin, 'origin');
-    requireString(filter.destination, 'destination');
-    requireString(filter.departureDate, 'departureDate');
     const r = await flights.search({ filter });
     rememberFlightSearch(
       {
@@ -98,6 +129,7 @@ router.post(
         destination: filter.destination,
         departureDate: filter.departureDate,
         returnDate: filter.returnDate,
+        destinations: filter.destinations,
         adults: filter.adults,
         children: filter.children,
         infants: filter.infants,
@@ -136,14 +168,18 @@ router.post(
     const body = requireBody(req);
     const cached = getFlightSearch() ?? {};
     const fareSourceCode = pick(body.fareSourceCode, cached.fareSourceCode);
+    const destinations = pick(body.destinations, cached.destinations);
+    const firstLeg = Array.isArray(destinations) ? destinations[0] : null;
+    const lastLeg = Array.isArray(destinations) ? destinations[destinations.length - 1] : null;
     const args = clean({
       fareSourceCode,
       offerId: body.offerId,
       flight: pick(body.flight, findFlightOffer(fareSourceCode)),
-      origin: pick(body.origin, cached.origin),
-      destination: pick(body.destination, cached.destination),
-      departureDate: pick(body.departureDate, cached.departureDate),
+      origin: pick(body.origin, cached.origin, firstLeg?.origin),
+      destination: pick(body.destination, cached.destination, lastLeg?.destination),
+      departureDate: pick(body.departureDate, cached.departureDate, firstLeg?.departureDate),
       returnDate: pick(body.returnDate, cached.returnDate),
+      destinations,
       adults: pick(body.adults, cached.adults),
       children: pick(body.children, cached.children),
       infants: pick(body.infants, cached.infants),

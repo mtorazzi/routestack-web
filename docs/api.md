@@ -232,6 +232,37 @@ Response (abridged):
 }
 ```
 
+MultiCity search — request (billable). When `tripType` (or `type`) is
+`MultiCity` the itinerary lives in `destinations` and the top-level
+`origin`/`destination`/`departureDate`/`returnDate` are omitted. Each leg uses
+the exact keys from the `flight_search` leg schema — `origin`, `destination` and
+**`departureDate`** (a leg has no `returnDate`; the server also accepts the UI
+alias `date` and normalises it to `departureDate`). At least **two** complete
+legs are required:
+
+```bash
+curl -s -X POST localhost:8787/api/flights/search \
+  -H 'content-type: application/json' \
+  --data '{
+    "tripType": "MultiCity",
+    "destinations": [
+      { "origin": "MXP", "destination": "BKK", "departureDate": "2027-08-20" },
+      { "origin": "BKK", "destination": "SYD", "departureDate": "2027-08-27" },
+      { "origin": "SYD", "destination": "AKL", "departureDate": "2027-09-03" }
+    ],
+    "adults": 1,
+    "cabinClass": "Economy"
+  }'
+```
+
+The server forwards each leg to the tool as `{ origin, destination,
+departureDate }` (legs missing any of the three are dropped). A MultiCity body
+with fewer than two valid legs is rejected locally with HTTP 400 `BAD_REQUEST`
+(`MultiCity richiede almeno 2 tratte valide: origine, destinazione e data per
+ogni tratta.`) before any upstream call. `/api/flights/search` caches the legs
+so the free `/api/flights/checkout` can forward `destinations` together with the
+selected `flight` itinerary.
+
 ### Cars
 
 | Method | Path | Tool | Billable |

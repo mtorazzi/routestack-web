@@ -502,6 +502,10 @@ let flightSearch = null;
  * Cache the search context and the returned offers (keyed by `fareSourceCode`)
  * so `/checkout` can rebuild the itinerary the tool requires even when the
  * client only sends the selected `fareSourceCode`.
+ *
+ * `context` is stored verbatim, so MultiCity searches persist their
+ * `destinations` legs here too (next to `origin`/`destination`/… for the single
+ * itinerary) and `/checkout` can forward the full leg context.
  */
 export function rememberFlightSearch(context = {}, offers = []) {
   const byFare = new Map();

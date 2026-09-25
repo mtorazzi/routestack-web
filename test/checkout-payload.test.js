@@ -118,6 +118,65 @@ test('flight checkout fills fareSourceCode + flight + itinerary from the cached 
   assert.equal(a.sessionId, 'flight-sess-1');
 });
 
+test('flight checkout preserves the MultiCity leg context cached by the search', async (t) => {
+  const stub = makeStub();
+  const { post } = await withServer(t, stub);
+
+  const search = await post('/api/flights/search', {
+    tripType: 'MultiCity',
+    destinations: [
+      { origin: 'MXP', destination: 'BKK', departureDate: '2027-08-20' },
+      { origin: 'BKK', destination: 'SYD', departureDate: '2027-08-27' },
+    ],
+    adults: 1,
+    children: 0,
+    infants: 0,
+    cabinClass: 'Economy',
+  });
+  assert.equal(search.status, 200);
+  assert.equal(search.json.ok, true);
+
+  const searchCall = lastCall(stub.calls, 'flight_search');
+  assert.equal(searchCall.args.filter.tripType, 'MultiCity');
+  assert.equal(searchCall.args.filter.origin, undefined);
+  assert.equal(searchCall.args.filter.destinations.length, 2);
+
+  const offer = search.json.data.offers[0];
+  const checkout = await post('/api/flights/checkout', { fareSourceCode: offer.fareSourceCode });
+  assert.equal(checkout.status, 200);
+
+  const a = lastCall(stub.calls, 'flight_get_checkout_url').args;
+  assert.equal(a.fareSourceCode, offer.fareSourceCode);
+  assert.ok(a.flight, 'the raw itinerary object must be forwarded');
+  assert.equal(a.tripType, 'MultiCity');
+  assert.deepEqual(a.destinations, [
+    { origin: 'MXP', destination: 'BKK', departureDate: '2027-08-20' },
+    { origin: 'BKK', destination: 'SYD', departureDate: '2027-08-27' },
+  ]);
+  assert.equal(a.origin, 'MXP');
+  assert.equal(a.destination, 'SYD');
+  assert.equal(a.departureDate, '2027-08-20');
+  assert.equal(a.adults, 1);
+});
+
+test('flight search rejects MultiCity with a single leg before any upstream call', async (t) => {
+  const stub = makeStub();
+  const { post } = await withServer(t, stub);
+
+  const res = await post('/api/flights/search', {
+    tripType: 'MultiCity',
+    destinations: [{ origin: 'MXP', destination: 'BKK', departureDate: '2027-08-20' }],
+    adults: 1,
+    cabinClass: 'Economy',
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.json.ok, false);
+  assert.equal(res.json.error.code, 'BAD_REQUEST');
+  assert.match(res.json.error.message, /MultiCity/);
+  assert.equal(lastCall(stub.calls, 'flight_search'), undefined, 'no upstream flight_search call must be made');
+  assert.equal(lastCall(stub.calls, 'flight_session'), undefined, 'validation must run before the free session bootstrap');
+});
+
 test('flight checkout lets an explicit body win over the cached context', async (t) => {
   const stub = makeStub();
   const { post } = await withServer(t, stub);

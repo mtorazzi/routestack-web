@@ -52,8 +52,30 @@ export function stopsFromMax(maxStops) {
 }
 
 /**
+ * Normalise a single MultiCity leg to the shape `flight_search` expects.
+ * The leg date key is `departureDate` (confirmed from the tool schema); the
+ * UI stores it as `date`. Empty fields are dropped by `clean`.
+ */
+function buildFlightLeg(leg = {}) {
+  return clean({
+    origin: (leg.origin || '').trim().toUpperCase(),
+    destination: (leg.destination || '').trim().toUpperCase(),
+    departureDate: leg.departureDate || leg.date || undefined,
+  });
+}
+
+/** Keep only the legs that carry at least one value. */
+export function buildFlightDestinations(legs) {
+  if (!Array.isArray(legs)) return [];
+  return legs.map(buildFlightLeg).filter((leg) => Object.keys(leg).length > 0);
+}
+
+/**
  * @param {object} v form values
  * @returns {object} body for POST /api/flights/search
+ *
+ * MultiCity omits the top-level origin/destination/departureDate/returnDate and
+ * carries the itinerary in `destinations` instead (>= 2 segments upstream).
  */
 export function buildFlightSearchArgs(v = {}) {
   const price = clean({ min: toNum(v.priceMin, undefined), max: toNum(v.priceMax, undefined) });
@@ -63,6 +85,20 @@ export function buildFlightSearchArgs(v = {}) {
     stops: stopsFromMax(v.maxStops),
     refundability: v.refundability || undefined,
   });
+  if (v.tripType === 'MultiCity') {
+    return clean({
+      tripType: 'MultiCity',
+      destinations: buildFlightDestinations(v.destinations),
+      adults: toInt(v.adults, 1),
+      children: toInt(v.children, 0),
+      infants: toInt(v.infants, 0),
+      cabinClass: v.cabinClass,
+      filters: Object.keys(filters).length ? filters : undefined,
+      sortBy: v.sortBy || undefined,
+      limit: toInt(v.limit, undefined),
+      page: toInt(v.page, undefined),
+    });
+  }
   return clean({
     tripType: v.tripType || 'OneWay',
     origin: (v.origin || '').trim().toUpperCase(),
@@ -194,11 +230,22 @@ export function buildConfigPatch(values = {}, editing = {}) {
 export function missingRequired(kind, v = {}) {
   const missing = [];
   if (kind === 'flights') {
-    if (!v.origin) missing.push('origine');
-    if (!v.destination) missing.push('destinazione');
-    if (!v.departureDate) missing.push('data di andata');
-    if (!v.cabinClass) missing.push('classe');
-    if (v.tripType === 'RoundTrip' && !v.returnDate) missing.push('data di ritorno');
+    if (v.tripType === 'MultiCity') {
+      const legs = Array.isArray(v.destinations) ? v.destinations : [];
+      legs.forEach((leg, index) => {
+        const n = index + 1;
+        if (!leg?.origin) missing.push(`tratta ${n}: origine`);
+        if (!leg?.destination) missing.push(`tratta ${n}: destinazione`);
+        if (!leg?.departureDate && !leg?.date) missing.push(`tratta ${n}: data`);
+      });
+      if (!v.cabinClass) missing.push('classe');
+    } else {
+      if (!v.origin) missing.push('origine');
+      if (!v.destination) missing.push('destinazione');
+      if (!v.departureDate) missing.push('data di andata');
+      if (!v.cabinClass) missing.push('classe');
+      if (v.tripType === 'RoundTrip' && !v.returnDate) missing.push('data di ritorno');
+    }
   } else if (kind === 'hotels') {
     if (!v.destination) missing.push('destinazione');
     if (!v.checkIn) missing.push('check-in');
