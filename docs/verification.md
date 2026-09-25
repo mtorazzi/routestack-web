@@ -6,7 +6,7 @@ variables. No secret value, API key, API secret or full JWT is reproduced here:
 credentials are read from `ROUTESTACK_API_KEY` / `ROUTESTACK_API_SECRET` (and,
 for the `header` auth mode, `ROUTESTACK_ACCOUNT_ID`).
 
-Test suite: `npm test` → **38/38 pass**.
+Test suite: `npm test` → **46/46 pass**.
 
 ## Summary
 
@@ -220,3 +220,100 @@ The values come back **masked** (`rst_…1234`, `test…1234`) and never in clea
 the test credentials used are synthetic (`rst_TESTKEY1234` /
 `test-secret-1234`) and the copy was removed. No real `ROUTESTACK_*` value was
 ever printed.
+
+## Check 15 — static assets are no-store / settings save E2E
+
+**Bug (diagnosed from the deployed instance):** the server served assets with
+`express.static(publicDir, { extensions: ['html'], maxAge: 0 })`, which emits
+`Cache-Control: public, max-age=0`. That still permits browser/proxy
+revalidation caching, so after the Check 14 fix was committed the deployed
+browser kept executing the **previous** `settings.js` bundle. The live process
+proved it: the stale `POST /api/config` wrote a `config/secrets.json` containing
+only `{"sandbox": false}` — a patch that **neither** the old nor the new
+`settings.js` builds — so the first API key + secret were silently dropped and
+the UI still said *"Impostazioni salvate."*.
+
+**Fix:** `server/index.js` now disables validator/caching metadata for every
+static asset and for the SPA catch-all:
+
+```js
+app.use(
+  express.static(publicDir, {
+    extensions: ['html'],
+    etag: false,
+    lastModified: false,
+    setHeaders: (res) => res.setHeader('cache-control', 'no-store, must-revalidate'),
+  }),
+);
+
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(publicDir, 'index.html'), {
+    headers: { 'cache-control': 'no-store, must-revalidate' },
+  });
+});
+```
+
+Routing and the API are unchanged.
+
+**Regression test:** `test/static-cache.test.js` boots `createApp()` on an
+ephemeral port and asserts `cache-control: no-store` for `/`, `/app.js`,
+`/views/settings.js`, `/styles/tokens.css` and the SPA catch-all
+`/impostazioni`. `npm test` → **46/46** green.
+
+**Header proof.** The task asked to run on `PORT=8799 HOST=127.0.0.1`, but in
+this environment 8799 is held by the pre-existing deployed instance, which the
+hard rule forbids killing. It still serves the old header (which is exactly the
+diagnosis):
+
+```text
+# pre-existing deployed instance on 8799 — left untouched
+/app.js             Cache-Control: public, max-age=0
+/                   Cache-Control: public, max-age=0
+/views/settings.js  Cache-Control: public, max-age=0
+```
+
+The new code was started on a free port (8797) and probed with the exact
+`curl -sI` commands:
+
+```text
+curl -sI localhost:8797/app.js            -> cache-control: no-store, must-revalidate
+curl -sI localhost:8797/                  -> cache-control: no-store, must-revalidate
+curl -sI localhost:8797/views/settings.js -> cache-control: no-store, must-revalidate
+curl -sI localhost:8797/impostazioni      -> cache-control: no-store, must-revalidate
+```
+
+(After the deploy restarts the 8799 instance it will serve these same headers.)
+
+**Settings save E2E** (throw-away copy `/tmp/rs-cfgtest`, clean env with
+`ROUTESTACK_*` unset, no billable call; copy deleted afterwards). Port 8801 from
+the previous round is also held by a leftover process and was not touched; 8813
+was used:
+
+```bash
+cp -r /root/Projects/routestack-web /tmp/rs-cfgtest
+rm -f /tmp/rs-cfgtest/config/secrets.json
+cd /tmp/rs-cfgtest
+env -u ROUTESTACK_API_KEY -u ROUTESTACK_API_SECRET -u ROUTESTACK_ACCOUNT_ID \
+    -u ROUTESTACK_BASE_URL PORT=8813 HOST=127.0.0.1 node server/index.js
+```
+
+`POST /api/config` with the exact first-entry browser body
+(`authMode`, `baseUrl`, `sandbox`, `currency`, `timeoutMs`, `apiKey`,
+`apiSecret`), then `GET`, file inspection, `DELETE`, `GET`:
+
+```text
+BEFORE      apiKeySet:false apiSecretSet:false
+POST        HTTP 200
+AFTER POST  apiKeySet:true apiSecretSet:true apiKey:"dumm…1234" apiSecret:"dumm…1234" timeoutMs:30000
+FILE        keys:apiKey,apiSecret,authMode,baseUrl,currency,sandbox,timeoutMs
+DELETE      HTTP 200
+AFTER DEL   apiKeySet:false apiSecretSet:false
+E2E OK
+```
+
+The written `config/secrets.json` contains **all** the required fields
+(`authMode`, `baseUrl`, `currency`, `timeoutMs`, `apiKey`, `apiSecret`) plus
+`sandbox`; `GET /api/config` returns the secrets **masked** (`dumm…1234`) and
+never in clear; `DELETE` returns to unset. Only synthetic dummy credentials
+(`dummy-key-1234` / `dummy-secret-1234`) inside the throw-away copy were used and
+no real `ROUTESTACK_*` value was ever printed.

@@ -33,10 +33,22 @@ export function createApp() {
   });
 
   const publicDir = path.join(ROOT, 'public');
-  app.use(express.static(publicDir, { extensions: ['html'], maxAge: 0 }));
+  // Serve every asset with no client-side caching at all. UI fixes must reach
+  // the browser on the next load; `maxAge: 0` still allowed revalidation
+  // caching, which kept a stale bundle alive after a deploy.
+  app.use(
+    express.static(publicDir, {
+      extensions: ['html'],
+      etag: false,
+      lastModified: false,
+      setHeaders: (res) => res.setHeader('cache-control', 'no-store, must-revalidate'),
+    }),
+  );
 
   app.get(/^\/(?!api).*/, (req, res) => {
-    res.sendFile(path.join(publicDir, 'index.html'));
+    res.sendFile(path.join(publicDir, 'index.html'), {
+      headers: { 'cache-control': 'no-store, must-revalidate' },
+    });
   });
 
   // Central error handler: never crashes, never leaks secrets.
