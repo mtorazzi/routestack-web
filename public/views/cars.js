@@ -5,12 +5,12 @@
 import { attachAutocomplete } from '../components/autocomplete.js';
 import { humanError, openCheckout, vertical } from '../components/api.js';
 import { openDrawer } from '../components/drawer.js';
-import { clear, el, icon, render } from '../components/dom.js';
+import { clear, el, icon, render as renderNodes } from '../components/dom.js';
 import { advanced, checkField, clearErrors, dateField, field, fieldset, numberField, readValues, selectField, setError, textField } from '../components/fields.js';
 import { formatDate, formatPrice, formatTime, isoDateInDays } from '../components/format.js';
 import { buildCarSearchArgs, missingRequired } from '../components/params.js';
-import { badge, emptyState, errorState, idleState, kv } from '../components/states.js';
-import { carCard, resultsHeader, skeletonGrid } from '../components/results.js';
+import { badge, emptyState, errorState, idleState, kv, skeletonGrid } from '../components/states.js';
+import { carCard, resultsHeader } from '../components/results.js';
 
 const SORT_OPTIONS = [
   { value: '', label: 'Default' },
@@ -73,7 +73,7 @@ export function render(ctx) {
   /* ---------------- layout ---------------- */
   const resultsEl = el('div', { class: 'results' });
   const panel = el('section', { class: 'panel panel--sticky' }, el('h2', { attrs: { style: 'font-size: var(--text-xl); margin-bottom: var(--space-4)' }, text: 'Cerca auto' }), form);
-  render(
+  renderNodes(
     outlet,
     el(
       'div',
@@ -98,7 +98,7 @@ export function render(ctx) {
   }
 
   function showIdle() {
-    render(resultsEl, idleState({ title: 'Cerca un\'auto', text: 'Scegli i luoghi di ritiro e riconsegna dall\'elenco, indica date e orari, poi premi “Cerca auto”.', exampleLabel: 'Prova Malpensa', onExample: fillExample }));
+    renderNodes(resultsEl, idleState({ title: 'Cerca un\'auto', text: 'Scegli i luoghi di ritiro e riconsegna dall\'elenco, indica date e orari, poi premi “Cerca auto”.', exampleLabel: 'Prova Malpensa', onExample: fillExample }));
   }
 
   form.addEventListener('submit', async (event) => {
@@ -129,14 +129,14 @@ export function render(ctx) {
       state.offers = data.offers || [];
       state.meta = { ...data, ...meta };
       if (!state.offers.length) {
-        render(resultsEl, emptyState({ title: 'Nessuna auto trovata', text: 'Prova a cambiare luoghi, date o a rimuovere i filtri.' }));
+        renderNodes(resultsEl, emptyState({ title: 'Nessuna auto trovata', text: 'Prova a cambiare luoghi, date o a rimuovere i filtri.' }));
         announce('Nessuna auto trovata.');
       } else {
         renderResults();
         announce(`${state.offers.length} auto trovate.`);
       }
     } catch (err) {
-      render(resultsEl, errorState(err));
+      renderNodes(resultsEl, errorState(err));
       announce(`Errore: ${humanError(err).title}.`);
     } finally {
       submitBtn.disabled = false;
@@ -146,13 +146,13 @@ export function render(ctx) {
   });
 
   function showSkeletons() {
-    render(resultsEl, el('div', { class: 'results', attrs: { 'aria-busy': 'true' } }, skeletonGrid(6)));
+    renderNodes(resultsEl, el('div', { class: 'results', attrs: { 'aria-busy': 'true' } }, skeletonGrid(6)));
   }
 
   function renderResults() {
     const grid = el('div', { class: 'card-grid' });
     for (const offer of state.offers) grid.append(carCard(offer, { onOpen: openCar }));
-    render(
+    renderNodes(
       resultsEl,
       resultsHeader({
         count: state.meta?.count ?? state.offers.length,

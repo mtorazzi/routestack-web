@@ -5,7 +5,7 @@
 /**
  * Create an element.
  * @param {string} tag
- * @param {object} [props] class/text/html/attrs/dataset/on*/DOM props
+ * @param {object} [props] class/text/html/attrs/dataset/on* handler props / DOM props
  * @param {...(Node|string|null|undefined|Array)} children
  * @returns {HTMLElement}
  */

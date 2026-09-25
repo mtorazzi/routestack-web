@@ -4,12 +4,12 @@
 import { attachAutocomplete } from '../components/autocomplete.js';
 import { humanError, openCheckout, vertical } from '../components/api.js';
 import { openDrawer } from '../components/drawer.js';
-import { clear, el, icon, render } from '../components/dom.js';
+import { clear, el, icon, render as renderNodes } from '../components/dom.js';
 import { advanced, clearErrors, dateField, fieldset, numberField, radioField, readValues, selectField, setError, textField } from '../components/fields.js';
 import { formatDate, formatDuration, formatPrice, formatTime, isoDateInDays } from '../components/format.js';
 import { buildFlightSearchArgs, missingRequired } from '../components/params.js';
-import { badge, errorState, emptyState, idleState, kv } from '../components/states.js';
-import { flightCard, resultsHeader, skeletonGrid } from '../components/results.js';
+import { badge, errorState, emptyState, idleState, kv, skeletonGrid } from '../components/states.js';
+import { flightCard, resultsHeader } from '../components/results.js';
 
 const CABIN_OPTIONS = [
   { value: '', label: 'Seleziona la classe…' },
@@ -104,7 +104,7 @@ export function render(ctx) {
   /* ---------------- layout ---------------- */
   const resultsEl = el('div', { class: 'results' });
   const panel = el('section', { class: 'panel panel--sticky' }, el('h2', { attrs: { style: 'font-size: var(--text-xl); margin-bottom: var(--space-4)' }, text: 'Cerca voli' }), form);
-  render(
+  renderNodes(
     outlet,
     el(
       'div',
@@ -131,7 +131,7 @@ export function render(ctx) {
   }
 
   function showIdle() {
-    render(resultsEl, idleState({ title: 'Pronto per cercare', text: 'Compila origine, destinazione e data di andata, poi premi “Cerca voli”. Seleziona la classe per procedere.', exampleLabel: 'Prova MXP → BKK', onExample: fillExample }));
+    renderNodes(resultsEl, idleState({ title: 'Pronto per cercare', text: 'Compila origine, destinazione e data di andata, poi premi “Cerca voli”. Seleziona la classe per procedere.', exampleLabel: 'Prova MXP → BKK', onExample: fillExample }));
   }
 
   form.addEventListener('submit', async (event) => {
@@ -164,14 +164,14 @@ export function render(ctx) {
       state.meta = { ...data, ...meta };
       state.currency = data.currency || state.currency;
       if (!state.offers.length) {
-        render(resultsEl, emptyState({ title: 'Nessun volo trovato', text: 'Prova a cambiare date, aeroporti o a rimuovere i filtri avanzati.' }));
+        renderNodes(resultsEl, emptyState({ title: 'Nessun volo trovato', text: 'Prova a cambiare date, aeroporti o a rimuovere i filtri avanzati.' }));
         announce('Nessun volo trovato.');
       } else {
         renderResults();
         announce(`${state.offers.length} voli trovati.`);
       }
     } catch (err) {
-      render(resultsEl, errorState(err));
+      renderNodes(resultsEl, errorState(err));
       announce(`Errore: ${humanError(err).title}.`);
     } finally {
       submitBtn.disabled = false;
@@ -182,13 +182,13 @@ export function render(ctx) {
 
   function showSkeletons() {
     const wrap = el('div', { class: 'results', attrs: { 'aria-busy': 'true' } }, skeletonGrid(6));
-    render(resultsEl, wrap);
+    renderNodes(resultsEl, wrap);
   }
 
   function renderResults() {
     const grid = el('div', { class: 'card-grid' });
     for (const offer of state.offers) grid.append(flightCard(offer, { onOpen: (o) => openFlight(o), currency: state.currency }));
-    render(
+    renderNodes(
       resultsEl,
       resultsHeader({
         count: state.meta?.count ?? state.offers.length,

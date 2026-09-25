@@ -3,7 +3,7 @@
  * I segreti sono sempre mascherati finché non si preme "Modifica".
  */
 import { deleteConfig, getConfig, humanError, saveConfig, testConfig } from '../components/api.js';
-import { clear, el, icon, render } from '../components/dom.js';
+import { clear, el, icon, render as renderNodes } from '../components/dom.js';
 import { checkField, clearErrors, field, fieldset, numberField, radioField, readValues, selectField } from '../components/fields.js';
 import { formatDate } from '../components/format.js';
 import { errorState, kv } from '../components/states.js';
@@ -12,7 +12,7 @@ export function render(ctx) {
   const { outlet, announce, setConfig, config } = ctx;
   const state = { config: config || null, editing: { apiKey: false, apiSecret: false, accountId: false }, test: null };
 
-  render(outlet, el('p', { class: 'state__text' }, 'Caricamento configurazione…'));
+  renderNodes(outlet, el('p', { class: 'state__text' }, 'Caricamento configurazione…'));
 
   (async () => {
     try {
@@ -21,7 +21,7 @@ export function render(ctx) {
       setConfig?.(data);
       renderSettings();
     } catch (err) {
-      render(outlet, el('div', { class: 'stack' }, el('h1', { text: 'Impostazioni' }), errorState(err)));
+      renderNodes(outlet, el('div', { class: 'stack' }, el('h1', { text: 'Impostazioni' }), errorState(err)));
     }
   })();
 
@@ -83,7 +83,7 @@ export function render(ctx) {
       ]),
     );
 
-    render(
+    renderNodes(
       outlet,
       el('div', { class: 'page-head' }, el('div', {}, el('h1', { text: 'Impostazioni' }), el('p', { class: 'page-head__meta', text: 'Configura l\'accesso a RouteStack e le preferenze dell\'interfaccia.' }))),
       el('div', { class: 'vertical-grid' }, panel, resolution),
@@ -123,14 +123,14 @@ export function render(ctx) {
       testBtn.disabled = true;
       clear(testBtn);
       testBtn.append(el('span', { class: 'spinner' }), ' Verifica…');
-      render(testResult, el('p', { class: 'card__sub', text: 'Mint del partner token e tools/list in corso…' }));
+      renderNodes(testResult, el('p', { class: 'card__sub', text: 'Mint del partner token e tools/list in corso…' }));
       try {
         const { data } = await testConfig();
         state.test = data;
-        render(testResult, testBlock(data));
+        renderNodes(testResult, testBlock(data));
         announce('Test connessione completato.');
       } catch (err) {
-        render(testResult, errorState(err));
+        renderNodes(testResult, errorState(err));
         announce(`Errore: ${humanError(err).title}.`);
       } finally {
         testBtn.disabled = false;

@@ -114,3 +114,41 @@ curl -s localhost:8798/api/config | grep -c "<apiKey value>"   # 0
 The sandbox host `evolvemcp.routestack.ai` responds **401** with these
 credentials, so all proofs above are production-only. Toggle with
 `config/secrets.json` → `"sandbox": true` (or leave `false`).
+
+## Check 13 — frontend syntax regression
+
+The 38-test suite only covered pure modules, so a real defect class shipped
+unnoticed: the view layer did not parse. `node --check` on `public/**/*.js`
+failed on **5** files.
+
+1. `public/components/dom.js` — the JSDoc line
+   `@param {object} [props] class/text/html/attrs/dataset/on*/DOM props`
+   contained `*/` inside the comment text, closing the block early and leaving
+   `DOM props` as stray code (`SyntaxError: Unexpected identifier 'props'`).
+   Reworded to `…/on* handler props / DOM props`; no behaviour change.
+2. `public/views/flights.js`, `public/views/hotels.js`, `public/views/cars.js`
+   and `public/views/settings.js` each imported `render` from
+   `../components/dom.js` *and* declared `export function render(ctx)`, which is
+   a duplicate binding (`SyntaxError: Identifier 'render' has already been
+   declared`). The DOM helper is now aliased as `render as renderNodes` and
+   every internal call site that meant the helper was updated, while
+   `export function render(ctx)` and `export default { render }` are unchanged
+   (`public/app.js` still calls `flightsView.render`, etc.).
+
+An additional latent defect surfaced once the views could be imported: `cars.js`
+/`flights.js`/`hotels.js` imported `skeletonGrid` from `../components/results.js`,
+but it is actually exported by `../components/states.js`, so `import()` of those
+views threw `does not provide an export named 'skeletonGrid'`. The import was
+corrected to source `skeletonGrid` from `states.js`.
+
+New regression guard `test/frontend-modules.test.js` runs `node --check` over
+every `.js` under `public/` (exit code 0, offending file named on failure), then
+`await import()`s every module except `public/app.js` (which touches the DOM at
+import time and is therefore syntax-checked only), and asserts the four view
+modules still expose a callable `render` via both named and default export.
+
+Verification: `for f in $(find public -name '*.js'); do node --check "$f" || echo
+"SYNTAX FAIL $f"; done` prints nothing; `npm test` is **41/41** green; a smoke
+server on `PORT=8799 HOST=127.0.0.1` returned **200** for `/`, `/app.js`,
+`/router.js`, `/components/dom.js`, the four `/views/*.js` and
+`/styles/tokens.css`.

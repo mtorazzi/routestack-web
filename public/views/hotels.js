@@ -5,12 +5,12 @@
 import { attachAutocomplete } from '../components/autocomplete.js';
 import { humanError, openCheckout, vertical } from '../components/api.js';
 import { openDrawer } from '../components/drawer.js';
-import { clear, el, icon, render } from '../components/dom.js';
+import { clear, el, icon, render as renderNodes } from '../components/dom.js';
 import { advanced, checkField, checkGroup, clearErrors, dateField, fieldset, numberField, readValues, selectField, setError, textField } from '../components/fields.js';
 import { formatPrice, isoDateInDays } from '../components/format.js';
 import { buildHotelSearchArgs, missingRequired } from '../components/params.js';
-import { badge, emptyState, errorState, idleState, kv } from '../components/states.js';
-import { hotelCard, resultsHeader, skeletonGrid } from '../components/results.js';
+import { badge, emptyState, errorState, idleState, kv, skeletonGrid } from '../components/states.js';
+import { hotelCard, resultsHeader } from '../components/results.js';
 
 const CURRENCIES = ['EUR', 'USD', 'GBP'];
 const SORT_OPTIONS = [
@@ -77,7 +77,7 @@ export function render(ctx) {
   /* ---------------- layout ---------------- */
   const resultsEl = el('div', { class: 'results' });
   const panel = el('section', { class: 'panel panel--sticky' }, el('h2', { attrs: { style: 'font-size: var(--text-xl); margin-bottom: var(--space-4)' }, text: 'Cerca hotel' }), form);
-  render(
+  renderNodes(
     outlet,
     el(
       'div',
@@ -100,7 +100,7 @@ export function render(ctx) {
   }
 
   function showIdle() {
-    render(resultsEl, idleState({ title: 'Cerca una destinazione', text: 'Inserisci città o nome hotel, scegli le date e premi “Cerca hotel”. Usa i filtri avanzati per stelle, prezzo e servizi.', exampleLabel: 'Prova Roma', onExample: fillExample }));
+    renderNodes(resultsEl, idleState({ title: 'Cerca una destinazione', text: 'Inserisci città o nome hotel, scegli le date e premi “Cerca hotel”. Usa i filtri avanzati per stelle, prezzo e servizi.', exampleLabel: 'Prova Roma', onExample: fillExample }));
   }
 
   form.addEventListener('submit', async (event) => {
@@ -138,14 +138,14 @@ export function render(ctx) {
       const incoming = data.hotels || [];
       state.hotels = append ? [...state.hotels, ...incoming] : incoming;
       if (!state.hotels.length) {
-        render(resultsEl, emptyState({ title: 'Nessun hotel trovato', text: 'Prova a spostare le date o ad allargare i filtri.' }));
+        renderNodes(resultsEl, emptyState({ title: 'Nessun hotel trovato', text: 'Prova a spostare le date o ad allargare i filtri.' }));
         announce('Nessun hotel trovato.');
       } else {
         renderResults();
         announce(`${state.hotels.length} hotel trovati.`);
       }
     } catch (err) {
-      render(resultsEl, errorState(err));
+      renderNodes(resultsEl, errorState(err));
       announce(`Errore: ${humanError(err).title}.`);
     } finally {
       submitBtn.disabled = false;
@@ -155,7 +155,7 @@ export function render(ctx) {
   }
 
   function showSkeletons() {
-    render(resultsEl, el('div', { class: 'results', attrs: { 'aria-busy': 'true' } }, skeletonGrid(6)));
+    renderNodes(resultsEl, el('div', { class: 'results', attrs: { 'aria-busy': 'true' } }, skeletonGrid(6)));
   }
 
   function renderResults() {
@@ -185,7 +185,7 @@ export function render(ctx) {
       });
       children.push(el('div', { attrs: { style: 'text-align: center' } }, moreBtn));
     }
-    render(resultsEl, ...children);
+    renderNodes(resultsEl, ...children);
   }
 
   function roomsArgs(hotel) {
@@ -227,21 +227,21 @@ export function render(ctx) {
 
   async function loadRooms(hotel, host, drawer) {
     if (!state.meta?.token || !state.meta?.correlationId) {
-      render(host, el('p', { class: 'card__sub', text: 'Sessione hotel non disponibile: riesegui la ricerca.' }));
+      renderNodes(host, el('p', { class: 'card__sub', text: 'Sessione hotel non disponibile: riesegui la ricerca.' }));
       return;
     }
     try {
       const { data } = await apiV.rooms(roomsArgs(hotel));
       const offers = data.offers || [];
       if (!offers.length) {
-        render(host, el('p', { class: 'card__sub', text: 'Nessuna camera disponibile per queste date.' }));
+        renderNodes(host, el('p', { class: 'card__sub', text: 'Nessuna camera disponibile per queste date.' }));
         return;
       }
       const list = el('div', { class: 'room-list' });
       for (const offer of offers) list.append(roomRow(hotel, offer));
-      render(host, list);
+      renderNodes(host, list);
     } catch (err) {
-      render(host, errorState(err));
+      renderNodes(host, errorState(err));
     }
   }
 
