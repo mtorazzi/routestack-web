@@ -157,6 +157,39 @@ export function buildCarSearchArgs(v = {}) {
   });
 }
 
+/**
+ * Build the POST /api/config patch.
+ *
+ * Secret controls are rendered masked/read-only (and submit `''`) until the
+ * user presses "Modifica". On a fresh install `apiKeySet`/`apiSecretSet` are
+ * false, so no "Modifica" button exists — but the fields are editable and the
+ * first typed value must still be saved. Therefore a non-empty submitted secret
+ * is always included, regardless of the editing flag; an untouched secret
+ * submits `''` and is left out. `accountId` can be explicitly cleared (null)
+ * only while editing it.
+ *
+ * @param {object} values flat form values from `readValues(form)`
+ * @param {{apiKey?:boolean,apiSecret?:boolean,accountId?:boolean}} [editing]
+ * @returns {object} body for POST /api/config
+ */
+export function buildConfigPatch(values = {}, editing = {}) {
+  const patch = {
+    authMode: values.authMode,
+    baseUrl: values.baseUrl,
+    sandbox: values.sandbox === true,
+    currency: values.currency,
+    timeoutMs: Number(values.timeoutMs) || 30000,
+  };
+
+  if (typeof values.apiKey === 'string' && values.apiKey !== '') patch.apiKey = values.apiKey;
+  if (typeof values.apiSecret === 'string' && values.apiSecret !== '') patch.apiSecret = values.apiSecret;
+
+  if (typeof values.accountId === 'string' && values.accountId !== '') patch.accountId = values.accountId;
+  else if (editing.accountId) patch.accountId = null;
+
+  return patch;
+}
+
 /** Which required fields are missing, for client-side validation. */
 export function missingRequired(kind, v = {}) {
   const missing = [];

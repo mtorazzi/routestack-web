@@ -3,6 +3,7 @@ import test from 'node:test';
 
 import {
   buildCarSearchArgs,
+  buildConfigPatch,
   buildFlightSearchArgs,
   buildHotelSearchArgs,
   clean,
@@ -117,6 +118,49 @@ test('missingRequired reports the relevant missing fields', () => {
   assert.deepEqual(missingRequired('flights', { tripType: 'OneWay', origin: 'MXP', destination: 'BKK' }), ['data di andata', 'classe']);
   assert.deepEqual(missingRequired('hotels', { destination: 'Rome' }), ['check-in', 'check-out']);
   assert.deepEqual(missingRequired('cars', {}), ['luogo di ritiro', 'data di ritiro', 'luogo di riconsegna', 'data di riconsegna']);
+});
+
+test('buildConfigPatch saves first-entry credentials even when editing is false', () => {
+  const patch = buildConfigPatch(
+    { authMode: 'partner-token', baseUrl: 'https://mcp.routestack.ai/mcp', sandbox: false, currency: 'EUR', timeoutMs: '30000', apiKey: 'rst_TESTKEY1234', apiSecret: 'test-secret-1234', accountId: '' },
+    { apiKey: false, apiSecret: false, accountId: false },
+  );
+  assert.equal(patch.apiKey, 'rst_TESTKEY1234');
+  assert.equal(patch.apiSecret, 'test-secret-1234');
+  assert.ok(!('accountId' in patch));
+});
+
+test('buildConfigPatch leaves untouched (masked, empty) secrets out of the patch', () => {
+  const patch = buildConfigPatch(
+    { authMode: 'partner-token', baseUrl: 'https://mcp.routestack.ai/mcp', sandbox: true, currency: 'USD', timeoutMs: '45000', apiKey: '', apiSecret: '', accountId: '' },
+    { apiKey: false, apiSecret: false, accountId: false },
+  );
+  assert.ok(!('apiKey' in patch));
+  assert.ok(!('apiSecret' in patch));
+  assert.ok(!('accountId' in patch));
+  assert.equal(patch.sandbox, true);
+  assert.equal(patch.currency, 'USD');
+  assert.equal(patch.timeoutMs, 45000);
+});
+
+test('buildConfigPatch clears accountId only when explicitly editing', () => {
+  const cleared = buildConfigPatch(
+    { authMode: 'header', baseUrl: 'x', sandbox: false, currency: 'EUR', timeoutMs: '30000', apiKey: '', apiSecret: '', accountId: '' },
+    { apiKey: false, apiSecret: false, accountId: true },
+  );
+  assert.equal(cleared.accountId, null);
+  assert.equal(cleared.authMode, 'header');
+});
+
+test('buildConfigPatch keeps sandbox a real boolean and never emits undefined/empty secrets', () => {
+  const off = buildConfigPatch({ sandbox: undefined, timeoutMs: '', apiKey: undefined, apiSecret: undefined }, {});
+  assert.equal(off.sandbox, false);
+  assert.ok(!('apiKey' in off));
+  assert.ok(!('apiSecret' in off));
+  assert.equal(typeof off.sandbox, 'boolean');
+
+  const on = buildConfigPatch({ sandbox: 'true' }, {});
+  assert.equal(on.sandbox, false, 'a truthy non-boolean string must not become sandbox=true');
 });
 
 test('format helpers produce it-IT output', () => {

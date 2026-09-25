@@ -152,3 +152,71 @@ Verification: `for f in $(find public -name '*.js'); do node --check "$f" || ech
 server on `PORT=8799 HOST=127.0.0.1` returned **200** for `/`, `/app.js`,
 `/router.js`, `/components/dom.js`, the four `/views/*.js` and
 `/styles/tokens.css`.
+
+## Check 14 — settings credential save (first entry)
+
+**Bug (read from the code, then fixed):** on a fresh install nothing is
+configured, so `maskConfig()` reports `apiKeySet:false` /
+`apiSecretSet:false`. `public/views/settings.js#secretField` renders those
+fields editable, but the "Modifica" button (which flips `state.editing.*`) is
+only added `if (set)`. `state.editing` therefore stays
+`{apiKey:false,apiSecret:false,accountId:false}` and the inline submit logic
+
+```js
+if (state.editing.apiKey && values.apiKey) patch.apiKey = values.apiKey;
+if (state.editing.apiSecret && values.apiSecret) patch.apiSecret = values.apiSecret;
+if (state.editing.accountId) patch.accountId = values.accountId || null;
+```
+
+never copied the typed secrets into the patch. `POST /api/config` saved only
+preferences, the server kept `apiKeySet:false`, and the UI still announced
+*"Impostazioni salvate."* — the first API key + secret were silently discarded.
+(Editing an already-saved value worked, which is why it went unnoticed.)
+
+**Fix:** the patch is now built by a pure, unit-tested helper
+`buildConfigPatch(values, editing)` in `public/components/params.js`. It always
+sends `authMode`, `baseUrl`, `sandbox`, `currency`, `timeoutMs`; includes
+`apiKey` / `apiSecret` whenever the submitted value is a non-empty string
+(regardless of `editing`); includes `accountId` for a non-empty value and emits
+the explicit clear `accountId:null` only while `editing.accountId` is true;
+never emits an `undefined`/`''` secret. `public/views/settings.js` was switched
+to that helper and the inline logic removed; test connection, remove credentials
+and re-render after save are unchanged.
+
+**Regression test (written first, observed failing):** `buildConfigPatch` did
+not yet exist, so `npm test` failed with
+`does not provide an export named 'buildConfigPatch'`. After the fix the four
+new assertions in `test/frontend-params.test.js` cover: first entry with
+`editing` all-false saves both secrets; untouched (`''`) secrets are omitted;
+`editing.accountId = true` + empty value yields `accountId:null`; `sandbox`
+stays a real boolean. `npm test` → **45/45** green and
+`for f in $(find public -name '*.js'); do node --check "$f"; done` prints
+nothing.
+
+**Live round-trip** (throw-away copy `/tmp/rs-cfgtest`, clean env with
+`ROUTESTACK_*` unset, no billable call — `POST/DELETE /api/config` only; copy
+deleted afterwards):
+
+```bash
+cp -r /root/Projects/routestack-web /tmp/rs-cfgtest
+rm -f /tmp/rs-cfgtest/config/secrets.json
+cd /tmp/rs-cfgtest
+env -u ROUTESTACK_API_KEY -u ROUTESTACK_API_SECRET -u ROUTESTACK_ACCOUNT_ID \
+    -u ROUTESTACK_BASE_URL PORT=8801 HOST=127.0.0.1 node server/index.js &
+```
+
+`GET /api/config` before, `POST` the test credentials, `GET` again, `DELETE`,
+`GET` again:
+
+```text
+BEFORE      apiKeySet:false apiSecretSet:false
+POST        HTTP 200
+AFTER POST  apiKeySet:true  apiSecretSet:true  apiKey:"rst_…1234" apiSecret:"test…1234"
+DELETE      HTTP 200
+AFTER DEL   apiKeySet:false apiSecretSet:false
+```
+
+The values come back **masked** (`rst_…1234`, `test…1234`) and never in clear;
+the test credentials used are synthetic (`rst_TESTKEY1234` /
+`test-secret-1234`) and the copy was removed. No real `ROUTESTACK_*` value was
+ever printed.

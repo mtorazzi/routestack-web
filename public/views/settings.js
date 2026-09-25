@@ -6,6 +6,7 @@ import { deleteConfig, getConfig, humanError, saveConfig, testConfig } from '../
 import { clear, el, icon, render as renderNodes } from '../components/dom.js';
 import { checkField, clearErrors, field, fieldset, numberField, radioField, readValues, selectField } from '../components/fields.js';
 import { formatDate } from '../components/format.js';
+import { buildConfigPatch } from '../components/params.js';
 import { errorState, kv } from '../components/states.js';
 
 export function render(ctx) {
@@ -93,16 +94,7 @@ export function render(ctx) {
       event.preventDefault();
       clearErrors(form);
       const values = readValues(form);
-      const patch = {
-        authMode: values.authMode,
-        baseUrl: values.baseUrl,
-        sandbox: values.sandbox === true,
-        currency: values.currency,
-        timeoutMs: Number(values.timeoutMs) || 30000,
-      };
-      if (state.editing.apiKey && values.apiKey) patch.apiKey = values.apiKey;
-      if (state.editing.apiSecret && values.apiSecret) patch.apiSecret = values.apiSecret;
-      if (state.editing.accountId) patch.accountId = values.accountId || null;
+      const patch = buildConfigPatch(values, state.editing);
       saveBtn.disabled = true;
       try {
         const { data } = await saveConfig(patch);
