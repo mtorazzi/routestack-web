@@ -8,8 +8,9 @@ import { clear, el, icon, render as renderNodes } from '../components/dom.js';
 import { advanced, clearErrors, dateField, fieldset, numberField, radioField, readValues, selectField, setError, textField } from '../components/fields.js';
 import { formatDate, formatDuration, formatPrice, formatTime, isoDateInDays } from '../components/format.js';
 import { buildFlightSearchArgs, missingRequired } from '../components/params.js';
-import { badge, errorState, emptyState, idleState, kv, LONG_SEARCH_HINT, skeletonGrid, startSearchClock } from '../components/states.js';
+import { badge, errorState, emptyState, idleState, kv, LONG_SEARCH_HINT, searchCostHint, skeletonGrid, startSearchClock } from '../components/states.js';
 import { flightCard, resultsHeader } from '../components/results.js';
+import { sortOffers } from '../components/sort.js';
 
 const CABIN_OPTIONS = [
   { value: '', label: 'Seleziona la classe…' },
@@ -216,7 +217,7 @@ export function render(ctx) {
     syncLegsUi();
   }
 
-  const form = el('form', { class: 'form', attrs: { novalidate: '' } }, tripType.wrap, singleFields, legsEditor, pax, cabin.wrap, adv, submitBtn, searchHint);
+  const form = el('form', { class: 'form', attrs: { novalidate: '' } }, tripType.wrap, singleFields, legsEditor, pax, cabin.wrap, adv, submitBtn, searchCostHint(), searchHint);
 
   attachLocation(originField.control, (it) => {
     sel.origin = it;
@@ -364,17 +365,16 @@ export function render(ctx) {
         source: state.meta?.source,
         sortBy: state.lastArgs?.sortBy || '',
         sortOptions: SORT_OPTIONS,
+        // Local sort only: reorder the already-fetched offers and re-render.
+        // Never re-submit — the /search call is billable.
         onSort: (v) => {
           state.lastArgs = { ...state.lastArgs, sortBy: v || undefined };
-          resubmit();
+          state.offers = sortOffers(state.offers, v, 'flights');
+          renderResults();
         },
       }),
       grid,
     );
-  }
-
-  async function resubmit() {
-    form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
   }
 
   function openFlight(offer) {

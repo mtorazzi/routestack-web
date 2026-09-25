@@ -11,7 +11,7 @@ Il progetto è composto da:
   risposte.
 - `public/` — UI statica (`index.html`, `app.js`, `router.js`, `components/*`,
   `views/*`, `styles/*`), senza dipendenze: il browser non vede mai i segreti.
-- `test/` — suite `node:test` (72 test).
+- `test/` — suite `node:test` (93 test).
 
 ## Avvio
 

@@ -6,7 +6,7 @@ variables. No secret value, API key, API secret or full JWT is reproduced here:
 credentials are read from `ROUTESTACK_API_KEY` / `ROUTESTACK_API_SECRET` (and,
 for the `header` auth mode, `ROUTESTACK_ACCOUNT_ID`).
 
-Test suite: `npm test` → **62/62 pass**.
+Test suite: `npm test` → **93/93 pass** (latest additions in Check 20).
 
 ## Summary
 
@@ -646,5 +646,82 @@ explicitly forbidden; the request shape and the timeout plumbing are proven
 against stubbed transports only. The precedence gotcha is documented in
 `README.md` / `docs/api.md`: a deployed `config/secrets.json` still carrying
 `"timeoutMs": 30000` keeps the old behaviour until the operator updates it.
+
+## Check 20 — result sorting is local, not a billable search
+
+**Audit finding.** Changing the results-header *Ordina* select re-issued the
+search in **all three** verticals, so every sort change cost a paid RouteStack
+call:
+
+- `public/views/flights.js` had `resubmit()` →
+  `form.dispatchEvent(new Event('submit', …))`, i.e. a full
+  `POST /api/flights/search`;
+- `public/views/hotels.js` and `public/views/cars.js` did the same thing inline
+  (`form.dispatchEvent(new Event('submit', …))`).
+
+`POST /api/{flights,hotels,cars}/search` is the **billable** call on RouteStack
+(`flight_search` / `hotel_search` / `car_search`), so a sort — a pure
+presentation concern over data already in memory — was spending money.
+
+**Fix.**
+
+- New pure module `public/components/sort.js` exporting
+  `sortOffers(offers, sortBy, vertical)`. It returns a **new** array and never
+  mutates the input; comparators are stable (index tie-break) and
+  **missing/unparseable values always sort last**; an empty/unknown `sortBy` or
+  an unknown vertical keeps the original order.
+  - flights: `price` (`ourprice`/`price`, asc), `duration` (minutes, parsed from
+    a number, `"13h 20m"` or `"PT13H20M"`, asc), `departure`
+    (`departureTime`, asc);
+  - hotels: `price` (asc), `stars`, `savings` (`savingsPercent`) and `rating`
+    (descending, best first);
+  - cars: `price` (asc) plus the existing `supplier` option (alphabetical).
+- The header `onSort` in the three views now reorders
+  `state.offers` / `state.hotels` and calls `renderResults()` only. The old
+  `resubmit()` helper and both inline `dispatchEvent('submit')` calls were
+  removed — nothing in the header touches the network. `sortBy` remains in the
+  **search form**, so it still travels upstream on the next real search.
+- Cost made visible: a persistent note next to the search button in all three
+  verticals — *"Le ricerche sono fatturate. L'ordinamento dei risultati è locale
+  e non consuma una nuova ricerca."* (`SEARCH_COST_HINT` / `searchCostHint()` in
+  `public/components/states.js`).
+- The hotels *"Carica altri risultati"* button is now labelled
+  *"Carica altri risultati (nuova ricerca fatturata)"*: it re-sends
+  `hotel_search` with `nextResultsKey` and **is** billable. It still works; no
+  confirm dialog was added.
+
+Pagination state (`nextResultsKey`), checkout and MultiCity are untouched.
+
+**Offline proof (no billable call).**
+
+Unit tests — `test/sort.test.js` (18) cover each vertical and each key, the
+fallbacks (`ourprice`/`price`), numeric/`"13h 20m"`/ISO duration parsing, stable
+ties, missing/unparseable values last in both directions, input-not-mutated,
+non-array input, empty/unknown `sortBy` and unknown vertical, plus
+`parseDuration` / `sortKeys`.
+
+DOM-stub tests — `test/sort-dom.test.js` (3) load the **real** view modules in
+Node against the extended `settings-dom.test.js` stub (autocomplete needs
+`replaceWith` / `after` / `parentElement`), drive one search through a stubbed
+`fetch`, then change the header select and assert both the new DOM order **and
+that `fetch` was called zero extra times** for that interaction. All three
+verticals are covered because the same stub supports them cheaply.
+
+Pre-fix proof: reintroducing the old submit in `flights.js#onSort` and re-running
+`test/sort-dom.test.js` makes the flights test fail (the search returns the
+server order, not the sorted one, and `fetch` is called again); restoring the fix
+turns it green. The change is a genuine regression guard, not a tautology.
+
+Observed:
+
+```text
+node --test test/sort.test.js      -> tests 18, pass 18, fail 0
+node --test test/sort-dom.test.js  -> tests 3,  pass 3,  fail 0
+npm test                           -> tests 93, pass 93, fail 0
+for f in $(find public -name '*.js'); do node --check "$f"; done  -> no output
+```
+
+**No live `/search` was executed in this round**: the three billable calls are
+audited from the code and the fix is verified offline against stubs only.
 
 

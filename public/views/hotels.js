@@ -9,8 +9,9 @@ import { clear, el, icon, render as renderNodes } from '../components/dom.js';
 import { advanced, checkField, checkGroup, clearErrors, dateField, fieldset, numberField, readValues, selectField, setError, textField } from '../components/fields.js';
 import { formatPrice, isoDateInDays } from '../components/format.js';
 import { buildHotelSearchArgs, missingRequired } from '../components/params.js';
-import { badge, emptyState, errorState, idleState, kv, LONG_SEARCH_HINT, skeletonGrid, startSearchClock } from '../components/states.js';
+import { badge, emptyState, errorState, idleState, kv, LONG_SEARCH_HINT, searchCostHint, skeletonGrid, startSearchClock } from '../components/states.js';
 import { hotelCard, resultsHeader } from '../components/results.js';
+import { sortOffers } from '../components/sort.js';
 
 const CURRENCIES = ['EUR', 'USD', 'GBP'];
 const SORT_OPTIONS = [
@@ -65,6 +66,7 @@ export function render(ctx) {
     stars.wrap,
     adv,
     submitBtn,
+    searchCostHint(),
     searchHint,
   );
 
@@ -176,15 +178,18 @@ export function render(ctx) {
         source: state.meta?.source,
         sortBy: state.lastArgs?.sortBy || '',
         sortOptions: SORT_OPTIONS,
+        // Local sort only: reorder the already-fetched hotels and re-render.
+        // Never re-submit — the /search call is billable.
         onSort: (v) => {
           state.lastArgs = { ...state.lastArgs, sortBy: v || undefined };
-          form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+          state.hotels = sortOffers(state.hotels, v, 'hotels');
+          renderResults();
         },
       }),
       grid,
     ];
     if (state.nextKey) {
-      const moreBtn = el('button', { class: 'btn btn--ghost btn--block', type: 'button' }, 'Carica altri risultati');
+      const moreBtn = el('button', { class: 'btn btn--ghost btn--block', type: 'button' }, 'Carica altri risultati (nuova ricerca fatturata)');
       moreBtn.addEventListener('click', async () => {
         moreBtn.disabled = true;
         moreBtn.textContent = 'Caricamento…';

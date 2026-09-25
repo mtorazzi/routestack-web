@@ -9,8 +9,9 @@ import { clear, el, icon, render as renderNodes } from '../components/dom.js';
 import { advanced, checkField, clearErrors, dateField, field, fieldset, numberField, readValues, selectField, setError, textField } from '../components/fields.js';
 import { formatDate, formatPrice, formatTime, isoDateInDays } from '../components/format.js';
 import { buildCarSearchArgs, missingRequired } from '../components/params.js';
-import { badge, emptyState, errorState, idleState, kv, LONG_SEARCH_HINT, skeletonGrid, startSearchClock } from '../components/states.js';
+import { badge, emptyState, errorState, idleState, kv, LONG_SEARCH_HINT, searchCostHint, skeletonGrid, startSearchClock } from '../components/states.js';
 import { carCard, resultsHeader } from '../components/results.js';
+import { sortOffers } from '../components/sort.js';
 
 const SORT_OPTIONS = [
   { value: '', label: 'Default' },
@@ -56,6 +57,7 @@ export function render(ctx) {
     fieldset('Riconsegna', [dropoffField.wrap, el('div', { class: 'grid-2' }, dropoffDate.wrap, dropoffTime.wrap)]),
     adv,
     submitBtn,
+    searchCostHint(),
     searchHint,
   );
 
@@ -168,9 +170,12 @@ export function render(ctx) {
         source: state.meta?.source,
         sortBy: state.lastArgs?.sortBy || '',
         sortOptions: SORT_OPTIONS,
+        // Local sort only: reorder the already-fetched offers and re-render.
+        // Never re-submit — the /search call is billable.
         onSort: (v) => {
           state.lastArgs = { ...state.lastArgs, sortBy: v || undefined };
-          form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+          state.offers = sortOffers(state.offers, v, 'cars');
+          renderResults();
         },
       }),
       grid,

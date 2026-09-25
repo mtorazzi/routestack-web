@@ -12,6 +12,18 @@ import { el, icon } from './dom.js';
 export const LONG_SEARCH_HINT = 'Le ricerche lunghe possono richiedere 1–3 minuti: attendi senza ripetere.';
 
 /**
+ * Honest, persistent note about what costs money: only the searches are
+ * billable, while changing the results-header order is a local sort and never
+ * re-issues a search. Shown next to the search button in all three verticals.
+ */
+export const SEARCH_COST_HINT = "Le ricerche sono fatturate. L'ordinamento dei risultati è locale e non consuma una nuova ricerca.";
+
+/** Rendered note for {@link SEARCH_COST_HINT}. */
+export function searchCostHint() {
+  return el('p', { class: 'card__sub', attrs: { style: 'margin: 0' }, text: SEARCH_COST_HINT });
+}
+
+/**
  * Start a 1-second elapsed-seconds counter for a running search.
  * @param {{onTick?: (seconds:number)=>void}} [handlers]
  * @returns {() => void} stop function — always call it from the `finally` branch

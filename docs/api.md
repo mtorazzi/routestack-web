@@ -45,6 +45,28 @@ Failure:
   warn that the call was very likely counted and that the user should wait before
   retrying, instead of offering an immediate retry.
 
+## Billing
+
+Only these actions consume a **billable** RouteStack call:
+
+| Action | Local call | Upstream tool |
+|---|---|---|
+| Flight search | `POST /api/flights/search` | `flight_search` |
+| Hotel search | `POST /api/hotels/search` | `hotel_search` |
+| Car search | `POST /api/cars/search` | `car_search` |
+| Hotel "load more" | `POST /api/hotels/search` + `nextResultsKey` | `hotel_search` (same tool, billed again) |
+
+Everything else is free: autocomplete (`destinations` / `locations`), rooms,
+revalidate, details, session and checkout.
+
+**Result sorting is not billable.** Changing the results-header *Ordina* select
+reorders the rows already in memory on the client
+(`public/components/sort.js#sortOffers`) and **never** calls `/search`. The
+`sortBy` select *inside the search form* is part of the next real search payload;
+changing it alone does not fire a search. The hotel *"Carica altri risultati"*
+button is labelled *(nuova ricerca fatturata)* because it **does** re-send
+`hotel_search` with `nextResultsKey`.
+
 ## Timeouts
 
 Two knobs, both read from `config/secrets.json` (file wins) or the defaults:
