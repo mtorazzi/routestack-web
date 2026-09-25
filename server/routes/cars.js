@@ -37,7 +37,7 @@ router.post(
       limit: body.limit,
       page: body.page,
     });
-    const r = await cars.search(args);
+    const r = await cars.search({ filter: args });
     rememberCarSession(r.data.correlationId);
     sendOk(res, r.data, { source: r.source, tool: r.tool });
   }),
