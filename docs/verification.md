@@ -317,3 +317,80 @@ The written `config/secrets.json` contains **all** the required fields
 never in clear; `DELETE` returns to unset. Only synthetic dummy credentials
 (`dummy-key-1234` / `dummy-secret-1234`) inside the throw-away copy were used and
 no real `ROUTESTACK_*` value was ever printed.
+
+## Check 16 — Salva button was outside the form
+
+**Symptom:** the user pressed "Salva" and nothing happened — no save, in a
+normal window *and* in incognito. A fresh load produced **no** `POST /api/config`
+at all (the last server-side write predated the click); the backend save path
+was already proven correct by Check 14.
+
+**Repro (pre-fix code):** `public/views/settings.js` built the action row as
+
+```js
+const actions = el('div', { class: 'row' }, testBtn, saveBtn, removeBtn);
+const panel = el('section', { class: 'panel' }, el('h2', …), form, el('hr', …), actions, testResult);
+```
+
+`saveBtn` was `type="submit"` but sat **outside** the `<form>` and had no `form`
+attribute. A submit button only submits its ancestor form (or the form named by
+its `form` attribute), so the click never submitted and the `form.addEventListener('submit', …)`
+listener never ran.
+
+**Fix:**
+
+- `saveBtn` stays `type="submit"` and now also carries `attrs: { form: FORM_ID }`,
+  with `const FORM_ID = 'settings-form'`; `testBtn` / `removeBtn` stay `type="button"`.
+- The `<form>` gets `id="settings-form"`.
+- The action row and the test result are rendered **inside** the form as its last
+  children (`fieldsets → <hr> → buttons → test result`). Visual order and classes
+  are unchanged.
+- Success feedback verified: the handler re-renders and announces
+  `Impostazioni salvate.` (on failure it announces `Errore: <titolo>.`).
+
+**Regression test:** `test/settings-dom.test.js` loads `public/views/settings.js`
+in Node against a minimal DOM stub (`createElement`, `createElementNS`,
+`createTextNode`, `append`, `setAttribute`, `querySelectorAll`, `addEventListener`,
+`dispatchEvent`, `classList`, `dataset`), renders the view with a stub `ctx`, then:
+
+- asserts `form.querySelector('button[type="submit"]')` is **not null** (the
+  structural invariant — this assertion fails on the pre-fix code);
+- fills the `apiKey` / `apiSecret` inputs, dispatches a real `submit` event and
+  asserts the captured `POST /api/config` body contains both fields and that the
+  announce text is `Impostazioni salvate.`.
+
+Verified on the pre-fix code by stashing only `public/views/settings.js`: the test
+fails at the structural assertion; with the fix restored it passes.
+
+```text
+node --test test/settings-dom.test.js  -> tests 1, pass 1, fail 0
+npm test                               -> tests 47, pass 47, fail 0
+for f in $(find public -name '*.js'); do node --check "$f"; done  -> no output
+```
+
+**Served asset** (what the browser actually downloads) shows the buttons inside
+the form:
+
+```bash
+curl -s localhost:8802/views/settings.js | grep -c saveBtn   # -> 4
+```
+
+```js
+    const saveBtn = el('button', { class: 'btn btn--primary', type: 'submit', attrs: { form: FORM_ID } }, /* … */ 'Salva');
+    const actions = el('div', { class: 'row' }, testBtn, saveBtn, removeBtn);
+    const form = el(
+      'form',
+      { class: 'form', attrs: { novalidate: '', id: FORM_ID } },
+      fieldset('Autenticazione', […]),
+      fieldset('Connessione', […]),
+      fieldset('Preferenze', […]),
+      el('hr', { class: 'divider' }),
+      actions,
+      testResult,
+    );
+```
+
+**Port note:** `8799` is held by a pre-existing process that this session must
+not touch, so the live check used `8802` and the instance was stopped afterwards.
+Only synthetic dummy values (`dummy-key-1234` / `dummy-secret-1234`) were used; no
+real credential appears in this document.

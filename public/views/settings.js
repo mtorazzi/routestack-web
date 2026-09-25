@@ -9,6 +9,13 @@ import { formatDate } from '../components/format.js';
 import { buildConfigPatch } from '../components/params.js';
 import { errorState, kv } from '../components/states.js';
 
+/**
+ * The submit button lives inside the form, but we also bind it explicitly via
+ * the `form` attribute so it keeps working even if the action row is ever moved
+ * back out of the <form> element by a future edit.
+ */
+const FORM_ID = 'settings-form';
+
 export function render(ctx) {
   const { outlet, announce, setConfig, config } = ctx;
   const state = { config: config || null, editing: { apiKey: false, apiSecret: false, accountId: false }, test: null };
@@ -48,22 +55,28 @@ export function render(ctx) {
     const currency = selectField({ name: 'currency', label: 'Valuta predefinita', options: ['EUR', 'USD', 'GBP'], value: cfg.currency });
     const timeout = numberField({ name: 'timeoutMs', label: 'Timeout (ms)', value: String(cfg.timeoutMs), min: 1000, max: 120000, step: 1000 });
 
-    const form = el(
-      'form',
-      { class: 'form', attrs: { novalidate: '' } },
-      fieldset('Autenticazione', [authMode.wrap, apiKey.wrap, apiSecret.wrap, accountId.wrap]),
-      fieldset('Connessione', [baseUrl.wrap, sandbox.wrap]),
-      fieldset('Preferenze', [el('div', { class: 'grid-2' }, currency.wrap, timeout.wrap)]),
-    );
-
     const testBtn = el('button', { class: 'btn btn--ghost', type: 'button' }, icon('M22 12h-4l-3 9L9 3l-3 9H2', { size: 16 }), 'Test connessione');
-    const saveBtn = el('button', { class: 'btn btn--primary', type: 'submit' }, icon('M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2zM17 21v-8H7v8M7 3v5h8', { size: 16 }), 'Salva');
+    const saveBtn = el('button', { class: 'btn btn--primary', type: 'submit', attrs: { form: FORM_ID } }, icon('M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2zM17 21v-8H7v8M7 3v5h8', { size: 16 }), 'Salva');
     const removeBtn = el('button', { class: 'btn btn--danger', type: 'button' }, icon('M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6', { size: 16 }), 'Rimuovi credenziali');
 
     const testResult = el('div', { attrs: { 'aria-live': 'polite' } });
-
     const actions = el('div', { class: 'row' }, testBtn, saveBtn, removeBtn);
-    const panel = el('section', { class: 'panel' }, el('h2', { attrs: { style: 'margin-bottom: var(--space-4)' }, text: 'Credenziali e preferenze' }), form, el('hr', { class: 'divider' }), actions, testResult);
+
+    // The action row and the test result are placed *inside* the form: a
+    // `type="submit"` button only submits its ancestor form (or the form named
+    // by its `form` attribute). Keeping it outside meant "Salva" did nothing.
+    const form = el(
+      'form',
+      { class: 'form', attrs: { novalidate: '', id: FORM_ID } },
+      fieldset('Autenticazione', [authMode.wrap, apiKey.wrap, apiSecret.wrap, accountId.wrap]),
+      fieldset('Connessione', [baseUrl.wrap, sandbox.wrap]),
+      fieldset('Preferenze', [el('div', { class: 'grid-2' }, currency.wrap, timeout.wrap)]),
+      el('hr', { class: 'divider' }),
+      actions,
+      testResult,
+    );
+
+    const panel = el('section', { class: 'panel' }, el('h2', { attrs: { style: 'margin-bottom: var(--space-4)' }, text: 'Credenziali e preferenze' }), form);
 
     const resolution = el(
       'aside',
